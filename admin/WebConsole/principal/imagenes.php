@@ -9,6 +9,7 @@
 //		Administra imágenes de un determinado Centro
 // ********************************************************************************************************
 include_once("../includes/ctrlacc.php");
+include_once("../includes/arbol.php");
 include_once("../clases/AdoPhp.php");
 include_once("../clases/XmlPhp.php");
 include_once("../clases/ArbolVistaXML.php");
@@ -113,12 +114,6 @@ $XMLcontextual=CreacontextualXMLImagen($AMBITO_IMAGENESINCREMENTALES,
 					$LITAMBITO_IMAGENESINCREMENTALES,
 					$IMAGENES_INCREMENTALES);
 echo $flotante->CreaMenuContextual($XMLcontextual);											
-        echo "<br><br><br>";
-        echo "<br><br><br>";
-$Repos=repos();
-$imagenes=img($Repos);
-$grupos_hijos= grupos();
-listaImg($imagenes,$grupos_hijos);
 
 // Tipos de menús contextuales:
 // id="TipoImagen_1"
@@ -483,49 +478,8 @@ function repos(){
                 $repositorios[$rs->campos["idrepositorio"]] = $rs->campos["nombrerepositorio"];
                 $rs->Siguiente();
         }
+        $rs->Cerrar();
         return($repositorios);
-}
-
-// Descripción: Devuelve un array de grupos de imágenes. Ordenados por tipos de imágenes y grupo padre
-// Parámetros: ninguno
-// devuelve: array de grupos.
-function grupos(){
-	global $cmd;
-	global $idcentro;
-
-	$grupos_hijos=Array();
-	$rs=new Recordset;
-	$cmd->texto="SELECT idgrupo, nombregrupo, grupos.grupoid AS grupopadre, tipo
-		       FROM grupos
-		      WHERE idcentro=$idcentro AND tipo IN (70, 71, 72)
-                   ORDER BY tipo, grupopadre, grupoid;";
-	$rs->Comando=&$cmd;
-	if (!$rs->Abrir()) return($grupos_hijos);
-
-        $rs->Primero();
-	$oldgrupopadre=0;
-	$num=-1;
-        while (!$rs->EOF){
-		$grupopadre=$rs->campos["grupopadre"];
-		$nombregrupo=$rs->campos["nombregrupo"];
-
-		$idgrupo=$rs->campos["idgrupo"];
-                // El tipo de grupo de imagenes son 70, 71 y 72 correspondiendo al tipo de imagen 1, 2 y 3
-		$tipo=$rs->campos["tipo"] - 69;
-		if ($oldgrupopadre != $grupopadre) {
-			$oldgrupopadre=$grupopadre;
-		        // Cuando cambio de grupo pongo el orden del array a cero
-			$num=0;
-		} else {
-			$num++;
-	        }
-		$grupos_hijos[$tipo][$grupopadre][$num]["id"] = $idgrupo;
-		$grupos_hijos[$tipo][$grupopadre][$num]["nombre"] = $nombregrupo;
-
-		$rs->Siguiente();
-	}
-	return ($grupos_hijos);
-
 }
 
 // Descripción: Devuelve un array de las imágenes ordenadas por tipo y grupo al que pertenecen.
@@ -571,6 +525,7 @@ function img($repositorios){
                 $rs->Siguiente();
         }
 
+	$rs->Cerrar();
         return($imagenes);
 }
 
@@ -632,5 +587,13 @@ function listaGrupo($tipo,$idgrupo,$nivel,$orden,$imagenes,$grupos_hijos){
 	return($orden);
 }
 
+        echo "<br><br><br>";
+        echo "<br><br><br>";
+//$Repos=repos();
+//$imagenes=img($Repos);
+//$grp_imagenes= grupos();
+$imagenes=nodos_arbol("imagenes");
+$grp_imagenes= grupos_arbol("imagenes");
+listaImg($imagenes,$grp_imagenes);
 ?>
 

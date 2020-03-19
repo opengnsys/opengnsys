@@ -9,6 +9,7 @@
 //		Administra el hardware de los ordenadores de un determinado Centro
 // *************************************************************************************************************************************************
 include_once("../includes/ctrlacc.php");
+include_once("../includes/arbol.php");
 include_once("../clases/AdoPhp.php");
 include_once("../clases/XmlPhp.php");
 include_once("../clases/ArbolVistaXML.php");
@@ -641,4 +642,26 @@ function CreacontextualXMLPerfil_Hardware(){
 	$layerXML.='</MENUCONTEXTUAL>';
 	return($layerXML);
 }
+
+echo "<br><br>";
+echo "<br><br>";
+$tipos=nodos_arbol("tiposhardware");
+$componentes=nodos_arbol("componenteshardware");
+$perfiles=nodos_arbol("perfileshardware");
+$grp_tipos=grupos_arbol("tiposhardware");
+$grp_componentes=grupos_arbol("componenteshardware");
+$grp_perfiles=grupos_arbol("perfileshardware");
+echo "<br><br>";
+print_r($tipos);
+echo "<br><br>";
+print_r($componentes);
+echo "<br><br>";
+print_r($perfiles);
+echo "<br><br>";
+// No existen grupos de tipos de hardware, debe devolver array vacío.
+print_r($grp_tipos);
+echo "<br><br>";
+print_r($grp_componentes);
+echo "<br><br>";
+print_r($grp_perfiles);
 ?>

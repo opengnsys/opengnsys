@@ -9,6 +9,7 @@
 //		Administra procedimientos,y tareas de un determinado Centro
 // *************************************************************************************************************************************************
 include_once("../includes/ctrlacc.php");
+include_once("../includes/arbol.php");
 include_once("../clases/AdoPhp.php");
 include_once("../clases/XmlPhp.php");
 include_once("../clases/ArbolVistaXML.php");
@@ -685,4 +686,22 @@ function CreacontextualXMLTarea(){
 	$layerXML.='</MENUCONTEXTUAL>';
 	return($layerXML);
 }
+echo "<br><br>";
+echo "<br><br>";
+$comandos=nodos_arbol("comandos");
+$procedimientos=nodos_arbol("procedimientos");
+$tareas=nodos_arbol("tareas");
+$grp_procedimientos=grupos_arbol("procedimientos");
+$grp_tareas=grupos_arbol("tareas");
+
+echo "<br><br>";
+print_r($comandos);
+echo "<br><br>";
+print_r($procedimientos);
+echo "<br><br>";
+print_r($tareas);
+echo "<br><br>";
+print_r($grp_procedimientos);
+echo "<br><br>";
+print_r($grp_tareas);
 ?>

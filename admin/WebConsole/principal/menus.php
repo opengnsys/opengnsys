@@ -9,6 +9,7 @@
 //		Administra los menus de los clientes rembo de un determinado Centro
 // *************************************************************************************************************************************************
 include_once("../includes/ctrlacc.php");
+include_once("../includes/arbol.php");
 include_once("../clases/AdoPhp.php");
 include_once("../clases/XmlPhp.php");
 include_once("../clases/ArbolVistaXML.php");
@@ -303,4 +304,12 @@ function CreacontextualXMLMenu(){
 	$layerXML.='</MENUCONTEXTUAL>';
 	return($layerXML);
 }
+
+echo "<br><br>";
+echo "<br><br>";
+$menus=nodos_arbol("menus");
+$grp_menus=grupos_arbol("menus");
+print_r($menus);
+echo "<br><br>";
+print_r($grp_menus);
 ?>

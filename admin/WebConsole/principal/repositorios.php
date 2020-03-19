@@ -9,6 +9,7 @@
 //		Administra los repositorios de un determinado Centro
 // *************************************************************************************************************************************************
 include_once("../includes/ctrlacc.php");
+include_once("../includes/arbol.php");
 include_once("../clases/AdoPhp.php");
 include_once("../clases/XmlPhp.php");
 include_once("../clases/ArbolVistaXML.php");
@@ -360,4 +361,10 @@ function ContextualXMLComandos($litambito,$ambito){
 	return($finallayerXML);
 	}
 }
+echo "<br><br>";
+$repositorios=nodos_arbol("repositorios");
+$grp_repositorios=grupos_arbol("repositorios");
+print_r($repositorios);
+echo "<br><br>";
+print_r($grp_repositorios);
 ?>

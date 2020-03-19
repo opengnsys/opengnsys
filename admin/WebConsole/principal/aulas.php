@@ -9,6 +9,7 @@
 //		Administra grupos,aulas y ordenadores de un determinado Centro
 // ****************************************************************************
 include_once("../includes/ctrlacc.php");
+include_once("../includes/arbol.php");
 include_once("../clases/AdoPhp.php");
 include_once("../clases/XmlPhp.php");
 include_once("../clases/ArbolVistaXML.php");
@@ -1101,4 +1102,17 @@ function ContextualXMLNetBoot(){
         return($layerXML);
 }
 
+echo "<br><br>";
+echo "<br><br>";
+$aulas=nodos_arbol("aulas");
+$ordenadores=nodos_arbol("ordenadores");
+$grp_aulas=grupos_arbol("aulas");
+$grp_ordenadores=grupos_arbol("ordenadores");
+print_r($aulas);
+echo "<br><br>";
+print_r($ordenadores);
+echo "<br>gru aulas<br>";
+print_r($grp_aulas);
+echo "<br><br>";
+print_r($grp_ordenadores);
 ?>

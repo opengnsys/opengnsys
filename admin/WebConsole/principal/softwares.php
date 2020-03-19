@@ -9,6 +9,7 @@
 //		Administra el software de los ordenadores de un determinado Centro
 // *************************************************************************************************************************************************
 include_once("../includes/ctrlacc.php");
+include_once("../includes/arbol.php");
 include_once("../clases/AdoPhp.php");
 include_once("../clases/XmlPhp.php");
 include_once("../clases/ArbolVistaXML.php");
@@ -795,4 +796,26 @@ function CreacontextualXMLSoftware_Incremental(){
 	$layerXML.='</MENUCONTEXTUAL>';
 	return($layerXML);
 }
+
+echo "<br><br>";
+echo "<br><br>";
+$tipos=nodos_arbol("tipossoftware");
+$componentes=nodos_arbol("componentessoftware");
+$perfiles=nodos_arbol("perfilessoftware");
+$grp_tipos=grupos_arbol("tipossoftware");
+$grp_componentes=grupos_arbol("componentessoftware");
+$grp_perfiles=grupos_arbol("perfilessoftware");
+echo "<br><br>";
+print_r($tipos);
+echo "<br><br>";
+print_r($componentes);
+echo "<br><br>";
+print_r($perfiles);
+echo "<br><br>";
+// No existen grupos de tipos de hardware, debe devolver array vacío.
+print_r($grp_tipos);
+echo "<br><br>";
+print_r($grp_componentes);
+echo "<br><br>";
+print_r($grp_perfiles);
 ?>
