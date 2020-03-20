@@ -48,7 +48,8 @@ $XMLcontextual=ContextualXMLComandos($LITAMBITO_CENTROS,$AMBITO_CENTROS);
 	<SCRIPT language="javascript" src="../clases/jscripts/HttpLib.js"></SCRIPT>
 	<?php echo '<SCRIPT language="javascript" src="../idiomas/javascripts/'.$idioma.'/comunes_'.$idioma.'.js"></SCRIPT>'?>
 </HEAD>
-<BODY OnContextMenu="return false">
+<!-- BODY OnContextMenu="return false" -->
+<BODY >
 <FORM name="fcomandos" action="" method="post" target="frame_contenidos">
 	<INPUT type="hidden" name="idcomando" value="">
 	<INPUT type="hidden" name="descricomando" value="">
@@ -362,9 +363,8 @@ function ContextualXMLComandos($litambito,$ambito){
 	}
 }
 echo "<br><br>";
-$repositorios=nodos_arbol("repositorios");
-$grp_repositorios=grupos_arbol("repositorios");
-print_r($repositorios);
-echo "<br><br>";
-print_r($grp_repositorios);
+$nodos=nodos_arbol("repositorios");
+$grupos=grupos_arbol("repositorios");
+
+lista_raiz_arbol("repositorios", $nodos, $grupos);
 ?>

@@ -592,8 +592,8 @@ function listaGrupo($tipo,$idgrupo,$nivel,$orden,$imagenes,$grupos_hijos){
 //$Repos=repos();
 //$imagenes=img($Repos);
 //$grp_imagenes= grupos();
-$imagenes=nodos_arbol("imagenes");
-$grp_imagenes= grupos_arbol("imagenes");
-listaImg($imagenes,$grp_imagenes);
+$nodos=nodos_arbol("imagenes");
+$grupos= grupos_arbol("imagenes");
+listaImg($nodos,$grupos);
 ?>
 

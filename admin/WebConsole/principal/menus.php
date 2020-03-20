@@ -307,9 +307,8 @@ function CreacontextualXMLMenu(){
 
 echo "<br><br>";
 echo "<br><br>";
-$menus=nodos_arbol("menus");
-$grp_menus=grupos_arbol("menus");
-print_r($menus);
-echo "<br><br>";
-print_r($grp_menus);
+$nodos=nodos_arbol("menus");
+$grupos=grupos_arbol("menus");
+
+lista_raiz_arbol("software", $nodos, $grupos);
 ?>

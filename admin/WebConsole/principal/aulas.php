@@ -45,7 +45,8 @@ $arbol=new ArbolVistaXML($arbolXML,0,$baseurlimg,$clasedefault,1,0,5); // Crea e
 	<?php echo '<SCRIPT language="javascript" src="../idiomas/javascripts/'.$idioma.'/comunes_'.$idioma.'.js"></SCRIPT>'?>
 	<?php echo '<SCRIPT language="javascript" src="../idiomas/javascripts/'.$idioma.'/aulas_'.$idioma.'.js"></SCRIPT>'?>
 </HEAD>
-<BODY OnContextMenu="return false">
+<!-- BODY OnContextMenu="return false" -->
+<BODY >
 <FORM name="fcomandos" action="" method="post" target="frame_contenidos">
 	<INPUT type="hidden" name="idcomando" value="">
 	<INPUT type="hidden" name="descricomando" value="">
@@ -112,9 +113,12 @@ $XMLcontextual=ContextualXMLAsistentes($LITAMBITO_ORDENADORES,$AMBITO_ORDENADORE
 echo $flotante->CreaMenuContextual($XMLcontextual);
 
 
+echo "<br><br><br>";
+echo "<br><br><br>";
 
 //___________________________________________________________________________________________________
 ?>
+
 </BODY>
 </HTML>
 <?php
@@ -1102,17 +1106,8 @@ function ContextualXMLNetBoot(){
         return($layerXML);
 }
 
-echo "<br><br>";
-echo "<br><br>";
-$aulas=nodos_arbol("aulas");
-$ordenadores=nodos_arbol("ordenadores");
-$grp_aulas=grupos_arbol("aulas");
-$grp_ordenadores=grupos_arbol("ordenadores");
-print_r($aulas);
-echo "<br><br>";
-print_r($ordenadores);
-echo "<br>gru aulas<br>";
-print_r($grp_aulas);
-echo "<br><br>";
-print_r($grp_ordenadores);
+$nodos=nodos_arbol("aulas");
+$grupos=grupos_arbol("aulas");
+
+lista_raiz_arbol ("aulas",$nodos,$grupos);
 ?>

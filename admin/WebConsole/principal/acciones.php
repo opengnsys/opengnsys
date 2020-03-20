@@ -691,17 +691,12 @@ echo "<br><br>";
 $comandos=nodos_arbol("comandos");
 $procedimientos=nodos_arbol("procedimientos");
 $tareas=nodos_arbol("tareas");
+$grp_comandos[1]=Array ();
 $grp_procedimientos=grupos_arbol("procedimientos");
 $grp_tareas=grupos_arbol("tareas");
 
-echo "<br><br>";
-print_r($comandos);
-echo "<br><br>";
-print_r($procedimientos);
-echo "<br><br>";
-print_r($tareas);
-echo "<br><br>";
-print_r($grp_procedimientos);
-echo "<br><br>";
-print_r($grp_tareas);
+$nodos = $comandos + $procedimientos + $tareas;
+$grupos = $grp_comandos + $grp_procedimientos + $grp_tareas;
+
+lista_raiz_arbol("software", $nodos, $grupos);
 ?>

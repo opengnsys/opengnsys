@@ -802,20 +802,14 @@ echo "<br><br>";
 $tipos=nodos_arbol("tipossoftware");
 $componentes=nodos_arbol("componentessoftware");
 $perfiles=nodos_arbol("perfilessoftware");
-$grp_tipos=grupos_arbol("tipossoftware");
+/* En la BD no existen grupos de tipos de hardware.
+ * Creo el grupo que 0 que es padre de los nodos sin grupo */
+$grp_tipo[1]=Array();
 $grp_componentes=grupos_arbol("componentessoftware");
 $grp_perfiles=grupos_arbol("perfilessoftware");
-echo "<br><br>";
-print_r($tipos);
-echo "<br><br>";
-print_r($componentes);
-echo "<br><br>";
-print_r($perfiles);
-echo "<br><br>";
-// No existen grupos de tipos de hardware, debe devolver array vacío.
-print_r($grp_tipos);
-echo "<br><br>";
-print_r($grp_componentes);
-echo "<br><br>";
-print_r($grp_perfiles);
+
+$nodos=$tipos + $componentes + $perfiles;
+$grupos=$grp_componentes + $grp_perfiles;
+
+lista_raiz_arbol("software", $nodos, $grupos);
 ?>

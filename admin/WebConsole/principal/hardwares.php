@@ -45,7 +45,8 @@ $arbol=new ArbolVistaXML($arbolXML,0,$baseurlimg,$clasedefault,1,0,5);
 	<?php echo '<SCRIPT language="javascript" src="../idiomas/javascripts/'.$idioma.'/comunes_'.$idioma.'.js"></SCRIPT>'?>
 	<?php echo '<SCRIPT language="javascript" src="../idiomas/javascripts/'.$idioma.'/hardwares_'.$idioma.'.js"></SCRIPT>'?>
 </HEAD>
-<BODY OnContextMenu="return false">
+<!-- BODY OnContextMenu="return false" -->
+<BODY>
 <?php
 //________________________________________________________________________________________________________
 echo $arbol->CreaArbolVistaXML();	 // Crea árbol (HTML) a partir del XML
@@ -648,20 +649,14 @@ echo "<br><br>";
 $tipos=nodos_arbol("tiposhardware");
 $componentes=nodos_arbol("componenteshardware");
 $perfiles=nodos_arbol("perfileshardware");
-$grp_tipos=grupos_arbol("tiposhardware");
+/* En la BD no existen grupos de tipos de software.
+ * Creo el grupo que 0 que es padre de los nodos sin grupo */
+$grp_tipos[1]=Array();
 $grp_componentes=grupos_arbol("componenteshardware");
 $grp_perfiles=grupos_arbol("perfileshardware");
-echo "<br><br>";
-print_r($tipos);
-echo "<br><br>";
-print_r($componentes);
-echo "<br><br>";
-print_r($perfiles);
-echo "<br><br>";
-// No existen grupos de tipos de hardware, debe devolver array vacío.
-print_r($grp_tipos);
-echo "<br><br>";
-print_r($grp_componentes);
-echo "<br><br>";
-print_r($grp_perfiles);
+
+$nodos=$tipos + $componentes + $perfiles;
+$grupos=$grp_tipos + $grp_componentes + $grp_perfiles;
+
+lista_raiz_arbol("hardware", $nodos, $grupos);
 ?>
