@@ -506,7 +506,8 @@ ul[id^='menu-'] li:hover > ul {
 }
 
 .separador {
-   border-bottom:1px solid #ccc;
+   margin: 1px 4px 1px 4px;
+   border-bottom:1px solid #fff;
 }
 
 ul[id^='menu-'] li > img {
