@@ -41,15 +41,17 @@ $XMLcontextual=ContextualXMLComandos($LITAMBITO_CENTROS,$AMBITO_CENTROS);
 	<LINK rel="stylesheet" type="text/css" href="../estilos.css">
 	<SCRIPT language="javascript" src="../clases/jscripts/ArbolVistaXML.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../clases/jscripts/MenuContextual.js"></SCRIPT>
+	<SCRIPT language="javascript" src="../jscripts/arbol.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../jscripts/repositorios.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../jscripts/opciones.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../jscripts/constantes.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../jscripts/comunes.js"></SCRIPT>	
+	<SCRIPT language="javascript" src="../api/jquery.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../clases/jscripts/HttpLib.js"></SCRIPT>
 	<?php echo '<SCRIPT language="javascript" src="../idiomas/javascripts/'.$idioma.'/comunes_'.$idioma.'.js"></SCRIPT>'?>
 </HEAD>
-<!-- BODY OnContextMenu="return false" -->
-<BODY >
+<BODY onclick="ocultar_menu();" OnContextMenu="return false">
+
 <FORM name="fcomandos" action="" method="post" target="frame_contenidos">
 	<INPUT type="hidden" name="idcomando" value="">
 	<INPUT type="hidden" name="descricomando" value="">
@@ -71,7 +73,42 @@ $XMLcontextual=CreacontextualXMLGruposRepositorios(); // Grupos de repositorios
 echo $flotante->CreaMenuContextual($XMLcontextual);
 $XMLcontextual=CreacontextualXMLRepositorio(); // Repositorio
 echo $flotante->CreaMenuContextual($XMLcontextual);
+
+echo "<br><br>\n";
+$nodos=nodos_arbol("repositorios");
+$grupos=grupos_arbol("repositorios");
+
+lista_raiz_arbol("repositorios", $nodos, $grupos);
 ?>
+<!-- Repositorios -->
+<ul id="menu-tipo-65" name="menu-tipo-65" oncontextmenu="return false;">
+  <li onclick="insertar_grupos(65,'gruporepositorio')"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de Repositorios </li>
+  <li onclick="insertar(140,115,550,280,'../propiedades/propiedades_repositorios.php')"><img class="menu-icono" src="../images/iconos/aula.gif"> Añadir Repositorio </li>
+  <li> <hr class="separador"> </li>
+  <li onclick="colocar('../gestores/gestor_repositorios.php',41)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar Repositorio </li>
+</ul>
+
+<ul id="menu-grupo-65" name="menu-grupo-65" oncontextmenu="return false;">
+  <li onclick="insertar_grupos(65,'gruporepositorio')"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de Repositorios </li>
+  <li onclick="insertar(140,115,550,280,'../propiedades/propiedades_repositorios.php')"><img class="menu-icono" src="../images/iconos/aula.gif"> Añadir Repositorio </li>
+  <li> <hr class="separador"> </li>
+  <li onclick="colocar('../gestores/gestor_repositorios.php',41)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar Repositorio </li>
+  <li> <hr class="separador"> </li>
+  <li onclick="modificar_grupos()"><img class="menu-icono" src="../images/iconos/modificar.gif"> Propiedades </li>
+  <li onclick="eliminar_grupos()"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar grupo de repositorios </li>
+</ul>
+
+<ul id="menu-65" name="menu-65" oncontextmenu="return false;">
+  <li onclick="muestra_inforRepositorios()"><img class="menu-icono" src="../images/iconos/informacion.gif"> Información Repositorio </li>
+  <li> <hr class="separador"> </li>
+  <li onclick="mover(41)"><img class="menu-icono" src="../images/iconos/mover.gif"> Mover Repositorio </li>
+  <li> <hr class="separador"> </li>
+  <li onclick="modificar(140,115,550,280,'../comandos/EliminarImagenRepositorio.php')"><img class="menu-icono" src="../images/iconos/comandos.gif"> Eliminar Imagen Repositorio </li>
+  <li> <hr class="separador"> </li>
+  <li onclick="modificar(140,115,550,280,'../propiedades/propiedades_repositorios.php')"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades </li>
+  <li onclick="eliminar(140,115,550,280,'../propiedades/propiedades_repositorios.php')"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar Repositorio </li>
+</ul>
+
 </BODY>
 </HTML>
 <?php
@@ -362,9 +399,4 @@ function ContextualXMLComandos($litambito,$ambito){
 	return($finallayerXML);
 	}
 }
-echo "<br><br>";
-$nodos=nodos_arbol("repositorios");
-$grupos=grupos_arbol("repositorios");
-
-lista_raiz_arbol("repositorios", $nodos, $grupos);
 ?>

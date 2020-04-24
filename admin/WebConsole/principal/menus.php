@@ -30,21 +30,24 @@ $arbol=new ArbolVistaXML($arbolXML,0,$baseurlimg,$clasedefault,1,0,5);
 //________________________________________________________________________________________________________
 ?>
 <HTML>
-<TITLE>Administración web de aulas</TITLE>
 <HEAD>
+	<TITLE>Administración web de aulas</TITLE>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<LINK rel="stylesheet" type="text/css" href="../estilos.css">
 	<SCRIPT language="javascript" src="../clases/jscripts/ArbolVistaXML.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../clases/jscripts/MenuContextual.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../jscripts/menus.js"></SCRIPT>
+	<SCRIPT language="javascript" src="../jscripts/arbol.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../jscripts/opciones.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../jscripts/constantes.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../jscripts/comunes.js"></SCRIPT>
+	<SCRIPT language="javascript" src="../api/jquery.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../clases/jscripts/HttpLib.js"></SCRIPT>
 	<?php echo '<SCRIPT language="javascript" src="../idiomas/javascripts/'.$idioma.'/comunes_'.$idioma.'.js"></SCRIPT>'?>
 	<?php echo '<SCRIPT language="javascript" src="../idiomas/javascripts/'.$idioma.'/menus_'.$idioma.'.js"></SCRIPT>'?>
 </HEAD>
-<BODY OnContextMenu="return false">
+<BODY onclick="ocultar_menu();" OnContextMenu="return false">
+
 <?php
 //________________________________________________________________________________________________________
 echo $arbol->CreaArbolVistaXML();	 // Crea árbol (HTML) a partir del XML
@@ -57,7 +60,42 @@ $XMLcontextual=ContextualXMLGruposMenus(); // Grupos de menus
 echo $flotante->CreaMenuContextual($XMLcontextual); 
 $XMLcontextual=CreacontextualXMLMenu(); // Menús
 echo $flotante->CreaMenuContextual($XMLcontextual); 
+
+echo "<br><br>";
+echo "<br><br>\n";
+$nodos=nodos_arbol("menus");
+$grupos=grupos_arbol("menus");
+
+lista_raiz_arbol("software", $nodos, $grupos);
 ?>
+<!-- Menús -->
+<ul id="menu-tipo-64" name="menu-tipo-64" oncontextmenu="return false;">
+  <li onclick="insertar_grupos(64,'gruposmenus')"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de menús </li>
+  <li onclick="insertar(140,115,550,480,'../propiedades/propiedades_menus.php')"><img class="menu-icono" src="../images/iconos/menu.gif"> Definir nuevo menú </li>
+  <li> <hr class="separador"> </li>
+  <li onclick="colocar('../gestores/gestor_menus.php',40)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar menú </li>
+</ul>
+
+<ul id="menu-grupo-64" name="menu-grupo-64" oncontextmenu="return false;">
+  <li onclick="insertar_grupos(64,'gruposmenus')"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de menús </li>
+  <li onclick="insertar(140,115,550,480,'../propiedades/propiedades_menus.php')"><img class="menu-icono" src="../images/iconos/menu.gif"> Definir nuevo menú </li>
+  <li> <hr class="separador"> </li>
+  <li onclick="colocar('../gestores/gestor_menus.php',40)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar menú </li>
+  <li> <hr class="separador"> </li>
+  <li onclick="modificar_grupos()"><img class="menu-icono" src="../images/iconos/modificar.gif"> Propiedades </li>
+  <li onclick="eliminar_grupos()"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar grupo de menús </li>
+</ul>
+
+<ul id="menu-64" name="menu-64" oncontextmenu="return false;">
+  <li onclick="gestionar_items()"><img class="menu-icono" src="../images/iconos/comandos.gif"> Gestionar Items </li>
+  <li onclick="muestra_informacion()"><img class="menu-icono" src="../images/iconos/informacion.gif"> Información Menú </li>
+  <li> <hr class="separador"> </li>
+  <li onclick="mover(id)"><img class="menu-icono" src="../images/iconos/mover.gif"> Mover menú </li>
+  <li> <hr class="separador"> </li>
+  <li onclick="modificar(140,115,550,480,'../propiedades/propiedades_menus.php')"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades </li>
+  <li onclick="eliminar(140,115,550,480,'../propiedades/propiedades_menus.php')"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar menú </li>
+</ul>
+
 </BODY>
 </HTML>
 <?php
@@ -304,11 +342,4 @@ function CreacontextualXMLMenu(){
 	$layerXML.='</MENUCONTEXTUAL>';
 	return($layerXML);
 }
-
-echo "<br><br>";
-echo "<br><br>";
-$nodos=nodos_arbol("menus");
-$grupos=grupos_arbol("menus");
-
-lista_raiz_arbol("software", $nodos, $grupos);
 ?>

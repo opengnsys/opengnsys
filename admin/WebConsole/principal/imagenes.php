@@ -33,12 +33,13 @@ $arbol=new ArbolVistaXML($arbolXML,0,$baseurlimg,$clasedefault,1,0,5);
 //________________________________________________________________________________________________________
 ?>
 <HTML>
-<TITLE>Administración web de aulas</TITLE>
 <HEAD>
+	<TITLE>Administración web de aulas</TITLE>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<LINK rel="stylesheet" type="text/css" href="../estilos.css">
 	<SCRIPT language="javascript" src="../clases/jscripts/ArbolVistaXML.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../clases/jscripts/MenuContextual.js"></SCRIPT>
+	<SCRIPT language="javascript" src="../jscripts/arbol.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../jscripts/imagenes.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../jscripts/opciones.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../jscripts/constantes.js"></SCRIPT>
@@ -48,7 +49,8 @@ $arbol=new ArbolVistaXML($arbolXML,0,$baseurlimg,$clasedefault,1,0,5);
 	<?php echo '<SCRIPT language="javascript" src="../idiomas/javascripts/'.$idioma.'/comunes_'.$idioma.'.js"></SCRIPT>'?>
 	<?php echo '<SCRIPT language="javascript" src="../idiomas/javascripts/'.$idioma.'/imagenes_'.$idioma.'.js"></SCRIPT>'?>
 </HEAD>
-<BODY onclick="ocultar_menu('menu-contextual');" >
+<BODY onclick="ocultar_menu();" OnContextMenu="return false">
+
 
 <?php
 //________________________________________________________________________________________________________
@@ -115,48 +117,39 @@ $XMLcontextual=CreacontextualXMLImagen($AMBITO_IMAGENESINCREMENTALES,
 					$IMAGENES_INCREMENTALES);
 echo $flotante->CreaMenuContextual($XMLcontextual);											
 
-// Tipos de menús contextuales:
-// id="TipoImagen_1"
-// id="TipoImagen_2"
-// id="TipoImagen_3"
-// id="flo_gruposimagenesmonoliticas"
-// id="flo_gruposimagenesbasicas"
-// id="flo_gruposimagenesincrementales"
-// id="flo_imagenesmonoliticas"
-// id="flo_imagenesbasicas"
-// id="flo_imagenesincrementales"
-// En realidas son tres : tipos imagenes, grupos e imagenes.
-
+echo "<br><br><br>";
+echo "<br><br><br>\n";
+$nodos=nodos_arbol("imagenes");
+$grupos= grupos_arbol("imagenes");
+listaImg($nodos,$grupos);
 ?>
 
 
  <ul id="menu-tipes" name="menu-tipes" oncontextmenu="return false;">
   <li onclick="insertar_grupos(0,'<?php echo $LITAMBITO_GRUPOSIMAGENES ?>');"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de imágenes</li>
-  <li class="separador" onclick="insertar_imagen('<?php echo $LITAMBITO_IMAGENES ?>',0);"><img class="menu-icono" src="../images/iconos/imagen.gif"> Definir nueva imagen</li>
+  <li onclick="insertar_imagen('<?php echo $LITAMBITO_IMAGENES ?>',0);"><img class="menu-icono" src="../images/iconos/imagen.gif"> Definir nueva imagen</li>
+  <li> <hr class="separador"> </li>
   <li onclick="mover()"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar imagen</li>
  </ul>
 
  <ul id="menu-groups" name="menu-groups" oncontextmenu="return false;">
  <li onclick="insertar_grupos(0,'<?php echo $LITAMBITO_GRUPOSIMAGENES ?>');"><img class="menu-icono" src="../images/iconos/carpeta.gif"><span class="menu-texto"> Nuevo grupo de imágenes</span></li>
-  <li class="separador" onclick="insertar_imagen('<?php echo $LITAMBITO_IMAGENES ?>',0);"><img class="menu-icono" src="../images/iconos/imagen.gif">Definir nueva imagen</li>
-  <li class="separador" onclick="colocar('../gestores/gestor_imagenes.php',0)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar imagen</li>
+  <li onclick="insertar_imagen('<?php echo $LITAMBITO_IMAGENES ?>',0);"><img class="menu-icono" src="../images/iconos/imagen.gif">Definir nueva imagen</li>
+  <li> <hr class="separador"> </li>
+  <li onclick="colocar('../gestores/gestor_imagenes.php',0)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar imagen</li>
+  <li> <hr class="separador"> </li>
   <li onclick="modificar_grupos('<?php echo $LITAMBITO_GRUPOSIMAGENES ?>');"><img class="menu-icono" src="../images/iconos/modificar.gif"> Propiedades</li>
   <li onclick="eliminar_grupos('<?php echo $LITAMBITO_GRUPOSIMAGENES ?>');"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar grupo de imágenes</li>
  </ul>
 
- <ul id="menu-images" name="menu-images" oncontextmenu="return false;">
-  <li class="separador" onclick="muestra_informacion();"><img class="menu-icono" src="../images/iconos/informacion.gif"> Imagen información</li>
-  <li class="separador" onclick="mover()"><img class="menu-icono" src="../images/iconos/mover.gif"> Mover Imagen</li>
+<ul id="menu-images" name="menu-images" oncontextmenu="return false;">
+  <li onclick="muestra_informacion();"><img class="menu-icono" src="../images/iconos/informacion.gif"> Imagen información</li>
+  <li> <hr class="separador"> </li>
+  <li onclick="mover()"><img class="menu-icono" src="../images/iconos/mover.gif"> Mover Imagen</li>
+  <li> <hr class="separador"> </li>
   <li onclick="modificar_imagen();"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades</li>
   <li onclick="eliminar_imagen();"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar imagen</li>
-  <!-- li>Comandos prueba <span>»</span>
-   <ul>
-    <li onclick="location.href='http://frikiblogeeo.blogspot.com'">Friki Bloggeo</li>
-    <li onclick="location.href='http://blogger.com'">Blogger</li>
-    <li onclick="location.href='http://gmail.com'">Gmail</li>
-   </ul>
-  </li -->
-  </ul>
+</ul>
 
  <!-- div id="outer-wrapper" onclick="ocultar_menu();" oncontextmenu="mostrarMenu(event, this.id, 'menu-contextual');return false;"> </div -->
 </BODY>
@@ -482,53 +475,6 @@ function repos(){
         return($repositorios);
 }
 
-// Descripción: Devuelve un array de las imágenes ordenadas por tipo y grupo al que pertenecen.
-// Parámetros: repositorios
-// array repositorios: array con los nombres del repositorio, para usarlo en la descripción de la imagen.
-// Devuelve: array de imágenes
-function img($repositorios){
-        global $TbMsg;
-        global $cmd;
-        global $idcentro;
-
-        $imagenes=Array();
-        $grupos_hijos=Array();
-        $rs=new Recordset;
-	$cmd->texto="SELECT DISTINCT imagenes.idimagen,imagenes.descripcion, imagenes.tipo, imagenes.grupoid,
-			     IF(imagenes.idrepositorio=0,basica.idrepositorio,imagenes.idrepositorio)  AS repo
-                       FROM  imagenes
-                  LEFT JOIN imagenes AS basica  ON imagenes.imagenid=basica.idimagen
-                      WHERE imagenes.idcentro=$idcentro ORDER BY imagenes.tipo, grupoid;";
-
-        $rs->Comando=&$cmd;
-        if (!$rs->Abrir()) return(Array($imagenes));
-
-        $rs->Primero();
-        $ordenImg=-1;
-        $oldgrupoid=(isset($rs->campos["grupoid"]))? $rs->campos["grupoid"] : 0;
-        while (!$rs->EOF){
-                $tipo=$rs->campos["tipo"];
-                $idimagen=$rs->campos["idimagen"];
-                $descripcion=$rs->campos["descripcion"];
-                $idrepo=$rs->campos["repo"];
-                // Las imágenes de un grupo son un array. Cuando cambio de grupo pongo el orden a cero:
-                $grupoid=(isset($rs->campos["grupoid"]))? $rs->campos["grupoid"] : 0;
-                if ($oldgrupoid != $grupoid) {
-                        $oldgrupoid=$grupoid;
-                        $ordenImg=0;
-                } else {
-                        $ordenImg=$ordenImg+1;
-                }
-
-                $imagenes[$tipo][$grupoid][$ordenImg]["descripcion"]=$descripcion." (".$repositorios[$idrepo].")";
-                $imagenes[$tipo][$grupoid][$ordenImg]["id"]=$idimagen;
-                $rs->Siguiente();
-        }
-
-	$rs->Cerrar();
-        return($imagenes);
-}
-
 // Descripción: Comienza el árbol de imágenes en froma de lista.
 // Parámetros: imágenes grupos_hijos
 // array imágenes: Array con las imágenes según tipo y grupo al que pertenecen.
@@ -571,7 +517,6 @@ function listaGrupo($tipo,$idgrupo,$nivel,$orden,$imagenes,$grupos_hijos){
             foreach ($grupos_hijos[$tipo][$idgrupo] as $hijo) {
                 $orden=$orden+1;
                 echo '      <li id="grupo_'.$hijo["id"].'" oncontextmenu="mostrar_menu(event,'. $tipo.', '.$hijo["id"].', \'menu-groups\');return false;"><input type="checkbox" name="list" id="nivel'.$nivel.'-'.$orden.'"><label for="nivel'.$nivel.'-'.$orden.'"><img class="menu_icono" src="../images/iconos/carpeta.gif">'.$hijo["nombre"].'</label>'."\n";
-                //echo '      <li oncontextmenu="mostrar_menu(event,'. $tipo.', '.$hijo["id"].', \'menu-groups\');return false;"><input type="checkbox" name="list" id="nivel'.$nivel.'-'.$hijo["id"].'"><label for="nivel'.$nivel.'-'.$hijo["id"].'"><img class="menu_icono" src="../images/iconos/carpeta.gif">'.$hijo["nombre"].'</label>'."\n";
 
                 $orden=listaGrupo($tipo,$hijo["id"],$nivel,$orden,$imagenes,$grupos_hijos);
             }
@@ -586,14 +531,5 @@ function listaGrupo($tipo,$idgrupo,$nivel,$orden,$imagenes,$grupos_hijos){
         echo "    </ul>"."\n";
 	return($orden);
 }
-
-        echo "<br><br><br>";
-        echo "<br><br><br>";
-//$Repos=repos();
-//$imagenes=img($Repos);
-//$grp_imagenes= grupos();
-$nodos=nodos_arbol("imagenes");
-$grupos= grupos_arbol("imagenes");
-listaImg($nodos,$grupos);
 ?>
 

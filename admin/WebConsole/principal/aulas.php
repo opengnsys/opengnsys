@@ -32,21 +32,22 @@ $arbol=new ArbolVistaXML($arbolXML,0,$baseurlimg,$clasedefault,1,0,5); // Crea e
 ?>
 <HTML>
 <HEAD>
-<TITLE>Administración web de aulas</TITLE>
+	<TITLE>Administración web de aulas</TITLE>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<LINK rel="stylesheet" type="text/css" href="../estilos.css">
 	<SCRIPT language="javascript" src="../clases/jscripts/ArbolVistaXML.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../clases/jscripts/MenuContextual.js"></SCRIPT>
+	<SCRIPT language="javascript" src="../jscripts/arbol.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../jscripts/aulas.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../jscripts/opciones.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../jscripts/constantes.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../jscripts/comunes.js"></SCRIPT>	
+	<SCRIPT language="javascript" src="../api/jquery.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../clases/jscripts/HttpLib.js"></SCRIPT>
 	<?php echo '<SCRIPT language="javascript" src="../idiomas/javascripts/'.$idioma.'/comunes_'.$idioma.'.js"></SCRIPT>'?>
 	<?php echo '<SCRIPT language="javascript" src="../idiomas/javascripts/'.$idioma.'/aulas_'.$idioma.'.js"></SCRIPT>'?>
 </HEAD>
-<!-- BODY OnContextMenu="return false" -->
-<BODY >
+<BODY onclick="ocultar_menu();" OnContextMenu="return false">
 <FORM name="fcomandos" action="" method="post" target="frame_contenidos">
 	<INPUT type="hidden" name="idcomando" value="">
 	<INPUT type="hidden" name="descricomando" value="">
@@ -111,13 +112,134 @@ $XMLcontextual=ContextualXMLAsistentes($LITAMBITO_GRUPOSORDENADORES,$AMBITO_GRUP
 echo $flotante->CreaMenuContextual($XMLcontextual);
 $XMLcontextual=ContextualXMLAsistentes($LITAMBITO_ORDENADORES,$AMBITO_ORDENADORES);
 echo $flotante->CreaMenuContextual($XMLcontextual);
-
-
-echo "<br><br><br>";
-echo "<br><br><br>";
-
 //___________________________________________________________________________________________________
+
+// Árbol de aulas
+echo "<br><br>\n";
+$nodos=nodos_arbol("aulas");
+$grupos=grupos_arbol("aulas");
+
+lista_raiz_arbol ("aulas",$nodos,$grupos);
+
+// Menús contextuales
+echo "<!-- comandos -->\n";
+echo menu_comandos("ordenadores",16);
+echo "<!-- sincronizacion -->\n";
+echo menu_sincronizacion("ordenadores",16);
+echo "<!-- asistentes. -->\n";
+echo menu_asistentes("ordenadores",16);
 ?>
+<!-- aulas -->
+
+<ul id="menu-tipo-2" name="menu-tipo-2" oncontextmenu="return false;">
+  <li onclick="ver_aulas()"><img class="menu-icono" src="../images/iconos/ordenadores.gif"> Estatus ordenadores </li>
+  <li onclick="cola_acciones()"><img class="menu-icono" src="../images/iconos/acciones.gif"> Cola de acciones </li>
+  <li> <hr class="separador"> </li>
+  <li onclick="insertar_grupos(2,'gruposaulas',1)"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de aulas </li>
+  <li onclick="insertar(170,80,480,480,'../propiedades/propiedades_aulas.php',1)"><img class="menu-icono" src="../images/iconos/aula.gif"> Añadir nueva aula </li>
+  <li> <hr class="separador"> </li>
+  <li onclick="actualizar_ordenadores()"><img class="menu-icono" src="../images/iconos/actualizar.gif"> Actualizar </li>
+  <li onclick="purgar_ordenadores()"><img class="menu-icono" src="../images/iconos/purgar.gif"> Conmutar </li>
+  <li> <hr class="separador"> </li>
+  <li onclick="consola_remota(id)"><img class="menu-icono" src="../images/iconos/shell.gif"> Consola remota </li>
+  <li> <hr class="separador"> </li>
+  <li onmouseover="ocultar_menu('comandos'); mostrar_menu(event,1,1,'menu-comandos-ordenadores')"><img class="menu-icono" src="../images/iconos/comandos.gif"> Comandos <img name="swsbfn" src="../images/flotantes/swsbfn.gif"></li>
+  <li onclick="confirmarprocedimiento(id)"><img class="menu-icono" src="../images/iconos/procedimiento.gif"> Procedimientos </li>
+</ul>
+
+<ul id="menu-grupo-2" name="menu-grupo-2" oncontextmenu="return false;">
+  <li onclick="ver_aulas()"><img class="menu-icono" src="../images/iconos/ordenadores.gif"> Estatus ordenadores </li>
+  <li onclick="cola_acciones()"><img class="menu-icono" src="../images/iconos/acciones.gif"> Cola de acciones </li>
+  <li> <hr class="separador"> </li>
+  <li onclick="insertar_grupos(2,'gruposaulas',1)"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de aulas </li>
+  <li onclick="insertar(170,80,480,480,'../propiedades/propiedades_aulas.php',1)"><img class="menu-icono" src="../images/iconos/aula.gif"> Añadir nueva aula </li>
+  <li> <hr class="separador"> </li>
+  <li onclick="actualizar_ordenadores()"><img class="menu-icono" src="../images/iconos/actualizar.gif"> Actualizar </li>
+  <li onclick="purgar_ordenadores()"><img class="menu-icono" src="../images/iconos/purgar.gif"> Conmutar </li>
+  <li> <hr class="separador"> </li>
+  <li onclick="consola_remota(id)"><img class="menu-icono" src="../images/iconos/shell.gif"> Consola remota </li>
+  <li> <hr class="separador"> </li>
+  <li onmouseover="ocultar_menu('comandos'); mostrar_menu(event,1,1,'menu-comandos-ordenadores')"><img class="menu-icono" src="../images/iconos/comandos.gif"> Comandos <img name="swsbfn" src="../images/flotantes/swsbfn.gif"> </li>
+  <li onclick="confirmarprocedimiento(id)"><img class="menu-icono" src="../images/iconos/procedimiento.gif"> Procedimientos </li>
+  <li> <hr class="separador"> </li>
+  <li onclick="modificar_grupos()"><img class="menu-icono" src="../images/iconos/modificar.gif"> Propiedades </li>
+  <li onclick="eliminar_grupos()"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar grupo de aulas </li>
+</ul>
+
+<ul id="menu-2" name="menu-2" oncontextmenu="return false;">
+  <li onclick="ver_boot()"><img class="menu-icono" src="../images/iconos/ordenadores.gif"> NetBoot AVANZADO </li>
+  <li onclick="ver_ubicarordenadores()"><img class="menu-icono" src="../images/iconos/ordenadores.gif"> Reubicar ordenadores </li>
+  <li onclick="ver_aulas()"><img class="menu-icono" src="../images/iconos/ordenadores.gif"> Estatus ordenadores </li>
+  <li onclick="cola_acciones()"><img class="menu-icono" src="../images/iconos/acciones.gif"> Cola de acciones </li>
+  <li> <hr class="separador"> </li>
+  <li onclick="insertar_grupos(4,'aulas')"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de ordenadores </li>
+  <li onclick="colocar_ordenador(1)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar ordenador </li>
+  <li> <hr class="separador"> </li>
+  <li onclick="insertar(170,80,480,480,'../propiedades/propiedades_ordenadores.php')"><img class="menu-icono" src="../images/iconos/ordenador.gif"> Añadir nuevo ordenador </li>
+  <li onclick="incorporarordenador()"><img class="menu-icono" src="../images/iconos/aula.gif"> Incorporar ordenadores </li>
+  <li> <hr class="separador"> </li>
+  <li onclick="actualizar_ordenadores()"><img class="menu-icono" src="../images/iconos/actualizar.gif"> Actualizar </li>
+  <li onclick="purgar_ordenadores()"><img class="menu-icono" src="../images/iconos/purgar.gif"> Conmutar </li>
+  <li> <hr class="separador"> </li>
+  <li onclick="consola_remota(id)"><img class="menu-icono" src="../images/iconos/shell.gif"> Consola remota </li>
+  <li> <hr class="separador"> </li>
+  <li onmouseover="ocultar_menu('comandos'); mostrar_menu(event,1,1,'menu-comandos-ordenadores')"><img class="menu-icono" src="../images/iconos/comandos.gif"> Comandos <img name="swsbfn" src="../images/flotantes/swsbfn.gif"></li>
+  <li onmouseover="ocultar_menu('comandos'); mostrar_menu(event,1,1,'menu-sincronizadas-ordenadores')"><img class="menu-icono" src="../images/iconos/comandos.gif"> Sincronizadas <img name="swsbfn" src="../images/flotantes/swsbfn.gif"></li>
+  <li onmouseover="ocultar_menu('comandos'); mostrar_menu(event,1,1,'menu-asistentes-ordenadores')"><img class="menu-icono" src="../images/iconos/comandos.gif"> Asistentes <img name="swsbfn" src="../images/flotantes/swsbfn.gif"></li>
+  <li> <hr class="separador"> </li>
+  <li onclick="confirmarprocedimiento(id)"><img class="menu-icono" src="../images/iconos/procedimiento.gif"> Procedimientos </li>
+  <li> <hr class="separador"> </li>
+  <li onclick="configuraciones(4)"><img class="menu-icono" src="../images/iconos/configuraciones.gif"> Configuración </li>
+  <li onclick="modificar(170,80,480,480,'../propiedades/propiedades_aulas.php')"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades </li>
+  <li onclick="eliminar(170,80,480,480,'../propiedades/propiedades_aulas.php')"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar aula </li>
+</ul>
+
+<!-- ordenadores -->
+<ul id="menu-grupo-1" name="menu-grupo-1" oncontextmenu="return false;">
+  <li onclick="ver_boot()"><img class="menu-icono" src="../images/iconos/ordenadores.gif"> NetBoot AVANZADO </li>
+  <li onclick="ver_aulas()"><img class="menu-icono" src="../images/iconos/ordenadores.gif"> Estatus ordenadores </li>
+  <li onclick="cola_acciones()"><img class="menu-icono" src="../images/iconos/acciones.gif"> Cola de acciones </li>
+  <li> <hr class="separador"> </li>
+  <li onclick="insertar_grupos(2,'gruposaulas',1)"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de aulas </li>
+  <li onclick="insertar(170,80,480,480,'../propiedades/propiedades_aulas.php',1)"><img class="menu-icono" src="../images/iconos/aula.gif"> Añadir nueva aula </li>
+  <li onclick="actualizar_ordenadores()"><img class="menu-icono" src="../images/iconos/actualizar.gif"> Actualizar </li>
+  <li onclick="purgar_ordenadores()"><img class="menu-icono" src="../images/iconos/purgar.gif"> Conmutar </li>
+  <li> <hr class="separador"> </li>
+  <li onclick="consola_remota(id)"><img class="menu-icono" src="../images/iconos/shell.gif"> Consola remota </li>
+  <li> <hr class="separador"> </li>
+  <li onmouseover="ocultar_menu('comandos'); mostrar_menu(event,1,1,'menu-comandos-ordenadores')"><img class="menu-icono" src="../images/iconos/comandos.gif"> Comandos <img name="swsbfn" src="../images/flotantes/swsbfn.gif"></li>
+  <li onmouseover="ocultar_menu('comandos'); mostrar_menu(event,1,1,'menu-sincronizadas-ordenadores')"><img class="menu-icono" src="../images/iconos/comandos.gif"> Sincronizadas <img name="swsbfn" src="../images/flotantes/swsbfn.gif"></li>
+  <li onmouseover="ocultar_menu('comandos'); mostrar_menu(event,1,1,'menu-asistentes-ordenadores')"><img class="menu-icono" src="../images/iconos/comandos.gif"> Asistentes <img name="swsbfn" src="../images/flotantes/swsbfn.gif"></li>
+  <li> <hr class="separador"> </li>
+  <li onclick="confirmarprocedimiento(id)"><img class="menu-icono" src="../images/iconos/procedimiento.gif"> Procedimientos </li>
+  <li onclick="configuraciones()"><img class="menu-icono" src="../images/iconos/configuraciones.gif"> Configuración </li>
+  <li onclick="modificar_grupos()"><img class="menu-icono" src="../images/iconos/modificar.gif"> Propiedades </li>
+  <li onclick="eliminar_grupos"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar grupo de ordenadores </li>
+</ul>
+
+<ul id="menu-1" name="menu-1" oncontextmenu="return false;">
+  <li onclick="cola_acciones()"><img class="menu-icono" src="../images/iconos/acciones.gif"> Cola de acciones </li>
+  <li> <hr class="separador"> </li>
+  <li onclick="ver_log(16)"><img class="menu-icono" src="../images/iconos/acciones.gif"> Log historico </li>
+  <li onclick="ver_log_seguimiento(16)"><img class="menu-icono" src="../images/iconos/acciones.gif"> Log en tiempo real </li>
+  <li onclick="mover_ordenador()"><img class="menu-icono" src="../images/iconos/mover.gif"> Mover ordenador </li>
+  <li> <hr class="separador"> </li>
+  <li onclick="actualizar_ordenadores()"><img class="menu-icono" src="../images/iconos/actualizar.gif"> Actualizar </li>
+  <li onclick="purgar_ordenadores()"><img class="menu-icono" src="../images/iconos/purgar.gif"> Conmutar </li>
+  <li> <hr class="separador"> </li>
+  <li onclick="consola_remota(id)"><img class="menu-icono" src="../images/iconos/shell.gif"> Consola remota </li>
+  <li onclick="eco_remoto()"><img class="menu-icono" src="../images/iconos/ecocon.gif"> Eco de Consola </li>
+  <li> <hr class="separador"> </li>
+  <li onclick="confirmarprocedimiento(id)"><img class="menu-icono" src="../images/iconos/procedimiento.gif"> Procedimientos </li>
+  <li> <hr class="separador"> </li>
+  <li onmouseover="ocultar_menu('comandos'); mostrar_menu(event,1,1,'menu-comandos-ordenadores')"><img class="menu-icono" src="../images/iconos/comandos.gif"> Comandos <img name="swsbfn" src="../images/flotantes/swsbfn.gif"></li>
+  <li onmouseover="ocultar_menu('comandos'); mostrar_menu(event,1,1,'menu-sincronizadas-ordenadores')"><img class="menu-icono" src="../images/iconos/comandos.gif"> Sincronizadas <img name="swsbfn" src="../images/flotantes/swsbfn.gif"></li>
+  <li onmouseover="ocultar_menu('comandos'); mostrar_menu(event,1,1,'menu-asistentes-ordenadores')"><img class="menu-icono" src="../images/iconos/comandos.gif"> Asistentes <img name="swsbfn" src="../images/flotantes/swsbfn.gif"></li>
+  <li> <hr class="separador"> </li>
+  <li onclick="configuraciones(16)"><img class="menu-icono" src="../images/iconos/configuraciones.gif"> Configuración </li>
+  <li onclick="modificar(170,80,480,400,'../propiedades/propiedades_ordenadores.php')"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades </li>
+  <li onclick="eliminar(170,80,480,400,'../propiedades/propiedades_ordenadores.php')"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar ordenador </li>
+</ul>
 
 </BODY>
 </HTML>
@@ -993,6 +1115,7 @@ function ContextualXMLComandos($litambito,$ambito){
 	$prelayerXML.='>';
 	$finallayerXML=$prelayerXML.$layerXML;
 	return($finallayerXML);
+	echo "\n\n";
 	}
 }
 
@@ -1106,8 +1229,91 @@ function ContextualXMLNetBoot(){
         return($layerXML);
 }
 
-$nodos=nodos_arbol("aulas");
-$grupos=grupos_arbol("aulas");
+// funciones nuevos menús contextuales
+function menu_comandos($litambito,$ambito){
+	global $cmd;
+	global $TbMsg;
 
-lista_raiz_arbol ("aulas",$nodos,$grupos);
+	$rs=new Recordset;
+	$cmd->texto="SELECT  idcomando,descripcion,pagina,gestor,funcion
+			FROM comandos
+			WHERE activo=1 AND submenu='' AND aplicambito & ".$ambito.">0
+			ORDER BY descripcion";
+	$rs->Comando=&$cmd;
+	if ($rs->Abrir()){
+		$menu = '<ul id="menu-comandos-'.$litambito.'" name="menu-comandos-'.$litambito.'" oncontextmenu="return false;">'."\n";
+
+		$rs->Primero();
+		while (!$rs->EOF){
+			$descrip=$TbMsg["COMMAND_".$rs->campos["funcion"]];
+			if (empty ($descrip)) {
+				$descrip=$rs->campos["descripcion"];
+			}
+			$menu .= '  <li onclick="confirmarcomando('."'".$ambito."'".','.$rs->campos["idcomando"].',\''.$rs->campos["descripcion"].'\',\''.$rs->campos["pagina"]. '\',\''.$rs->campos["gestor"]. '\',\''.$rs->campos["funcion"]. '\')" >'.
+				    $descrip.' </li>'."\n";
+			$rs->Siguiente();
+		}
+	$menu .= "</ul>\n";
+	return($menu);
+	}
+}
+
+function menu_sincronizacion($litambito,$ambito){
+	global $cmd;
+	global $TbMsg;
+	$menu = "";
+
+	$rs=new Recordset;
+	$cmd->texto="SELECT  idcomando,descripcion,pagina,gestor,funcion
+			FROM comandos
+			WHERE activo=1 AND submenu='Sincronizacion' AND aplicambito & ".$ambito.">0
+			ORDER BY descripcion";
+	$rs->Comando=&$cmd;
+	if ($rs->Abrir()){
+		$menu = '<ul id="menu-sincronizadas-'.$litambito.'" name="menu-sincronizadas-'.$litambito.'" oncontextmenu="return false;">'."\n";
+
+		$rs->Primero();
+		while (!$rs->EOF){
+			$descrip=$TbMsg["COMMAND_".$rs->campos["funcion"]];
+			if (empty ($descrip)) {
+				$descrip=$rs->campos["descripcion"];
+			}
+			$menu .= '  <li onclick="confirmarcomando('."'".$ambito."'".','.$rs->campos["idcomando"].',\''.$rs->campos["descripcion"].'\',\''.$rs->campos["pagina"]. '\',\''.$rs->campos["gestor"]. '\',\''.$rs->campos["funcion"]. '\')" >'.
+				       $descrip.' </li>'."\n";
+			$rs->Siguiente();
+		}
+	$menu .= "</ul>\n";
+	return($menu);
+	}
+}
+//________________________________________________________________________________________________________
+function menu_asistentes($litambito,$ambito){
+	global $cmd;
+	global $TbMsg;
+	$rs=new Recordset;
+	$cmd->texto="SELECT  idcomando,descripcion,pagina,gestor,funcion
+			FROM asistentes
+			WHERE activo=1 AND aplicambito & ".$ambito.">0
+			ORDER BY descripcion";
+	$rs->Comando=&$cmd;
+	if ($rs->Abrir()){
+		$menu = '<ul id="menu-asistentes-'.$litambito.'" name="menu-asistentes-'.$litambito.'" oncontextmenu="return false;">'."\n";
+
+		$rs->Primero();
+		while (!$rs->EOF){
+			$descrip=$TbMsg["WIZARD_".$rs->campos["descripcion"]];
+			if (empty ($descrip)) {
+				$descrip=$rs->campos["descripcion"];
+			}
+			$menu .= '  <li onclick="confirmarcomando('."'".$ambito."'".','.$rs->campos["idcomando"].',\''.$rs->campos["descripcion"].'\',\''.$rs->campos["pagina"]. '\',\''.$rs->campos["gestor"]. '\',\''.$rs->campos["funcion"]. '\')" >'.
+                                       $descrip.' </li>'."\n";
+
+			$rs->Siguiente();
+		}
+	$menu .= "</ul>\n";
+	return($menu);
+	}
+}
+
+
 ?>

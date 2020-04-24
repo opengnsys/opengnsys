@@ -30,22 +30,24 @@ $arbol=new ArbolVistaXML($arbolXML,0,$baseurlimg,$clasedefault,1,0,5);
 //________________________________________________________________________________________________________
 ?>
 <HTML>
-<TITLE>Administración web de aulas</TITLE>
 <HEAD>
+	<TITLE>Administración web de aulas</TITLE>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<META HTTP-EQUIV="Content-Type"  CONTENT="text/html;charset=ISO-8859-1"> 
 	<LINK rel="stylesheet" type="text/css" href="../estilos.css">
 	<SCRIPT language="javascript" src="../clases/jscripts/ArbolVistaXML.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../clases/jscripts/MenuContextual.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../jscripts/acciones.js"></SCRIPT>
+	<SCRIPT language="javascript" src="../jscripts/arbol.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../jscripts/opciones.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../jscripts/constantes.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../jscripts/comunes.js"></SCRIPT>
+	<SCRIPT language="javascript" src="../api/jquery.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../clases/jscripts/HttpLib.js"></SCRIPT>
 	<?php echo '<SCRIPT language="javascript" src="../idiomas/javascripts/'.$idioma.'/comunes_'.$idioma.'.js"></SCRIPT>'?>
 	<?php echo '<SCRIPT language="javascript" src="../idiomas/javascripts/'.$idioma.'/acciones_'.$idioma.'.js"></SCRIPT>'?>
 </HEAD>
-<BODY OnContextMenu="return false">
+<BODY onclick="ocultar_menu();" OnContextMenu="return false">
 <?php
 //________________________________________________________________________________________________________
 echo $arbol->CreaArbolVistaXML();	 // Crea árbol (HTML) a partir del XML
@@ -72,7 +74,92 @@ echo $flotante->CreaMenuContextual($XMLcontextual);
 $XMLcontextual=CreacontextualXMLTarea(); // Tareas
 echo $flotante->CreaMenuContextual($XMLcontextual); 
 
+// Menús contextuales nuevos
+echo "\n\n";
+
+
+echo "<br><br>";
+echo "<br><br>";
+echo "<br><br>";
+echo "<br><br>\n";
+// Árbol de nodos
+$comandos=nodos_arbol("comandos");
+$procedimientos=nodos_arbol("procedimientos");
+$tareas=nodos_arbol("tareas");
+$grp_comandos[1]=Array ();
+$grp_procedimientos=grupos_arbol("procedimientos");
+$grp_tareas=grupos_arbol("tareas");
+
+$nodos = $comandos + $procedimientos + $tareas;
+$grupos = $grp_comandos + $grp_procedimientos + $grp_tareas;
+
+lista_raiz_arbol("software", $nodos, $grupos);
+
 ?>
+<!-- tipos sin menú -->
+<!-- procedimientos -->
+<ul id="menu-tipo-51" name="menu-grupos-51" oncontextmenu="return false;">
+  <li onclick="insertar_grupos(51,'gruposprocedimientos');"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de procedimientos </li>
+  <li  onclick="insertar(140,115,550,250,'../propiedades/propiedades_procedimientos.php')"><img class="menu-icono" src="../images/iconos/procedimiento.gif"> Definir nuevo procedimiento </li>
+  <li> <hr class="separador"> </li>
+  <li onclick="colocar('../gestores/gestor_procedimientos.php',33)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar procedimiento </li>
+</ul>
+
+<ul id="menu-grupo-51" name="menu-grupos-51" oncontextmenu="return false;">
+  <li onclick="insertar_grupos(51,'gruposprocedimientos');"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de procedimientos </li>
+  <li  onclick="insertar(140,115,550,250,'../propiedades/propiedades_procedimientos.php')"><img class="menu-icono" src="../images/iconos/procedimiento.gif"> Definir nuevo procedimiento </li>
+  <li> <hr class="separador"> </li>
+  <li  onclick="colocar('../gestores/gestor_procedimientos.php',33)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar procedimiento </li>
+  <li> <hr class="separador"> </li>
+  <li onclick="modificar_grupos()"><img class="menu-icono" src="../images/iconos/modificar.gif"> Propiedades </li>
+  <li onclick="eliminar_grupos()"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar grupo de procedimientos </li>
+</ul>
+
+<ul id="menu-51" name="menu-51" oncontextmenu="return false;">
+  <li onclick="informacion_acciones(id);"><img class="menu-icono" src="../images/iconos/informacion.gif"> Información Procedimiento </li>
+  <li  onclick="inclusion_acciones(id)"><img class="menu-icono" src="../images/iconos/acciones.gif"> Incluir acciones </li>
+  <li> <hr class="separador"> </li>
+  <li  onclick="mover()"><img class="menu-icono" src="../images/iconos/mover.gif"> Mover procedimiento </li>
+  <li> <hr class="separador"> </li>
+  <li onclick="modificar(140,115,550,250,'../propiedades/propiedades_procedimientos.php')"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades</li>
+  <li  onclick="eliminar(140,115,550,250,'../propiedades/propiedades_procedimientos.php');"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar procedimiento </li>
+  <li> <hr class="separador"> </li>
+  <li onclick="insertar_accionmenu(id)"><img class="menu-icono" src="../images/iconos/menus.gif"> Gestión de Menús </li>
+  </ul>
+
+<!-- tareas -->
+<ul id="menu-tipo-52" name="menu-tipo-52" oncontextmenu="return false;">
+  <li onclick="insertar_grupos(52,'grupostareas');"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de tareas </li>
+  <li  onclick="insertar(170,150,480,270,'../propiedades/propiedades_tareas.php')"><img class="menu-icono" src="../images/iconos/tareas.gif"> Definir nueva tarea </li>
+  <li> <hr class="separador"> </li>
+  <li  onclick="colocar('../gestores/gestor_tareas.php',33)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar tarea </li>
+</ul>
+
+<ul id="menu-grupo-52" name="menu-grupo-52" oncontextmenu="return false;">
+  <li onclick="insertar_grupos(52,'grupostareas');"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de tareas </li>
+  <li  onclick="insertar(170,150,480,270,'../propiedades/propiedades_tareas.php')"><img class="menu-icono" src="../images/iconos/tareas.gif"> Definir nueva tarea </li>
+  <li> <hr class="separador"> </li>
+  <li  onclick="colocar('../gestores/gestor_tareas.php',33)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar tarea </li>
+  <li> <hr class="separador"> </li>
+  <li  onclick="modificar_grupos()"><img class="menu-icono" src="../images/iconos/modificar.gif"> Propiedades </li>
+  <li  onclick="eliminar_grupos()"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar grupo de tareas </li>
+</ul>
+
+<ul id="menu-52" name="menu-52" oncontextmenu="return false;">
+  <li onclick="ejecutar_tareas(id);"><img class="menu-icono" src="../images/iconos/tareas.gif"> Ejecutar tarea </li>
+  <li  onclick="programacion(id)"><img class="menu-icono" src="../images/iconos/reloj.gif"> Programaciones </li>
+  <li> <hr class="separador"> </li>
+  <li onclick="informacion_acciones(34)"><img class="menu-icono" src="../images/iconos/informacion.gif"> Información tarea </li>
+  <li  onclick="inclusion_acciones(id)"><img class="menu-icono" src="../images/iconos/acciones.gif"> Incluir acciones </li>
+  <li> <hr class="separador"> </li>
+  <li  onclick="mover()"><img class="menu-icono" src="../images/iconos/mover.gif"> Mover tarea </li>
+  <li> <hr class="separador"> </li>
+  <li onclick="modificar(170,150,480,270,'../propiedades/propiedades_tareas.php')"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades </li>
+  <li  onclick="eliminar(170,150,480,270,'../propiedades/propiedades_tareas.php')"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar tarea </li>
+  <li> <hr class="separador"> </li>
+  <li onclick="insertar_accionmenu(3)"><img class="menu-icono" src="../images/iconos/menus.gif"> Gestión de Menús </li>
+</ul>
+
 </BODY>
 </HTML>
 <?php
@@ -686,17 +773,4 @@ function CreacontextualXMLTarea(){
 	$layerXML.='</MENUCONTEXTUAL>';
 	return($layerXML);
 }
-echo "<br><br>";
-echo "<br><br>";
-$comandos=nodos_arbol("comandos");
-$procedimientos=nodos_arbol("procedimientos");
-$tareas=nodos_arbol("tareas");
-$grp_comandos[1]=Array ();
-$grp_procedimientos=grupos_arbol("procedimientos");
-$grp_tareas=grupos_arbol("tareas");
-
-$nodos = $comandos + $procedimientos + $tareas;
-$grupos = $grp_comandos + $grp_procedimientos + $grp_tareas;
-
-lista_raiz_arbol("software", $nodos, $grupos);
 ?>
