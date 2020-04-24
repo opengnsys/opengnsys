@@ -5,9 +5,9 @@
 
 /**
  * Devuelve un array de grupos de nodos. Ordenados por tipos de nodos y grupo
+ *
  * @param[tipo_nodo] str tipo de elemento a mostrar en el árbol (aulas, imagenes, ...)
  * @return array de grupos.
- * @note  usamos la variable tipo por compatibilidad con grupos de imágenes.
  */
 function grupos_arbol($tipo_nodo) {
         global $cmd;
@@ -15,27 +15,27 @@ function grupos_arbol($tipo_nodo) {
 
         $grupos_hijos=Array();
 	$sql="";
-	$ambito="";
+	$num_tipo="";
 
 	switch ($tipo_nodo){
 	    case 'aulas':
 		global $AMBITO_GRUPOSAULAS;
-		$ambito=$AMBITO_GRUPOSAULAS;
+		$num_tipo=$AMBITO_GRUPOSAULAS;
                 break; 
 	    case 'componenteshardware':
 		global $AMBITO_GRUPOSCOMPONENTESHARD;
-		$ambito=$AMBITO_GRUPOSCOMPONENTESHARD;
+		$num_tipo=$AMBITO_GRUPOSCOMPONENTESHARD;
                 break; 
 	    case 'componentessoftware':
 		global $AMBITO_GRUPOSCOMPONENTESSOFT;
-		$ambito=$AMBITO_GRUPOSCOMPONENTESSOFT;
+		$num_tipo=$AMBITO_GRUPOSCOMPONENTESSOFT;
                 break; 
 	    case 'imagenes':
-		$ambito="70, 71, 72";
+		$num_tipo="70, 71, 72";
                 break; 
 	    case 'menus':
 		global $AMBITO_GRUPOSMENUS;
-		$ambito=$AMBITO_GRUPOSMENUS;
+		$num_tipo=$AMBITO_GRUPOSMENUS;
                 break; 
 	    case 'ordenadores':
 		$sql="SELECT gruposordenadores.idgrupo AS id, nombregrupoordenador AS nombre,
@@ -47,41 +47,39 @@ function grupos_arbol($tipo_nodo) {
                 break; 
 	    case 'perfileshardware':
 		global $AMBITO_GRUPOSPERFILESHARD;
-		$ambito=$AMBITO_GRUPOSPERFILESHARD;
+		$num_tipo=$AMBITO_GRUPOSPERFILESHARD;
                 break; 
 	    case 'perfilessoftware':
 		global $AMBITO_GRUPOSPERFILESSOFT;
-		$ambito=$AMBITO_GRUPOSPERFILESSOFT;
+		$num_tipo=$AMBITO_GRUPOSPERFILESSOFT;
                 break; 
 	    case 'perfilessoftwareincremental':
 		global $AMBITO_GRUPOSSOFTINCREMENTAL;
-		$ambito=$AMBITO_GRUPOSSOFTINCREMENTAL;
+		$num_tipo=$AMBITO_GRUPOSSOFTINCREMENTAL;
                 break; 
 	    case 'procedimientos':
 		global $AMBITO_GRUPOSPROCEDIMIENTOS;
-		$ambito=$AMBITO_GRUPOSPROCEDIMIENTOS;
+		$num_tipo=$AMBITO_GRUPOSPROCEDIMIENTOS;
                 break; 
 	    case 'repositorios':
 		global $AMBITO_GRUPOSREPOSITORIOS;
-		$ambito=$AMBITO_GRUPOSREPOSITORIOS;
+		$num_tipo=$AMBITO_GRUPOSREPOSITORIOS;
                 break; 
 	    case 'tareas':
 		global $AMBITO_GRUPOSTAREAS;
-		$ambito=$AMBITO_GRUPOSTAREAS;
+		$num_tipo=$AMBITO_GRUPOSTAREAS;
                 break; 
 	}
-        if ($sql == "" && $ambito != "") {
+        if ($sql == "" && $num_tipo != "") {
 		$sql="SELECT idgrupo AS id, nombregrupo AS nombre, grupos.grupoid AS grupopadre, tipo AS conjuntoid
                        FROM grupos
-                      WHERE idcentro=$idcentro AND tipo IN ($ambito)
+                      WHERE idcentro=$idcentro AND tipo IN ($num_tipo)
                    ORDER BY tipo, grupopadre, grupoid;";
 	}
 	if ($sql == "")	return ($grupos_hijos);
 
         $rs=new Recordset;
         $cmd->texto=$sql;
- //echo "text: ".$cmd->texto;
- //echo "<br><br>";
         $rs->Comando=&$cmd;
         if (!$rs->Abrir()) return($grupos_hijos);
 
@@ -139,30 +137,32 @@ function lista_grupo_arbol($tipo_nodo, $tipo, $idgrupo, $nivel, $orden, $nodos, 
         if (isset ($grupos[$tipo][$idgrupo])){
             foreach ($grupos[$tipo][$idgrupo] as $hijo) {
                 $orden=$orden+1;
-                echo '      <li id="grupo_'.$hijo["id"].'" oncontextmenu="mostrar_menu(event,'. $tipo.', '.$hijo["id"].', \'menu-groups-'.$tipo_nodo.'\');return false;"><input type="checkbox" name="list" id="nivel'.$nivel.'-'.$orden.'"><label for="nivel'.$nivel.'-'.$orden.'"><img class="menu_icono" src="../images/iconos/carpeta.gif">'.$hijo["nombre"].'</label>'."\n";
-                //echo '      <li oncontextmenu="mostrar_menu(event,'. $tipo.', '.$hijo["id"].', \'menu-groups\');return false;"><input type="checkbox" name="list" id="nivel'.$nivel.'-'.$hijo["id"].'"><label for="nivel'.$nivel.'-'.$hijo["id"].'"><img class="menu_icono" src="../images/iconos/carpeta.gif">'.$hijo["nombre"].'</label>'."\n";
+		echo '      <li id="grupo_'.$hijo["id"].'"><input type="checkbox" name="list" id="nivel'.$nivel.'-'.$orden.'">
+			      <label oncontextmenu="ocultar_menu(); mostrar_menu(event,'. $tipo.', '.$hijo["id"].', \'menu-grupo-'.$tipo.'\');return false;" for="nivel'.$nivel.'-'.$orden.'">
+                                 <img class="menu_icono" src="../images/iconos/carpeta.gif">'.$hijo["nombre"].'
+                              </label>'."\n";
 
+		$orden++;
                 $orden=lista_grupo_arbol($tipo_nodo, $tipo, $hijo["id"], $nivel, $orden, $nodos, $grupos);
             }
             echo "      </li>"."\n";
         }
-        // creo la lista de las imágenes dentro del grupo (si existen).
+        // Creo la lista de las nodos dentro del grupo (si existen).
         if (isset ($nodos[$tipo][$idgrupo])){
             foreach ($nodos[$tipo][$idgrupo] as $nodo){
 		if ($tipo_nodo == "aulas"){
 		    // Incluyo input para que se pueda abrir el nodo
-		    echo '      <li id="'.$tipo_nodo.'_'.$nodo["id"].'" oncontextmenu="ocultar_menu(); mostrar_menu(event,'. $tipo.', '.$nodo["id"].', \'menu-'.$tipo_nodo.'\');return false;">';
-		    echo '<input type="checkbox" name="list" id="nivel'.$nivel.'-'.$orden.'"><label for="nivel'.$nivel.'-'.$orden.'">';
-		    echo '<img class="menu_icono" src="../images/iconos/imagen.gif"> '.$nodo["descripcion"];
-		    echo '</label>'."\n" ;
+		    echo '      <li id="'.$tipo_nodo.'_'.$nodo["id"].'">
+				    <input type="checkbox" name="list" id="nivel'.$nivel.'-'.$orden.'">
+				    <label oncontextmenu="ocultar_menu(); mostrar_menu(event,'. $tipo.', '.$nodo["id"].', \'menu-'.$tipo.'\');return false;" for="nivel'.$nivel.'-'.$orden.'">
+					<img class="menu_icono" src="../images/iconos/imagen.gif"> '.$nodo["descripcion"].'
+				    </label>'."\n" ;
 
 		    // Listo grupo de ordenadores
 		    lista_grupo_arbol("ordenadores",$nodo["id"],0, $nivel, $orden,$ordenadores,$grp_ordenadores);
 		} else {
-		    echo '      <li id="'.$tipo_nodo.'_'.$nodo["id"].'" oncontextmenu="ocultar_menu(); mostrar_menu(event,'. $tipo.', '.$nodo["id"].', \'menu-'.$tipo_nodo.'\');return false;">';
-		    echo '<a href="#r">';
-		    echo '<img class="menu_icono" src="../images/iconos/imagen.gif"> '.$nodo["descripcion"];
-		    echo '</a>';
+		    echo '      <li id="'.$tipo_nodo.'_'.$nodo["id"].'" oncontextmenu="ocultar_menu(); mostrar_menu(event,'. $tipo.', '.$nodo["id"].', \'menu-'.$tipo.'\');return false;">
+				    <a href="#r"> <img class="menu_icono" src="../images/iconos/imagen.gif"> '.$nodo["descripcion"].'</a>';
 		}
                 echo "      </li>"."\n";
             }
@@ -173,7 +173,8 @@ function lista_grupo_arbol($tipo_nodo, $tipo, $idgrupo, $nivel, $orden, $nodos, 
 
 
 /**
- * Devuelve un array de grupos de nodos. Ordenados por tipos de nodos y grupo
+ * Construye la parte del árbol correspondiente al raíz. Si los nodos son de distintos tipos muestra también el primer nivel (ej: procedimientos y tareas).
+ *
  * @param[tipo_nodo] str tipo de elemento a mostrar en el árbol (aulas, imagenes, ...)
  * @param[nodos] array nodos a mostrar
  * @param[grupos] array grupos de nodos a mostrar
@@ -191,17 +192,24 @@ function lista_raiz_arbol ($tipo_nodo, $nodos, $grupos){
 	    $grp_ordenadores=grupos_arbol("ordenadores");
 	}
         echo '<ul id="menu_arbol">'."\n";
-        echo '  <li><input type="checkbox" name="list" id="nivel1-1"><label for="nivel1-1"><img class="menu-icono" src="../images/iconos/imagenes.gif">'.str_replace ('"','',$TbMsg[9]).'</label>'."\n";
 	$keys=array_keys($nodos);
 	if (count($keys) == 1) {
+	    $tipo= array_keys($nodos)[0];
+	    echo '  <li><input type="checkbox" name="list" id="nivel1-1">
+			<label for="nivel1-1" oncontextmenu="ocultar_menu(); mostrar_menu(event, '. $tipo.', 0, \'menu-tipo-'.$tipo.'\');return false;">
+			    <img class="menu-icono" src="../images/iconos/imagenes.gif"> Inicio árbol
+			</label>'."\n";
 	    lista_grupo_arbol($tipo_nodo, $keys[0], 0, 1, $orden, $nodos, $grupos);
 	} else {
+            echo '  <li><input type="checkbox" name="list" id="nivel1-1"><label for="nivel1-1"><img class="menu-icono" src="../images/iconos/imagenes.gif"> Inicio árbol </label>'."\n";
 	    foreach ($keys as $tipo) {
                 // Recorremos los grupos hijos desde el cero
                 echo '    <ul>'."\n";
-                echo '       <li id="grupo_'.$tipo.'_0" oncontextmenu="mostrar_menu(event, '. $tipo.', 0, \'menu-tipes\');return false;">'."\n";
-                //echo '          <input type="checkbox" name="list" id="nivel2-'.$tipo.'"><label for="nivel2-'.$tipo.'"><img class="menu-icono" src="../images/iconos/carpeta.gif"> '.$tipo.' '.str_replace ('"','',$TbMsg[10+$tipo]).'</label>'."\n";
-                echo '          <input type="checkbox" name="list" id="nivel2-'.$tipo.'"><label for="nivel2-'.$tipo.'"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Falta nombre del tipo: '.$tipo.'</label>'."\n";
+                echo '       <li id="grupo_'.$tipo.'_0" >
+				  <input type="checkbox" name="list" id="nivel2-'.$tipo.'">
+				  <label oncontextmenu="ocultar_menu(); mostrar_menu(event, '. $tipo.', 0, \'menu-tipo-'.$tipo.'\');return false;" for="nivel2-'.$tipo.'">
+					<img class="menu-icono" src="../images/iconos/carpeta.gif"> Falta nombre del tipo: '.$tipo.'
+				  </label>'."\n";
                 $orden=lista_grupo_arbol($tipo_nodo, $tipo, 0, 2, $orden, $nodos, $grupos);
                 $orden=$orden+1;
                 echo '       </li>'."\n";
@@ -216,10 +224,11 @@ function lista_raiz_arbol ($tipo_nodo, $nodos, $grupos){
 
 /*
  * Descripción: Devuelve un array de nodos ordenados por el grupo al que pertenecen.
- * Parámetros:
- *     tipo_nodo: str tipo de elemento a mostrar en el árbol (aulas, imagenes, ...)
- *     Devuelve: array de nodos
- * Nota: Existen nodos clasificados por tipos. Para los no tienen tipos se usa un único tipo = 1
+ *
+ * @param[tipo_nodo] str tipo de elemento a mostrar en el árbol (aulas, imagenes, ...)
+ * @return           Array de nodos
+ * @note             Existen nodos clasificados por tipos. Para los no tienen tipos se usa un único tipo = 1
+ * @note             Si no existen nodos se devuelve un array $nodo[$int_tipo_nodo]=Array();. Para que se muestre en el árbol.
  */
 function nodos_arbol($tipo_nodo){
         global $TbMsg;
@@ -230,11 +239,13 @@ function nodos_arbol($tipo_nodo){
 	switch ($tipo_nodo){
 	    case 'aulas':
 		global $AMBITO_GRUPOSAULAS;
+		$num_tipo=$AMBITO_GRUPOSAULAS;
 		$sql="SELECT idaula AS id, nombreaula AS nombre, grupoid, '$AMBITO_GRUPOSAULAS' AS conjuntoid
 			FROM  aulas
                       WHERE idcentro=$idcentro ORDER BY conjuntoid, grupoid;";
                 break; 
 	    case 'comandos':
+		$num_tipo=1;
 		$sql="SELECT idcomando AS id, descripcion AS nombre, urlimg,
 			    '1' AS conjuntoid, '0' AS grupoid
 			FROM comandos
@@ -242,6 +253,7 @@ function nodos_arbol($tipo_nodo){
                 break; 
 	    case 'componenteshardware':
 		global $AMBITO_GRUPOSCOMPONENTESHARD;
+		$num_tipo=$AMBITO_GRUPOSCOMPONENTESHARD;
 		$sql="SELECT hardwares.idhardware AS id, hardwares.descripcion AS nombre,
 			     tipohardwares.urlimg, '$AMBITO_GRUPOSCOMPONENTESHARD' AS conjuntoid, grupoid
 		        FROM hardwares INNER JOIN tipohardwares
@@ -250,6 +262,7 @@ function nodos_arbol($tipo_nodo){
                 break; 
 	    case 'componentessoftware':
 		global $AMBITO_GRUPOSCOMPONENTESSOFT;
+		$num_tipo=$AMBITO_GRUPOSCOMPONENTESSOFT;
 		$sql="SELECT softwares.idsoftware AS id, softwares.descripcion AS nombre,
 			     tiposoftwares.urlimg, '$AMBITO_GRUPOSCOMPONENTESSOFT' AS conjuntoid, grupoid
                         FROM softwares INNER JOIN tiposoftwares
@@ -257,6 +270,7 @@ function nodos_arbol($tipo_nodo){
 		     ORDER BY conjuntoid, grupoid;";
                 break; 
 	    case 'imagenes':
+		$num_tipo=1;
 		$sql="SELECT DISTINCT imagenes.idimagen AS id ,imagenes.descripcion AS nombre,
 			              imagenes.tipo AS conjuntoid, imagenes.grupoid,
                              IF(imagenes.idrepositorio=0,basica.idrepositorio,imagenes.idrepositorio)  AS repo
@@ -266,6 +280,7 @@ function nodos_arbol($tipo_nodo){
                 break; 
 	    case 'menus':
 		global $AMBITO_GRUPOSMENUS;
+		$num_tipo=$AMBITO_GRUPOSMENUS;
 		$sql="SELECT idmenu AS id, descripcion AS nombre, '$AMBITO_GRUPOSMENUS' AS conjuntoid, grupoid
 			FROM menus  
 		       WHERE idcentro=$idcentro ORDER BY conjuntoid, grupoid;";
@@ -280,6 +295,7 @@ function nodos_arbol($tipo_nodo){
                 break; 
 	    case 'perfileshardware':
 		global $AMBITO_GRUPOSPERFILESHARD;
+		$num_tipo=$AMBITO_GRUPOSPERFILESHARD;
 		$sql="SELECT idperfilhard AS id, descripcion AS nombre,
 			     '$AMBITO_GRUPOSPERFILESHARD' AS conjuntoid, grupoid
 			FROM perfileshard
@@ -288,6 +304,7 @@ function nodos_arbol($tipo_nodo){
                 break; 
 	    case 'perfilessoftware':
 		global $AMBITO_GRUPOSPERFILESSOFT;
+		$num_tipo=$AMBITO_GRUPOSPERFILESSOFT;
 		$sql="SELECT idperfilsoft AS id, descripcion AS nombre,
 			     '$AMBITO_GRUPOSPERFILESSOFT' AS conjuntoid, grupoid
 			FROM perfilessoft
@@ -296,29 +313,34 @@ function nodos_arbol($tipo_nodo){
                 break; 
 	    case 'procedimientos':
 		global $AMBITO_GRUPOSPROCEDIMIENTOS;
+		$num_tipo=$AMBITO_GRUPOSPROCEDIMIENTOS;
 		$sql="SELECT idprocedimiento AS id, descripcion AS nombre, '$AMBITO_GRUPOSPROCEDIMIENTOS' AS conjuntoid, grupoid
 		        FROM procedimientos
 		       WHERE idcentro=$idcentro ORDER BY conjuntoid, grupoid;";
                 break; 
 	    case 'repositorios':
 		global $AMBITO_GRUPOSREPOSITORIOS;
+		$num_tipo=$AMBITO_GRUPOSREPOSITORIOS;
 		$sql="SELECT idrepositorio AS id, nombrerepositorio AS nombre, '$AMBITO_GRUPOSREPOSITORIOS' AS conjuntoid, grupoid
 	    	        FROM repositorios
 		       WHERE idcentro=$idcentro ORDER BY conjuntoid, grupoid;";
                 break; 
 	    case 'tareas':
 		global $AMBITO_GRUPOSTAREAS;
-		$sql="SELECT idtarea AS id, descripcion AS nombre, ambito, '$AMBITO_GRUPOSTAREAS' AS conjuntoid, grupoid
+		$num_tipo=$AMBITO_GRUPOSTAREAS;
+		$sql="SELECT idtarea AS id, descripcion AS nombre, num_tipo, '$AMBITO_GRUPOSTAREAS' AS conjuntoid, grupoid
                         FROM tareas 
 		       WHERE idcentro=$idcentro ORDER BY conjuntoid, grupoid;";
                 break; 
 	    case 'tiposhardware':
+		$num_tipo=1;
 		$sql="SELECT idtipohardware AS id, descripcion AS nombre, urlimg, nemonico,
 			     '1' AS conjuntoid, '0' AS grupoid
                         FROM tipohardwares
 		    ORDER BY conjuntoid, grupoid;";
                 break; 
 	    case 'tipossoftware':
+		$num_tipo=1;
 		$sql="SELECT idtiposoftware AS id, descripcion AS nombre, urlimg,
 			     '1' AS conjuntoid, '0' AS grupoid
                         FROM tiposoftwares
@@ -326,15 +348,12 @@ function nodos_arbol($tipo_nodo){
                 break; 
 	}
 	
-//echo "sql: ".$sql;
-//echo "<br><br>";
-        $nodos=Array();
-        $grupos_hijos=Array();
+        $nodos[$num_tipo]=Array();
         $rs=new Recordset;
         $cmd->texto=$sql;
 
         $rs->Comando=&$cmd;
-        if (!$rs->Abrir()) return(Array($nodos));
+        if (!$rs->Abrir()) return($nodos);
 
         $rs->Primero();
         $ordenNodo=-1;
@@ -360,7 +379,3 @@ function nodos_arbol($tipo_nodo){
         $rs->Cerrar();
         return($nodos);
 }
-
-
-
-?>
