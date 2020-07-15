@@ -35,6 +35,7 @@ $arbol=new ArbolVistaXML($arbolXML,0,$baseurlimg,$clasedefault,1,0,5); // Crea e
 	<TITLE>Administración web de aulas</TITLE>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<LINK rel="stylesheet" type="text/css" href="../estilos.css">
+	<SCRIPT language="javascript" src="../api/jquery.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../clases/jscripts/ArbolVistaXML.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../clases/jscripts/MenuContextual.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../jscripts/arbol.js"></SCRIPT>
@@ -42,7 +43,6 @@ $arbol=new ArbolVistaXML($arbolXML,0,$baseurlimg,$clasedefault,1,0,5); // Crea e
 	<SCRIPT language="javascript" src="../jscripts/opciones.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../jscripts/constantes.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../jscripts/comunes.js"></SCRIPT>	
-	<SCRIPT language="javascript" src="../api/jquery.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../clases/jscripts/HttpLib.js"></SCRIPT>
 	<?php echo '<SCRIPT language="javascript" src="../idiomas/javascripts/'.$idioma.'/comunes_'.$idioma.'.js"></SCRIPT>'?>
 	<?php echo '<SCRIPT language="javascript" src="../idiomas/javascripts/'.$idioma.'/aulas_'.$idioma.'.js"></SCRIPT>'?>
@@ -131,7 +131,7 @@ echo menu_asistentes("ordenadores",16);
 ?>
 <!-- aulas -->
 
-<ul id="menu-tipo-2" name="menu-tipo-2" oncontextmenu="return false;">
+<ul id="menu-type-2" name="menu-type-2" oncontextmenu="return false;">
   <li onclick="ver_aulas()"><img class="menu-icono" src="../images/iconos/ordenadores.gif"> Estatus ordenadores </li>
   <li onclick="cola_acciones()"><img class="menu-icono" src="../images/iconos/acciones.gif"> Cola de acciones </li>
   <li> <hr class="separador"> </li>
@@ -147,7 +147,7 @@ echo menu_asistentes("ordenadores",16);
   <li onclick="confirmarprocedimiento(id)"><img class="menu-icono" src="../images/iconos/procedimiento.gif"> Procedimientos </li>
 </ul>
 
-<ul id="menu-grupo-2" name="menu-grupo-2" oncontextmenu="return false;">
+<ul id="menu-group-2" name="menu-group-2" oncontextmenu="return false;">
   <li onclick="ver_aulas()"><img class="menu-icono" src="../images/iconos/ordenadores.gif"> Estatus ordenadores </li>
   <li onclick="cola_acciones()"><img class="menu-icono" src="../images/iconos/acciones.gif"> Cola de acciones </li>
   <li> <hr class="separador"> </li>
@@ -166,7 +166,7 @@ echo menu_asistentes("ordenadores",16);
   <li onclick="eliminar_grupos()"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar grupo de aulas </li>
 </ul>
 
-<ul id="menu-2" name="menu-2" oncontextmenu="return false;">
+<ul id="menu-node-2" name="menu-node-2" oncontextmenu="return false;">
   <li onclick="ver_boot()"><img class="menu-icono" src="../images/iconos/ordenadores.gif"> NetBoot AVANZADO </li>
   <li onclick="ver_ubicarordenadores()"><img class="menu-icono" src="../images/iconos/ordenadores.gif"> Reubicar ordenadores </li>
   <li onclick="ver_aulas()"><img class="menu-icono" src="../images/iconos/ordenadores.gif"> Estatus ordenadores </li>
@@ -195,7 +195,7 @@ echo menu_asistentes("ordenadores",16);
 </ul>
 
 <!-- ordenadores -->
-<ul id="menu-grupo-1" name="menu-grupo-1" oncontextmenu="return false;">
+<ul id="menu-group-1" name="menu-group-1" oncontextmenu="return false;">
   <li onclick="ver_boot()"><img class="menu-icono" src="../images/iconos/ordenadores.gif"> NetBoot AVANZADO </li>
   <li onclick="ver_aulas()"><img class="menu-icono" src="../images/iconos/ordenadores.gif"> Estatus ordenadores </li>
   <li onclick="cola_acciones()"><img class="menu-icono" src="../images/iconos/acciones.gif"> Cola de acciones </li>
@@ -217,7 +217,7 @@ echo menu_asistentes("ordenadores",16);
   <li onclick="eliminar_grupos"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar grupo de ordenadores </li>
 </ul>
 
-<ul id="menu-1" name="menu-1" oncontextmenu="return false;">
+<ul id="menu-node-1" name="menu-node-1" oncontextmenu="return false;">
   <li onclick="cola_acciones()"><img class="menu-icono" src="../images/iconos/acciones.gif"> Cola de acciones </li>
   <li> <hr class="separador"> </li>
   <li onclick="ver_log(16)"><img class="menu-icono" src="../images/iconos/acciones.gif"> Log historico </li>

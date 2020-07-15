@@ -34,13 +34,13 @@ $arbol=new ArbolVistaXML($arbolXML,0,$baseurlimg,$clasedefault,1,0,5);
 	<TITLE>Administración web de aulas</TITLE>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<LINK rel="stylesheet" type="text/css" href="../estilos.css">
+	<SCRIPT language="javascript" src="../api/jquery.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../clases/jscripts/ArbolVistaXML.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../clases/jscripts/MenuContextual.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../jscripts/softwares.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../jscripts/arbol.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../jscripts/opciones.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../jscripts/constantes.js"></SCRIPT>
-	<SCRIPT language="javascript" src="../api/jquery.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../clases/jscripts/HttpLib.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../jscripts/comunes.js"></SCRIPT>
 	<?php echo '<SCRIPT language="javascript" src="../idiomas/javascripts/'.$idioma.'/comunes_'.$idioma.'.js"></SCRIPT>'?>
@@ -94,13 +94,13 @@ $grupos=$grp_componentes + $grp_perfiles;
 lista_raiz_arbol("software", $nodos, $grupos);
 ?>
 <!-- componentes software Comrpobado Bien -->
-<ul id="menu-tipo-55" name="menu-grupos-55" oncontextmenu="return false;">
+<ul id="menu-type-55" name="menu-type-55" oncontextmenu="return false;">
   <li onclick="insertar_grupos(55,'gruposcomponentessoft')"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de componentes </li>
   <li onclick="insertar(140,115,550,250,'../propiedades/propiedades_componentesoftwares.php')"><img class="menu-icono" src="../images/iconos/confisoft.gif"> Definir nuevo componente </li>
   <li> <hr class="separador"> </li>
   <li onclick="colocar('../gestores/gestor_componentesoftwares.php',37)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar componente </li>
 </ul>
-<ul id="menu-grupo-55" name="menu-grupo-55" oncontextmenu="return false;">
+<ul id="menu-group-55" name="menu-group-55" oncontextmenu="return false;">
   <li onclick="insertar_grupos(55,'gruposcomponentessoft')"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de componentes </li>
   <li onclick="insertar(140,115,550,250,'../propiedades/propiedades_componentesoftwares.php')"><img class="menu-icono" src="../images/iconos/confisoft.gif"> Definir nuevo componente </li>
   <li> <hr class="separador"> </li>
@@ -110,7 +110,7 @@ lista_raiz_arbol("software", $nodos, $grupos);
   <li onclick="eliminar_grupos()"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar grupo de componentes </li>
 
 </ul>
-<ul id="menu-55" name="menu-55" oncontextmenu="return false;">
+<ul id="menu-node-55" name="menu-node-55" oncontextmenu="return false;">
   <li onclick="mover(37)"><img class="menu-icono" src="../images/iconos/mover.gif"> Mover componente </li>
   <li> <hr class="separador"> </li>
   <li onclick="modificar(140,115,550,250,'../propiedades/propiedades_componentesoftwares.php')"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades </li>
@@ -118,14 +118,14 @@ lista_raiz_arbol("software", $nodos, $grupos);
 </ul>
 
 <!-- perfiles software -->
-<ul id="menu-tipo-57" name="menu-tipo-57" oncontextmenu="return false;">
+<ul id="menu-type-57" name="menu-type-57" oncontextmenu="return false;">
   <li onclick="insertar_grupos(57,'gruposperfilessoft')"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de perfiles </li>
   <li onclick="insertar(170,150,480,280,'../propiedades/propiedades_perfilsoftwares.php')"><img class="menu-icono" src="../images/iconos/confisoft.gif"> Definir nuevo perfil </li>
   <li> <hr class="separador"> </li>
   <li onclick=""colocar('../gestores/gestor_perfilsoftwares.php',39)><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar perfil </li>
 </ul>
 
-<ul id="menu-grupo-57" name="menu-grupo-57" oncontextmenu="return false;">
+<ul id="menu-group-57" name="menu-group-57" oncontextmenu="return false;">
   <li onclick="insertar_grupos(57,'gruposperfilessoft')"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de perfiles </li>
   <li onclick="insertar(170,150,480,280,'../propiedades/propiedades_perfilsoftwares.php')"><img class="menu-icono" src="../images/iconos/confisoft.gif"> Definir nuevo perfil </li>
   <li> <hr class="separador"> </li>
@@ -135,10 +135,10 @@ lista_raiz_arbol("software", $nodos, $grupos);
   <li onclick="eliminar_grupos()"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar grupo de perfiles </li>
 
 </ul>
-<ul id="menu-57" name="menu-57" oncontextmenu="return false;">
+<ul id="menu-node-57" name="menu-node-57" oncontextmenu="return false;">
 
-  <li onclick="insertar_perfilcomponente()"><img class="menu-icono" src="../images/iconos/confisoft.gif"> Gestión componentes </li>
-  <li onclick="informacion_perfiles()"><img class="menu-icono" src="../images/iconos/informacion.gif"> Información Perfil </li>
+  <li id="manage"><img class="menu-icono" src="../images/iconos/confisoft.gif"> Gestión componentes </li>
+  <li id="showInfo"><img class="menu-icono" src="../images/iconos/informacion.gif"> Información Perfil </li>
   <li> <hr class="separador"> </li>
   <li onclick="mover(39)"><img class="menu-icono" src="../images/iconos/mover.gif"> Mover perfil </li>
   <li onclick="modificar(170,150,480,280,'../propiedades/propiedades_perfilsoftwares.php')"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades </li>

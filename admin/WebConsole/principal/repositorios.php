@@ -39,6 +39,7 @@ $XMLcontextual=ContextualXMLComandos($LITAMBITO_CENTROS,$AMBITO_CENTROS);
 	<TITLE>Administración web de aulas</TITLE>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<LINK rel="stylesheet" type="text/css" href="../estilos.css">
+	<SCRIPT language="javascript" src="../api/jquery.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../clases/jscripts/ArbolVistaXML.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../clases/jscripts/MenuContextual.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../jscripts/arbol.js"></SCRIPT>
@@ -46,7 +47,6 @@ $XMLcontextual=ContextualXMLComandos($LITAMBITO_CENTROS,$AMBITO_CENTROS);
 	<SCRIPT language="javascript" src="../jscripts/opciones.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../jscripts/constantes.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../jscripts/comunes.js"></SCRIPT>	
-	<SCRIPT language="javascript" src="../api/jquery.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../clases/jscripts/HttpLib.js"></SCRIPT>
 	<?php echo '<SCRIPT language="javascript" src="../idiomas/javascripts/'.$idioma.'/comunes_'.$idioma.'.js"></SCRIPT>'?>
 </HEAD>
@@ -81,14 +81,14 @@ $grupos=grupos_arbol("repositorios");
 lista_raiz_arbol("repositorios", $nodos, $grupos);
 ?>
 <!-- Repositorios -->
-<ul id="menu-tipo-65" name="menu-tipo-65" oncontextmenu="return false;">
+<ul id="menu-type-65" name="menu-type-65" oncontextmenu="return false;">
   <li onclick="insertar_grupos(65,'gruporepositorio')"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de Repositorios </li>
   <li onclick="insertar(140,115,550,280,'../propiedades/propiedades_repositorios.php')"><img class="menu-icono" src="../images/iconos/aula.gif"> Añadir Repositorio </li>
   <li> <hr class="separador"> </li>
   <li onclick="colocar('../gestores/gestor_repositorios.php',41)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar Repositorio </li>
 </ul>
 
-<ul id="menu-grupo-65" name="menu-grupo-65" oncontextmenu="return false;">
+<ul id="menu-group-65" name="menu-group-65" oncontextmenu="return false;">
   <li onclick="insertar_grupos(65,'gruporepositorio')"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de Repositorios </li>
   <li onclick="insertar(140,115,550,280,'../propiedades/propiedades_repositorios.php')"><img class="menu-icono" src="../images/iconos/aula.gif"> Añadir Repositorio </li>
   <li> <hr class="separador"> </li>
@@ -98,8 +98,8 @@ lista_raiz_arbol("repositorios", $nodos, $grupos);
   <li onclick="eliminar_grupos()"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar grupo de repositorios </li>
 </ul>
 
-<ul id="menu-65" name="menu-65" oncontextmenu="return false;">
-  <li onclick="muestra_inforRepositorios()"><img class="menu-icono" src="../images/iconos/informacion.gif"> Información Repositorio </li>
+<ul id="menu-node-65" name="menu-node-65" oncontextmenu="return false;">
+  <li id="showInfo"><img class="menu-icono" src="../images/iconos/informacion.gif"> Información Repositorio </li>
   <li> <hr class="separador"> </li>
   <li onclick="mover(41)"><img class="menu-icono" src="../images/iconos/mover.gif"> Mover Repositorio </li>
   <li> <hr class="separador"> </li>

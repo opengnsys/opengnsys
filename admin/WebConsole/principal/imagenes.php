@@ -37,6 +37,7 @@ $arbol=new ArbolVistaXML($arbolXML,0,$baseurlimg,$clasedefault,1,0,5);
 	<TITLE>Administración web de aulas</TITLE>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<LINK rel="stylesheet" type="text/css" href="../estilos.css">
+	<SCRIPT language="javascript" src="../api/jquery.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../clases/jscripts/ArbolVistaXML.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../clases/jscripts/MenuContextual.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../jscripts/arbol.js"></SCRIPT>
@@ -44,7 +45,6 @@ $arbol=new ArbolVistaXML($arbolXML,0,$baseurlimg,$clasedefault,1,0,5);
 	<SCRIPT language="javascript" src="../jscripts/opciones.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../jscripts/constantes.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../jscripts/comunes.js"></SCRIPT>	
-	<SCRIPT language="javascript" src="../api/jquery.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../clases/jscripts/HttpLib.js"></SCRIPT>
 	<?php echo '<SCRIPT language="javascript" src="../idiomas/javascripts/'.$idioma.'/comunes_'.$idioma.'.js"></SCRIPT>'?>
 	<?php echo '<SCRIPT language="javascript" src="../idiomas/javascripts/'.$idioma.'/imagenes_'.$idioma.'.js"></SCRIPT>'?>
@@ -132,7 +132,7 @@ listaImg($nodos,$grupos);
   <li onclick="mover()"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar imagen</li>
  </ul>
 
- <ul id="menu-groups" name="menu-groups" oncontextmenu="return false;">
+ <ul id="menu-group" name="menu-group" oncontextmenu="return false;">
  <li onclick="insertar_grupos(0,'<?php echo $LITAMBITO_GRUPOSIMAGENES ?>');"><img class="menu-icono" src="../images/iconos/carpeta.gif"><span class="menu-texto"> Nuevo grupo de imágenes</span></li>
   <li onclick="insertar_imagen('<?php echo $LITAMBITO_IMAGENES ?>',0);"><img class="menu-icono" src="../images/iconos/imagen.gif">Definir nueva imagen</li>
   <li> <hr class="separador"> </li>
@@ -516,7 +516,7 @@ function listaGrupo($tipo,$idgrupo,$nivel,$orden,$imagenes,$grupos_hijos){
         if (isset ($grupos_hijos[$tipo][$idgrupo])){
             foreach ($grupos_hijos[$tipo][$idgrupo] as $hijo) {
                 $orden=$orden+1;
-                echo '      <li id="grupo_'.$hijo["id"].'" oncontextmenu="mostrar_menu(event,'. $tipo.', '.$hijo["id"].', \'menu-groups\');return false;"><input type="checkbox" name="list" id="nivel'.$nivel.'-'.$orden.'"><label for="nivel'.$nivel.'-'.$orden.'"><img class="menu_icono" src="../images/iconos/carpeta.gif">'.$hijo["nombre"].'</label>'."\n";
+                echo '      <li id="grupo_'.$hijo["id"].'" oncontextmenu="mostrar_menu(event,'. $tipo.', '.$hijo["id"].', \'menu-group\');return false;"><input type="checkbox" name="list" id="nivel'.$nivel.'-'.$orden.'"><label for="nivel'.$nivel.'-'.$orden.'"><img class="menu_icono" src="../images/iconos/carpeta.gif">'.$hijo["nombre"].'</label>'."\n";
 
                 $orden=listaGrupo($tipo,$hijo["id"],$nivel,$orden,$imagenes,$grupos_hijos);
             }

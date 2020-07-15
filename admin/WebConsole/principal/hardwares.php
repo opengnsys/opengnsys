@@ -35,6 +35,7 @@ $arbol=new ArbolVistaXML($arbolXML,0,$baseurlimg,$clasedefault,1,0,5);
 	<TITLE>Administración web de aulas</TITLE>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<LINK rel="stylesheet" type="text/css" href="../estilos.css">
+	<SCRIPT language="javascript" src="../api/jquery.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../clases/jscripts/ArbolVistaXML.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../clases/jscripts/MenuContextual.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../jscripts/arbol.js"></SCRIPT>
@@ -42,7 +43,6 @@ $arbol=new ArbolVistaXML($arbolXML,0,$baseurlimg,$clasedefault,1,0,5);
 	<SCRIPT language="javascript" src="../jscripts/opciones.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../jscripts/constantes.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../jscripts/comunes.js"></SCRIPT>
-	<SCRIPT language="javascript" src="../api/jquery.js"></SCRIPT>
 	<SCRIPT language="javascript" src="../clases/jscripts/HttpLib.js"></SCRIPT>
 	<?php echo '<SCRIPT language="javascript" src="../idiomas/javascripts/'.$idioma.'/comunes_'.$idioma.'.js"></SCRIPT>'?>
 	<?php echo '<SCRIPT language="javascript" src="../idiomas/javascripts/'.$idioma.'/hardwares_'.$idioma.'.js"></SCRIPT>'?>
@@ -95,7 +95,7 @@ lista_raiz_arbol("hardware", $nodos, $grupos);
 ?>
 <!-- tipos -->
 
-<ul id="menu-tipo-1" name="menu-tipo-1" oncontextmenu="return false;">
+<ul id="menu-type-1" name="menu-type-1" oncontextmenu="return false;">
   <li onclick="insertar(170,150,480,240,'../propiedades/propiedades_tipohardwares.php')"><img class="menu-icono" src="../images/iconos/confihard.gif"> Definir nuevo tipo de hardware </li>
 </ul>
 
@@ -106,14 +106,14 @@ lista_raiz_arbol("hardware", $nodos, $grupos);
 </ul>
 
 <!-- componentes -->
-<ul id="menu-tipo-54" name="menu-tipo-54" oncontextmenu="return false;">
+<ul id="menu-type-54" name="menu-type-54" oncontextmenu="return false;">
   <li onclick="insertar_grupos(54,'gruposcomponenteshard')"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de componentes </li>
   <li onclick="insertar(170,150,480,230,'../propiedades/propiedades_componentehardwares.php')"><img class="menu-icono" src="../images/iconos/confihard.gif"> Definir nuevo componente </li>
   <li> <hr class="separador"> </li>
   <li onclick="colocar('../gestores/gestor_componentehardwares.php',36)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar componente </li>
 </ul>
 
-<ul id="menu-grupo-54" name="menu-grupo-54" oncontextmenu="return false;">
+<ul id="menu-group-54" name="menu-group-54" oncontextmenu="return false;">
   <li onclick="insertar_grupos(54,'gruposcomponenteshard')"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de componentes </li>
   <li onclick="insertar(170,150,480,230,'../propiedades/propiedades_componentehardwares.php')"><img class="menu-icono" src="../images/iconos/confihard.gif"> Definir nuevo componente </li>
   <li> <hr class="separador"> </li>
@@ -123,7 +123,7 @@ lista_raiz_arbol("hardware", $nodos, $grupos);
   <li onclick="eliminar_grupos()"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar grupo de componentes </li>
 </ul>
 
-<ul id="menu-54" name="menu-54" oncontextmenu="return false;">
+<ul id="menu-node-54" name="menu-node-54" oncontextmenu="return false;">
   <li onclick="mover(36)"><img class="menu-icono" src="../images/iconos/mover.gif"> Mover componente </li>
   <li> <hr class="separador"> </li>
   <li onclick="modificar(170,150,480,230,'../propiedades/propiedades_componentehardwares.php')"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades </li>
@@ -132,14 +132,14 @@ lista_raiz_arbol("hardware", $nodos, $grupos);
 
 <!-- perfiles -->
 
-<ul id="menu-tipo-56" name="menu-tipo-56" oncontextmenu="return false;">
+<ul id="menu-type-56" name="menu-type-56" oncontextmenu="return false;">
   <li onclick="insertar_grupos(56,'gruposperfileshard')"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de perfiles </li>
   <li onclick="insertar(170,150,480,280,'../propiedades/propiedades_perfilhardwares.php')"><img class="menu-icono" src="../images/iconos/confihard.gif"> Definir nuevo perfil </li>
   <li> <hr class="separador"> </li>
   <li onclick="colocar('../gestores/gestor_perfilhardwares.php',38)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar perfil </li>
 </ul>
 
-<ul id="menu-grupo-56" name="menu-grupo-56" oncontextmenu="return false;">
+<ul id="menu-group-56" name="menu-group-56" oncontextmenu="return false;">
   <li onclick="insertar_grupos(56,'gruposperfileshard')"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de perfiles </li>
   <li onclick="insertar(170,150,480,280,'../propiedades/propiedades_perfilhardwares.php')"><img class="menu-icono" src="../images/iconos/confihard.gif"> Definir nuevo perfil </li>
   <li> <hr class="separador"> </li>
@@ -149,9 +149,9 @@ lista_raiz_arbol("hardware", $nodos, $grupos);
   <li onclick="eliminar_grupos()"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar grupo de perfiles </li>
 </ul>
 
-<ul id="menu-56" name="menu-56" oncontextmenu="return false;">
-  <li onclick="insertar_perfilcomponente()"><img class="menu-icono" src="../images/iconos/confihard.gif"> Gestión Componentes </li>
-  <li onclick="muestra_informacion()"><img class="menu-icono" src="../images/iconos/informacion.gif"> Información Perfil </li>
+<ul id="menu-node-56" name="menu-node-56" oncontextmenu="return false;">
+  <li id="manage"><img class="menu-icono" src="../images/iconos/confihard.gif"> Gestión Componentes </li>
+  <li id="showInfo"><img class="menu-icono" src="../images/iconos/informacion.gif"> Información Perfil </li>
   <li> <hr class="separador"> </li>
   <li onclick="mover(38)"><img class="menu-icono" src="../images/iconos/mover.gif"> Mover perfil </li>
   <li> <hr class="separador"> </li>
