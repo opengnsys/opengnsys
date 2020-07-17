@@ -83,14 +83,14 @@ lista_raiz_arbol("repositorios", $nodos, $grupos);
 <!-- Repositorios -->
 <ul id="menu-type-65" name="menu-type-65" oncontextmenu="return false;">
   <li onclick="insertar_grupos(65,'gruporepositorio')"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de Repositorios </li>
-  <li onclick="insertar(140,115,550,280,'../propiedades/propiedades_repositorios.php')"><img class="menu-icono" src="../images/iconos/aula.gif"> Añadir Repositorio </li>
+  <li id="insert-type-65"><img class="menu-icono" src="../images/iconos/aula.gif"> Añadir Repositorio </li>
   <li> <hr class="separador"> </li>
   <li onclick="colocar('../gestores/gestor_repositorios.php',41)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar Repositorio </li>
 </ul>
 
 <ul id="menu-group-65" name="menu-group-65" oncontextmenu="return false;">
   <li onclick="insertar_grupos(65,'gruporepositorio')"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de Repositorios </li>
-  <li onclick="insertar(140,115,550,280,'../propiedades/propiedades_repositorios.php')"><img class="menu-icono" src="../images/iconos/aula.gif"> Añadir Repositorio </li>
+  <li id="insert-group-65"><img class="menu-icono" src="../images/iconos/aula.gif"> Añadir Repositorio </li>
   <li> <hr class="separador"> </li>
   <li onclick="colocar('../gestores/gestor_repositorios.php',41)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar Repositorio </li>
   <li> <hr class="separador"> </li>
@@ -99,14 +99,14 @@ lista_raiz_arbol("repositorios", $nodos, $grupos);
 </ul>
 
 <ul id="menu-node-65" name="menu-node-65" oncontextmenu="return false;">
-  <li id="showInfo"><img class="menu-icono" src="../images/iconos/informacion.gif"> Información Repositorio </li>
+  <li id="showInfo-65"><img class="menu-icono" src="../images/iconos/informacion.gif"> Información Repositorio </li>
   <li> <hr class="separador"> </li>
   <li onclick="mover(41)"><img class="menu-icono" src="../images/iconos/mover.gif"> Mover Repositorio </li>
   <li> <hr class="separador"> </li>
-  <li onclick="modificar(140,115,550,280,'../comandos/EliminarImagenRepositorio.php')"><img class="menu-icono" src="../images/iconos/comandos.gif"> Eliminar Imagen Repositorio </li>
+  <li id="rmImage"><img class="menu-icono" src="../images/iconos/comandos.gif"> Eliminar Imagen Repositorio </li>
   <li> <hr class="separador"> </li>
-  <li onclick="modificar(140,115,550,280,'../propiedades/propiedades_repositorios.php')"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades </li>
-  <li onclick="eliminar(140,115,550,280,'../propiedades/propiedades_repositorios.php')"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar Repositorio </li>
+  <li id="modify-65"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades </li>
+  <li id="remove-65"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar Repositorio </li>
 </ul>
 
 </BODY>

@@ -99,7 +99,7 @@ lista_raiz_arbol("hardware", $nodos, $grupos);
   <li onclick="insertar(170,150,480,240,'../propiedades/propiedades_tipohardwares.php')"><img class="menu-icono" src="../images/iconos/confihard.gif"> Definir nuevo tipo de hardware </li>
 </ul>
 
-<ul id="menu-1" name="menu-1" oncontextmenu="return false;">
+<ul id="menu-node-1" name="menu-1" oncontextmenu="return false;">
   <li onclick="modificar(170,150,480,240,'../propiedades/propiedades_tipohardwares.php')"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades </li>
   <li> <hr class="separador"> </li>
   <li onclick="eliminar(170,150,480,240,'../propiedades/propiedades_tipohardwares.php')"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar tipo de hardware </li>
@@ -108,14 +108,14 @@ lista_raiz_arbol("hardware", $nodos, $grupos);
 <!-- componentes -->
 <ul id="menu-type-54" name="menu-type-54" oncontextmenu="return false;">
   <li onclick="insertar_grupos(54,'gruposcomponenteshard')"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de componentes </li>
-  <li onclick="insertar(170,150,480,230,'../propiedades/propiedades_componentehardwares.php')"><img class="menu-icono" src="../images/iconos/confihard.gif"> Definir nuevo componente </li>
+  <li id="insert-type-54"><img class="menu-icono" src="../images/iconos/confihard.gif"> Definir nuevo componente </li>
   <li> <hr class="separador"> </li>
   <li onclick="colocar('../gestores/gestor_componentehardwares.php',36)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar componente </li>
 </ul>
 
 <ul id="menu-group-54" name="menu-group-54" oncontextmenu="return false;">
   <li onclick="insertar_grupos(54,'gruposcomponenteshard')"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de componentes </li>
-  <li onclick="insertar(170,150,480,230,'../propiedades/propiedades_componentehardwares.php')"><img class="menu-icono" src="../images/iconos/confihard.gif"> Definir nuevo componente </li>
+  <li id="insert-group-54"><img class="menu-icono" src="../images/iconos/confihard.gif"> Definir nuevo componente </li>
   <li> <hr class="separador"> </li>
   <li onclick="colocar('../gestores/gestor_componentehardwares.php',36)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar componente </li>
   <li> <hr class="separador"> </li>
@@ -126,22 +126,22 @@ lista_raiz_arbol("hardware", $nodos, $grupos);
 <ul id="menu-node-54" name="menu-node-54" oncontextmenu="return false;">
   <li onclick="mover(36)"><img class="menu-icono" src="../images/iconos/mover.gif"> Mover componente </li>
   <li> <hr class="separador"> </li>
-  <li onclick="modificar(170,150,480,230,'../propiedades/propiedades_componentehardwares.php')"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades </li>
-  <li onclick="eliminar(170,150,480,230,'../propiedades/propiedades_componentehardwares.php')"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar componente </li>
+  <li id="modify-54"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades </li>
+  <li id="remove-54"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar componente </li>
 </ul>
 
 <!-- perfiles -->
 
 <ul id="menu-type-56" name="menu-type-56" oncontextmenu="return false;">
   <li onclick="insertar_grupos(56,'gruposperfileshard')"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de perfiles </li>
-  <li onclick="insertar(170,150,480,280,'../propiedades/propiedades_perfilhardwares.php')"><img class="menu-icono" src="../images/iconos/confihard.gif"> Definir nuevo perfil </li>
+  <li id="insert-type-56"><img class="menu-icono" src="../images/iconos/confihard.gif"> Definir nuevo perfil </li>
   <li> <hr class="separador"> </li>
   <li onclick="colocar('../gestores/gestor_perfilhardwares.php',38)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar perfil </li>
 </ul>
 
 <ul id="menu-group-56" name="menu-group-56" oncontextmenu="return false;">
   <li onclick="insertar_grupos(56,'gruposperfileshard')"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de perfiles </li>
-  <li onclick="insertar(170,150,480,280,'../propiedades/propiedades_perfilhardwares.php')"><img class="menu-icono" src="../images/iconos/confihard.gif"> Definir nuevo perfil </li>
+  <li id="insert-group-56"><img class="menu-icono" src="../images/iconos/confihard.gif"> Definir nuevo perfil </li>
   <li> <hr class="separador"> </li>
   <li onclick="colocar('../gestores/gestor_perfilhardwares.php',38)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar perfil </li>
   <li> <hr class="separador"> </li>
@@ -150,13 +150,13 @@ lista_raiz_arbol("hardware", $nodos, $grupos);
 </ul>
 
 <ul id="menu-node-56" name="menu-node-56" oncontextmenu="return false;">
-  <li id="manage"><img class="menu-icono" src="../images/iconos/confihard.gif"> Gestión Componentes </li>
-  <li id="showInfo"><img class="menu-icono" src="../images/iconos/informacion.gif"> Información Perfil </li>
+  <li id="manage-56"><img class="menu-icono" src="../images/iconos/confihard.gif"> Gestión Componentes </li>
+  <li id="showInfo-56"><img class="menu-icono" src="../images/iconos/informacion.gif"> Información Perfil </li>
   <li> <hr class="separador"> </li>
   <li onclick="mover(38)"><img class="menu-icono" src="../images/iconos/mover.gif"> Mover perfil </li>
   <li> <hr class="separador"> </li>
-  <li onclick="modificar(170,150,480,280,'../propiedades/propiedades_perfilhardwares.php')"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades </li>
-  <li onclick="eliminar(170,150,480,280,'../propiedades/propiedades_perfilhardwares.php')"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar perfil hardware </li>
+  <li id="modify-56"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades </li>
+  <li id="remove-56"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar perfil hardware </li>
 </ul>
 
 

@@ -439,3 +439,108 @@ function IsNumeric(sText)
    return IsNumber;
    
 }
+
+
+$(function() {
+    // Inserta nodo
+    $("[id^='insert']").on ('click', function() {
+        // Id menu-node-tipoNodo_tipoNodo_idNodo
+        var id=$(this).parent().attr('id').split("_");
+        var url=urlProperty(id[1]);
+
+            console.log("tipo: "+id[1]+" nodo; "+id[2]);
+        url+="?opcion="+op_alta+"&grupoid="+id[2];
+        console.log("id:" +url);
+        window.open(url,"frame_contenidos")
+            // Usamos la uel del caso por defecto
+            /*
+                        var auxsplit= pages.split('?'); // La variable pages lleva parametros
+                        if(auxsplit[1]!=null)
+                                var whref=pages+"&";
+                        else
+                                var whref=pages+"?";
+                        whref+="opcion="+op_alta+"&grupoid="+identificador;
+                */
+
+    });
+
+    // Modificar nodo
+    $("[id^='modify']").on ('click', function() {
+        // Id menu-node-tipoNodo_tipoNodo_idNodo
+        var id=$(this).parent().attr('id').split("_");
+        var url=urlProperty(id[1]);
+
+            console.log("tipo: "+id[1]+" nodo; "+id[2]);
+        url+="?opcion="+op_modificacion+"&identificador="+id[2];
+        console.log("id:" +url);
+        window.open(url,"frame_contenidos")
+    });
+
+    // Elimina nodo
+    $("[id^='remove']").on ('click', function() {
+        // Id menu-node-tipoNodo_tipoNodo_idNodo
+        var id=$(this).parent().attr('id').split("_");
+        var url=urlProperty(id[1]);
+
+            console.log("tipo: "+id[1]+" nodo; "+id[2]);
+        url+="?opcion="+op_eliminacion+"&identificador="+id[2];
+        console.log("id:" +url);
+        window.open(url,"frame_contenidos")
+    });
+
+    // Elimina imagen
+    $("#rmImage").on ('click', function() {
+        // Id menu-node-tipoNodo_tipoNodo_idNodo
+        var id=$(this).parent().attr('id').split("_");
+        var url="../comandos/EliminarImagenRepositorio.php";
+
+            console.log("tipo: "+id[1]+" nodo; "+id[2]);
+        url+="?opcion="+op_modificacion+"&identificador="+id[2];
+        console.log("id:" +url);
+        window.open(url,"frame_contenidos")
+    });
+
+});
+
+function urlProperty(nodeType) {
+    // url según tipo de nodo
+    switch(nodeType) {
+        case '54':
+            // componente de hardware
+            var url="../propiedades/propiedades_componentehardwares.php";
+            break;
+        case '55':
+            // componente de software
+            var url="../propiedades/propiedades_componentesoftwares.php";
+            break;
+        case '64':
+            // menus
+            var url="../propiedades/propiedades_menus.php";
+            break;
+        case '56':
+            // perfil de hardware
+            var url="../propiedades/propiedades_perfilhardwares.php";
+            break;
+        case '57':
+            // perfil de software
+            var url="../propiedades/propiedades_perfilsoftwares.php";
+            break;
+        case '51':
+            // procedimiento
+            var url="../propiedades/propiedades_procedimientos.php";
+            break;
+        case '65':
+            // repositorio
+            var url="../propiedades/propiedades_repositorios.php";
+            break;
+        case '52':
+            // tarea
+            var url="../propiedades/propiedades_tareas.php";
+            break;
+        default:
+            console.log("case default");
+            break;
+    }
+    return url;
+}
+

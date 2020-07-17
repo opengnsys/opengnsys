@@ -71,14 +71,14 @@ lista_raiz_arbol("software", $nodos, $grupos);
 <!-- Menús -->
 <ul id="menu-type-64" name="menu-type-64" oncontextmenu="return false;">
   <li onclick="insertar_grupos(64,'gruposmenus')"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de menús </li>
-  <li onclick="insertar(140,115,550,480,'../propiedades/propiedades_menus.php')"><img class="menu-icono" src="../images/iconos/menu.gif"> Definir nuevo menú </li>
+  <li id="insert-type-64"><img class="menu-icono" src="../images/iconos/menu.gif"> Definir nuevo menú </li>
   <li> <hr class="separador"> </li>
   <li onclick="colocar('../gestores/gestor_menus.php',40)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar menú </li>
 </ul>
 
 <ul id="menu-group-64" name="menu-group-64" oncontextmenu="return false;">
   <li onclick="insertar_grupos(64,'gruposmenus')"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de menús </li>
-  <li onclick="insertar(140,115,550,480,'../propiedades/propiedades_menus.php')"><img class="menu-icono" src="../images/iconos/menu.gif"> Definir nuevo menú </li>
+  <li id="insert-group-64"><img class="menu-icono" src="../images/iconos/menu.gif"> Definir nuevo menú </li>
   <li> <hr class="separador"> </li>
   <li onclick="colocar('../gestores/gestor_menus.php',40)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar menú </li>
   <li> <hr class="separador"> </li>
@@ -87,13 +87,13 @@ lista_raiz_arbol("software", $nodos, $grupos);
 </ul>
 
 <ul id="menu-node-64" name="menu-node-64" oncontextmenu="return false;">
-  <li id="manage"><img class="menu-icono" src="../images/iconos/comandos.gif"> Gestionar Items </li>
-  <li id="showInfo"><img class="menu-icono" src="../images/iconos/informacion.gif"> Información Menú </li>
+  <li id="manage-64"><img class="menu-icono" src="../images/iconos/comandos.gif"> Gestionar Items </li>
+  <li id="showInfo-64"><img class="menu-icono" src="../images/iconos/informacion.gif"> Información Menú </li>
   <li> <hr class="separador"> </li>
   <li onclick="mover(id)"><img class="menu-icono" src="../images/iconos/mover.gif"> Mover menú </li>
   <li> <hr class="separador"> </li>
-  <li onclick="modificar(140,115,550,480,'../propiedades/propiedades_menus.php')"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades </li>
-  <li onclick="eliminar(140,115,550,480,'../propiedades/propiedades_menus.php')"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar menú </li>
+  <li id="modify-64"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades </li>
+  <li id="remove-64"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar menú </li>
 </ul>
 
 </BODY>
