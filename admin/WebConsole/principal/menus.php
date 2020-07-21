@@ -68,32 +68,33 @@ $grupos=grupos_arbol("menus");
 
 lista_raiz_arbol("software", $nodos, $grupos);
 ?>
+<!-- los id de los "li" contienen los tipos de nodos porque tienen que ser distintos, pero no se usan -->
 <!-- Menús -->
 <ul id="menu-type-64" name="menu-type-64" oncontextmenu="return false;">
-  <li onclick="insertar_grupos(64,'gruposmenus')"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de menús </li>
-  <li id="insert-type-64"><img class="menu-icono" src="../images/iconos/menu.gif"> Definir nuevo menú </li>
+  <li id="insertGroup-type-64"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de menús </li>
+  <li id="insertNode-type-64"><img class="menu-icono" src="../images/iconos/menu.gif"> Definir nuevo menú </li>
   <li> <hr class="separador"> </li>
   <li onclick="colocar('../gestores/gestor_menus.php',40)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar menú </li>
 </ul>
 
 <ul id="menu-group-64" name="menu-group-64" oncontextmenu="return false;">
-  <li onclick="insertar_grupos(64,'gruposmenus')"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de menús </li>
-  <li id="insert-group-64"><img class="menu-icono" src="../images/iconos/menu.gif"> Definir nuevo menú </li>
+  <li id="insertGroup-group-64"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de menús </li>
+  <li id="insertNode-group-64"><img class="menu-icono" src="../images/iconos/menu.gif"> Definir nuevo menú </li>
   <li> <hr class="separador"> </li>
   <li onclick="colocar('../gestores/gestor_menus.php',40)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar menú </li>
   <li> <hr class="separador"> </li>
-  <li onclick="modificar_grupos()"><img class="menu-icono" src="../images/iconos/modificar.gif"> Propiedades </li>
-  <li onclick="eliminar_grupos()"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar grupo de menús </li>
+  <li id="modifyGroup-64"><img class="menu-icono" src="../images/iconos/modificar.gif"> Propiedades </li>
+  <li id="removeGroup-64"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar grupo de menús </li>
 </ul>
 
 <ul id="menu-node-64" name="menu-node-64" oncontextmenu="return false;">
-  <li id="manage-64"><img class="menu-icono" src="../images/iconos/comandos.gif"> Gestionar Items </li>
-  <li id="showInfo-64"><img class="menu-icono" src="../images/iconos/informacion.gif"> Información Menú </li>
+  <li id="manageNode-64"><img class="menu-icono" src="../images/iconos/comandos.gif"> Gestionar Items </li>
+  <li id="showInfoNode-64"><img class="menu-icono" src="../images/iconos/informacion.gif"> Información Menú </li>
   <li> <hr class="separador"> </li>
   <li onclick="mover(id)"><img class="menu-icono" src="../images/iconos/mover.gif"> Mover menú </li>
   <li> <hr class="separador"> </li>
-  <li id="modify-64"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades </li>
-  <li id="remove-64"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar menú </li>
+  <li id="modifyNode-64"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades </li>
+  <li id="removeNode-64"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar menú </li>
 </ul>
 
 </BODY>

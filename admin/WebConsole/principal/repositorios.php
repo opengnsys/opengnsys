@@ -82,31 +82,31 @@ lista_raiz_arbol("repositorios", $nodos, $grupos);
 ?>
 <!-- Repositorios -->
 <ul id="menu-type-65" name="menu-type-65" oncontextmenu="return false;">
-  <li onclick="insertar_grupos(65,'gruporepositorio')"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de Repositorios </li>
-  <li id="insert-type-65"><img class="menu-icono" src="../images/iconos/aula.gif"> Añadir Repositorio </li>
+  <li id="insertGroup-type-65"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de Repositorios </li>
+  <li id="insertNode-type-65"><img class="menu-icono" src="../images/iconos/aula.gif"> Añadir Repositorio </li>
   <li> <hr class="separador"> </li>
   <li onclick="colocar('../gestores/gestor_repositorios.php',41)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar Repositorio </li>
 </ul>
 
 <ul id="menu-group-65" name="menu-group-65" oncontextmenu="return false;">
-  <li onclick="insertar_grupos(65,'gruporepositorio')"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de Repositorios </li>
-  <li id="insert-group-65"><img class="menu-icono" src="../images/iconos/aula.gif"> Añadir Repositorio </li>
+  <li id="insertGroup-group-65"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de Repositorios </li>
+  <li id="insertNode-group-65"><img class="menu-icono" src="../images/iconos/aula.gif"> Añadir Repositorio </li>
   <li> <hr class="separador"> </li>
   <li onclick="colocar('../gestores/gestor_repositorios.php',41)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar Repositorio </li>
   <li> <hr class="separador"> </li>
-  <li onclick="modificar_grupos()"><img class="menu-icono" src="../images/iconos/modificar.gif"> Propiedades </li>
-  <li onclick="eliminar_grupos()"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar grupo de repositorios </li>
+  <li id="modifyGroup-65"><img class="menu-icono" src="../images/iconos/modificar.gif"> Propiedades </li>
+  <li id="removeGroup-65"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar grupo de repositorios </li>
 </ul>
 
 <ul id="menu-node-65" name="menu-node-65" oncontextmenu="return false;">
-  <li id="showInfo-65"><img class="menu-icono" src="../images/iconos/informacion.gif"> Información Repositorio </li>
+  <li id="showInfoNode-65"><img class="menu-icono" src="../images/iconos/informacion.gif"> Información Repositorio </li>
   <li> <hr class="separador"> </li>
   <li onclick="mover(41)"><img class="menu-icono" src="../images/iconos/mover.gif"> Mover Repositorio </li>
   <li> <hr class="separador"> </li>
   <li id="rmImage"><img class="menu-icono" src="../images/iconos/comandos.gif"> Eliminar Imagen Repositorio </li>
   <li> <hr class="separador"> </li>
-  <li id="modify-65"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades </li>
-  <li id="remove-65"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar Repositorio </li>
+  <li id="modifyNode-65"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades </li>
+  <li id="removeNode-65"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar Repositorio </li>
 </ul>
 
 </BODY>

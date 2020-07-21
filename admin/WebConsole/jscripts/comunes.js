@@ -442,8 +442,19 @@ function IsNumeric(sText)
 
 
 $(function() {
+    // Inserta grupo
+    // Hay que distingir en grupos de aulas y ordenadores
+    $("[id^='insertGroup']").on ('click', function() {
+        var id=$(this).parent().attr('id').split("_");
+        var url="../propiedades/propiedades_grupos.php?opcion="+op_alta+"&grupoid="+id[2]+"&tipo="+id[1];
+
+        //    console.log("tipo: "+id[1]+" grupoPadre; "+id[2]);
+        console.log("id:" +url);
+        window.open(url,"frame_contenidos")
+    });
+
     // Inserta nodo
-    $("[id^='insert']").on ('click', function() {
+    $("[id^='insertNode']").on ('click', function() {
         // Id menu-node-tipoNodo_tipoNodo_idNodo
         var id=$(this).parent().attr('id').split("_");
         var url=urlProperty(id[1]);
@@ -464,8 +475,19 @@ $(function() {
 
     });
 
-    // Modificar nodo
-    $("[id^='modify']").on ('click', function() {
+    // Modifica grupo
+    $("[id^='modifyGroup']").on ('click', function() {
+        // Id menu-node-tipoNodo_tipoNodo_idNodo
+        var id=$(this).parent().attr('id').split("_");
+        var url="../propiedades/propiedades_grupos.php?opcion="+op_modificacion+"&idgrupo="+id[2];
+
+            console.log("tipo: "+id[1]+" nodo; "+id[2]);
+        console.log("id:" +url);
+        window.open(url,"frame_contenidos")
+    });
+
+    // Modifica nodo
+    $("[id^='modifyNode']").on ('click', function() {
         // Id menu-node-tipoNodo_tipoNodo_idNodo
         var id=$(this).parent().attr('id').split("_");
         var url=urlProperty(id[1]);
@@ -476,8 +498,19 @@ $(function() {
         window.open(url,"frame_contenidos")
     });
 
+    // Elimina grupo
+    $("[id^='removeGroup']").on ('click', function() {
+        // Id menu-node-tipoNodo_tipoNodo_idNodo
+        var id=$(this).parent().attr('id').split("_");
+        var url="../propiedades/propiedades_grupos.php?opcion="+op_eliminacion+"&idgrupo="+id[2]+"&tipo="+id[1];
+
+            console.log("tipo: "+id[1]+" nodo; "+id[2]);
+        console.log("id:" +url);
+        window.open(url,"frame_contenidos")
+    });
+
     // Elimina nodo
-    $("[id^='remove']").on ('click', function() {
+    $("[id^='removeNode']").on ('click', function() {
         // Id menu-node-tipoNodo_tipoNodo_idNodo
         var id=$(this).parent().attr('id').split("_");
         var url=urlProperty(id[1]);
@@ -502,6 +535,7 @@ $(function() {
 
 });
 
+// Devuelve la url de las propiedades del nodo según su tipo.
 function urlProperty(nodeType) {
     // url según tipo de nodo
     switch(nodeType) {

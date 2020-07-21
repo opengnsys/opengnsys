@@ -96,66 +96,67 @@ $grupos = $grp_comandos + $grp_procedimientos + $grp_tareas;
 lista_raiz_arbol("software", $nodos, $grupos);
 
 ?>
+<!-- los id de los "li" contienen los tipos de nodos porque tienen que ser distintos, pero no se usan -->
 <!-- tipos sin menú -->
 <!-- procedimientos -->
 <ul id="menu-type-51" name="menu-type-51" oncontextmenu="return false;">
-  <li onclick="insertar_grupos(51,'gruposprocedimientos');"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de procedimientos </li>
-  <li id="insert-type-51"><img class="menu-icono" src="../images/iconos/procedimiento.gif"> Definir nuevo procedimiento </li>
+  <li id="insertGroup-type-51"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de procedimientos </li>
+  <li id="insertNode-type-51"><img class="menu-icono" src="../images/iconos/procedimiento.gif"> Definir nuevo procedimiento </li>
   <li> <hr class="separador"> </li>
   <li onclick="colocar('../gestores/gestor_procedimientos.php',33)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar procedimiento </li>
 </ul>
 
 <ul id="menu-group-51" name="menu-group-51" oncontextmenu="return false;">
-  <li onclick="insertar_grupos(51,'gruposprocedimientos');"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de procedimientos </li>
-  <li id="insert-group-51"><img class="menu-icono" src="../images/iconos/procedimiento.gif"> Definir nuevo procedimiento </li>
+  <li id="insertGroup-group-51"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de procedimientos </li>
+  <li id="insertNode-group-51"><img class="menu-icono" src="../images/iconos/procedimiento.gif"> Definir nuevo procedimiento </li>
   <li> <hr class="separador"> </li>
   <li  onclick="colocar('../gestores/gestor_procedimientos.php',33)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar procedimiento </li>
   <li> <hr class="separador"> </li>
-  <li onclick="modificar_grupos()"><img class="menu-icono" src="../images/iconos/modificar.gif"> Propiedades </li>
-  <li onclick="eliminar_grupos()"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar grupo de procedimientos </li>
+  <li id="modifyGroup-51"><img class="menu-icono" src="../images/iconos/modificar.gif"> Propiedades </li>
+  <li id="removeGroup-51"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar grupo de procedimientos </li>
 </ul>
 
 <ul id="menu-node-51" name="menu-node-51" oncontextmenu="return false;">
-  <li id="showInfo"><img class="menu-icono" src="../images/iconos/informacion.gif"> Información Procedimiento </li>
-  <li id="manage"><img class="menu-icono" src="../images/iconos/acciones.gif"> Incluir acciones </li>
+  <li id="showInfoNode-51"><img class="menu-icono" src="../images/iconos/informacion.gif"> Información Procedimiento </li>
+  <li id="manageNode-51"><img class="menu-icono" src="../images/iconos/acciones.gif"> Incluir acciones </li>
   <li> <hr class="separador"> </li>
   <li  onclick="mover()"><img class="menu-icono" src="../images/iconos/mover.gif"> Mover procedimiento </li>
   <li> <hr class="separador"> </li>
-  <li id="modify-51"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades</li>
-  <li id="remove-51"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar procedimiento </li>
+  <li id="modifyNode-node-51"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades</li>
+  <li id="removeNode-node-51"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar procedimiento </li>
   <li> <hr class="separador"> </li>
   <li onclick="insertar_accionmenu(id)"><img class="menu-icono" src="../images/iconos/menus.gif"> Gestión de Menús </li>
   </ul>
 
 <!-- tareas -->
 <ul id="menu-type-52" name="menu-type-52" oncontextmenu="return false;">
-  <li onclick="insertar_grupos(52,'grupostareas');"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de tareas </li>
-  <li id="insert-type-52"><img class="menu-icono" src="../images/iconos/tareas.gif"> Definir nueva tarea </li>
+  <li id="insertGroup-type-52"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de tareas </li>
+  <li id="insertNode-type-52"><img class="menu-icono" src="../images/iconos/tareas.gif"> Definir nueva tarea </li>
   <li> <hr class="separador"> </li>
   <li  onclick="colocar('../gestores/gestor_tareas.php',33)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar tarea </li>
 </ul>
 
 <ul id="menu-group-52" name="menu-group-52" oncontextmenu="return false;">
-  <li onclick="insertar_grupos(52,'grupostareas');"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de tareas </li>
-  <li id="insert-group-52"><img class="menu-icono" src="../images/iconos/tareas.gif"> Definir nueva tarea </li>
+  <li id="insertGroup-group-52"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de tareas </li>
+  <li id="insertNode-group-52"><img class="menu-icono" src="../images/iconos/tareas.gif"> Definir nueva tarea </li>
   <li> <hr class="separador"> </li>
   <li  onclick="colocar('../gestores/gestor_tareas.php',33)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar tarea </li>
   <li> <hr class="separador"> </li>
-  <li  onclick="modificar_grupos()"><img class="menu-icono" src="../images/iconos/modificar.gif"> Propiedades </li>
-  <li  onclick="eliminar_grupos()"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar grupo de tareas </li>
+  <li  id="modifyGroup-52"><img class="menu-icono" src="../images/iconos/modificar.gif"> Propiedades </li>
+  <li  id="removeGroup-52"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar grupo de tareas </li>
 </ul>
 
 <ul id="menu-node-52" name="menu-node-52" oncontextmenu="return false;">
   <li onclick="ejecutar_tareas(id);"><img class="menu-icono" src="../images/iconos/tareas.gif"> Ejecutar tarea </li>
   <li  onclick="programacion(id)"><img class="menu-icono" src="../images/iconos/reloj.gif"> Programaciones </li>
   <li> <hr class="separador"> </li>
-  <li onclick="informacion_acciones(34)"><img class="menu-icono" src="../images/iconos/informacion.gif"> Información tarea </li>
-  <li  onclick="inclusion_acciones(id)"><img class="menu-icono" src="../images/iconos/acciones.gif"> Incluir acciones </li>
+  <li id="showInfoNode-52"><img class="menu-icono" src="../images/iconos/informacion.gif"> Información tarea </li>
+  <li id="manageNode-52"><img class="menu-icono" src="../images/iconos/acciones.gif"> Incluir acciones </li>
   <li> <hr class="separador"> </li>
   <li  onclick="mover()"><img class="menu-icono" src="../images/iconos/mover.gif"> Mover tarea </li>
   <li> <hr class="separador"> </li>
-  <li id="modify-52"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades </li>
-  <li id="remove-52"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar tarea </li>
+  <li id="modifyNode-node-52"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades </li>
+  <li id="removeNode-node-52"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar tarea </li>
   <li> <hr class="separador"> </li>
   <li onclick="insertar_accionmenu(3)"><img class="menu-icono" src="../images/iconos/menus.gif"> Gestión de Menús </li>
 </ul>
