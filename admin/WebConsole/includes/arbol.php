@@ -328,7 +328,7 @@ function nodos_arbol($tipo_nodo){
 	    case 'tareas':
 		global $AMBITO_GRUPOSTAREAS;
 		$num_tipo=$AMBITO_GRUPOSTAREAS;
-		$sql="SELECT idtarea AS id, descripcion AS nombre, num_tipo, '$AMBITO_GRUPOSTAREAS' AS conjuntoid, grupoid
+		$sql="SELECT idtarea AS id, descripcion AS nombre, '$AMBITO_GRUPOSTAREAS' AS conjuntoid, grupoid
                         FROM tareas 
 		       WHERE idcentro=$idcentro ORDER BY conjuntoid, grupoid;";
                 break; 
