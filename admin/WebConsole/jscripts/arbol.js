@@ -75,7 +75,7 @@ function ocultar_menu(tipo_menu="") {
 
 $(function() {
     // Mostrar información del menú
-    $('#showInfo').on ('click', function() {
+    $("[id^='showInfoNode']").on ('click', function() {
         // Id menu-node-tipoNodo_tipoNodo_idNodo
         var id=$(this).parent().attr('id').split("_");
         var description=$('#nodo-'+id[1]+'_'+id[2]).find('a').text().trim();
@@ -99,9 +99,14 @@ $(function() {
                 var tipoaccion=33; // constantes.php AMBITO_GRUPOSPROCEDIMIENTOS
                 var url="../varios/informacion_acciones.php?idtipoaccion="+id[2]+"&descripcionaccion="+description+"&tipoaccion="+tipoaccion;
                 break;
-            case '64':
+            case '65':
                 // repositorios
                 var url="../varios/informacion_repositorios.php?idrepositorio="+id[2]+"&descripcionrepositorio='"+description+"'";
+                break;
+            case '52':
+                // tareas
+                var tipoaccion=34; // constantes.php AMBITO_GRUPOSTAREAS
+                var url="../varios/informacion_acciones.php?idtipoaccion="+id[2]+"&descripcionaccion="+description+"&tipoaccion="+tipoaccion;
                 break;
 	    default:
 		console.log("case default");
@@ -112,7 +117,7 @@ $(function() {
     });
 
     // Getionar nodo
-    $('#manage').on ('click', function() {
+    $("[id^='manageNode']").on ('click', function() {
         // Id menu-node-tipoNodo_tipoNodo_idNodo
         var id=$(this).parent().attr('id').split("_");
         var description=$('#nodo-'+id[1]+'_'+id[2]).find('a').text().trim();
@@ -134,6 +139,11 @@ $(function() {
             case '51':
                 // procedimientos
                 var tipoaccion=33; // constantes.php AMBITO_GRUPOSPROCEDIMIENTOS
+                var url="../varios/inclusionacciones.php?idtipoaccion="+id[2]+"&descripcionaccion="+description+"&tipoaccion="+tipoaccion;
+                break;
+            case '52':
+                // tareas
+                var tipoaccion=34; // constantes.php AMBITO_GRUPOSTAREAS
                 var url="../varios/inclusionacciones.php?idtipoaccion="+id[2]+"&descripcionaccion="+description+"&tipoaccion="+tipoaccion;
                 break;
 	    default:

@@ -99,20 +99,20 @@ lista_raiz_arbol("software", $nodos, $grupos);
   <li id="insertGroup-type-55"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de componentes </li>
   <li id="insertNode-type-55"><img class="menu-icono" src="../images/iconos/confisoft.gif"> Definir nuevo componente </li>
   <li> <hr class="separador"> </li>
-  <li onclick="colocar('../gestores/gestor_componentesoftwares.php',37)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar componente </li>
+  <li id="put-type-55"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar componente </li>
 </ul>
 <ul id="menu-group-55" name="menu-group-55" oncontextmenu="return false;">
   <li id="insertGroup-group-55"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de componentes </li>
   <li id="insertNode-group-55"><img class="menu-icono" src="../images/iconos/confisoft.gif"> Definir nuevo componente </li>
   <li> <hr class="separador"> </li>
-  <li onclick="colocar('../gestores/gestor_componentesoftwares.php',37)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar componente </li>
+  <li id="put-group-55"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar componente </li>
   <li> <hr class="separador"> </li>
   <li id="modifyGroup-55"><img class="menu-icono" src="../images/iconos/modificar.gif"> Propiedades </li>
   <li id="removeGroup-55"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar grupo de componentes </li>
 
 </ul>
 <ul id="menu-node-55" name="menu-node-55" oncontextmenu="return false;">
-  <li onclick="mover(37)"><img class="menu-icono" src="../images/iconos/mover.gif"> Mover componente </li>
+  <li id="move-55"><img class="menu-icono" src="../images/iconos/mover.gif"> Mover componente </li>
   <li> <hr class="separador"> </li>
   <li id="modifyNode-55"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades </li>
   <li id="removeNode-55"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar componente </li>
@@ -123,14 +123,14 @@ lista_raiz_arbol("software", $nodos, $grupos);
   <li id="insertGroup-type-57"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de perfiles </li>
   <li id="insertNode-type-57"><img class="menu-icono" src="../images/iconos/confisoft.gif"> Definir nuevo perfil </li>
   <li> <hr class="separador"> </li>
-  <li onclick=""colocar('../gestores/gestor_perfilsoftwares.php',39)><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar perfil </li>
+  <li id="put-type-57"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar perfil </li>
 </ul>
 
 <ul id="menu-group-57" name="menu-group-57" oncontextmenu="return false;">
   <li id="insertGroup-group-57"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de perfiles </li>
   <li id="insertNode-group-57"><img class="menu-icono" src="../images/iconos/confisoft.gif"> Definir nuevo perfil </li>
   <li> <hr class="separador"> </li>
-  <li onclick=""colocar('../gestores/gestor_perfilsoftwares.php',39)><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar perfil </li>
+  <li id="put-group-57"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar perfil </li>
   <li> <hr class="separador"> </li>
   <li id="modifyGroup-57"><img class="menu-icono" src="../images/iconos/modificar.gif"> Propiedades </li>
   <li id="removeGroup-57"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar grupo de perfiles </li>
@@ -141,7 +141,7 @@ lista_raiz_arbol("software", $nodos, $grupos);
   <li id="manageNode-57"><img class="menu-icono" src="../images/iconos/confisoft.gif"> Gestión componentes </li>
   <li id="showInfoNode-57"><img class="menu-icono" src="../images/iconos/informacion.gif"> Información Perfil </li>
   <li> <hr class="separador"> </li>
-  <li onclick="mover(39)"><img class="menu-icono" src="../images/iconos/mover.gif"> Mover perfil </li>
+  <li id="move-57"><img class="menu-icono" src="../images/iconos/mover.gif"> Mover perfil </li>
   <li id="modifyNode-57"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades </li>
   <li> <hr class="separador"> </li>
   <li id="removeNode-57"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar perfil software </li>

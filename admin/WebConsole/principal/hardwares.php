@@ -111,21 +111,21 @@ lista_raiz_arbol("hardware", $nodos, $grupos);
   <li id="insertGroup-type-54"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de componentes </li>
   <li id="insertNode-type-54"><img class="menu-icono" src="../images/iconos/confihard.gif"> Definir nuevo componente </li>
   <li> <hr class="separador"> </li>
-  <li onclick="colocar('../gestores/gestor_componentehardwares.php',36)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar componente </li>
+  <li id="put-type-54"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar componente </li>
 </ul>
 
 <ul id="menu-group-54" name="menu-group-54" oncontextmenu="return false;">
   <li id="insertGroup-group-54"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de componentes </li>
   <li id="insertNode-group-54"><img class="menu-icono" src="../images/iconos/confihard.gif"> Definir nuevo componente </li>
   <li> <hr class="separador"> </li>
-  <li onclick="colocar('../gestores/gestor_componentehardwares.php',36)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar componente </li>
+  <li id="put-group-54"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar componente </li>
   <li> <hr class="separador"> </li>
   <li id="modifyGroup-54"><img class="menu-icono" src="../images/iconos/modificar.gif"> Propiedades </li>
   <li id="removeGroup-54"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar grupo de componentes </li>
 </ul>
 
 <ul id="menu-node-54" name="menu-node-54" oncontextmenu="return false;">
-  <li onclick="mover(36)"><img class="menu-icono" src="../images/iconos/mover.gif"> Mover componente </li>
+  <li id="move-54"><img class="menu-icono" src="../images/iconos/mover.gif"> Mover componente </li>
   <li> <hr class="separador"> </li>
   <li id="modifyNode-54"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades </li>
 
@@ -138,14 +138,14 @@ lista_raiz_arbol("hardware", $nodos, $grupos);
   <li id="insertGroup-type-56"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de perfiles </li>
   <li id="insertNode-type-56"><img class="menu-icono" src="../images/iconos/confihard.gif"> Definir nuevo perfil </li>
   <li> <hr class="separador"> </li>
-  <li onclick="colocar('../gestores/gestor_perfilhardwares.php',38)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar perfil </li>
+  <li id="put-type-56"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar perfil </li>
 </ul>
 
 <ul id="menu-group-56" name="menu-group-56" oncontextmenu="return false;">
   <li id="insertGroup-group-56"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de perfiles </li>
   <li id="insertNode-group-56"><img class="menu-icono" src="../images/iconos/confihard.gif"> Definir nuevo perfil </li>
   <li> <hr class="separador"> </li>
-  <li onclick="colocar('../gestores/gestor_perfilhardwares.php',38)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar perfil </li>
+  <li id="put-group-56"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar perfil </li>
   <li> <hr class="separador"> </li>
   <li id="modifyGroup-56"><img class="menu-icono" src="../images/iconos/modificar.gif"> Propiedades </li>
   <li id="removeGroup-56"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar grupo de perfiles </li>
@@ -155,7 +155,7 @@ lista_raiz_arbol("hardware", $nodos, $grupos);
   <li id="manageNode-56"><img class="menu-icono" src="../images/iconos/confihard.gif"> Gestión Componentes </li>
   <li id="showInfoNode-56"><img class="menu-icono" src="../images/iconos/informacion.gif"> Información Perfil </li>
   <li> <hr class="separador"> </li>
-  <li onclick="mover(38)"><img class="menu-icono" src="../images/iconos/mover.gif"> Mover perfil </li>
+  <li id="move-56"><img class="menu-icono" src="../images/iconos/mover.gif"> Mover perfil </li>
   <li> <hr class="separador"> </li>
   <li id="modifyNode-56"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades </li>
   <li id="removeNode-56"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar perfil hardware </li>

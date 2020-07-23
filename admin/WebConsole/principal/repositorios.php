@@ -85,14 +85,14 @@ lista_raiz_arbol("repositorios", $nodos, $grupos);
   <li id="insertGroup-type-65"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de Repositorios </li>
   <li id="insertNode-type-65"><img class="menu-icono" src="../images/iconos/aula.gif"> Añadir Repositorio </li>
   <li> <hr class="separador"> </li>
-  <li onclick="colocar('../gestores/gestor_repositorios.php',41)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar Repositorio </li>
+  <li id="put-type-65"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar Repositorio </li>
 </ul>
 
 <ul id="menu-group-65" name="menu-group-65" oncontextmenu="return false;">
   <li id="insertGroup-group-65"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de Repositorios </li>
   <li id="insertNode-group-65"><img class="menu-icono" src="../images/iconos/aula.gif"> Añadir Repositorio </li>
   <li> <hr class="separador"> </li>
-  <li onclick="colocar('../gestores/gestor_repositorios.php',41)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar Repositorio </li>
+  <li id="put-group-65"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar Repositorio </li>
   <li> <hr class="separador"> </li>
   <li id="modifyGroup-65"><img class="menu-icono" src="../images/iconos/modificar.gif"> Propiedades </li>
   <li id="removeGroup-65"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar grupo de repositorios </li>
@@ -101,7 +101,7 @@ lista_raiz_arbol("repositorios", $nodos, $grupos);
 <ul id="menu-node-65" name="menu-node-65" oncontextmenu="return false;">
   <li id="showInfoNode-65"><img class="menu-icono" src="../images/iconos/informacion.gif"> Información Repositorio </li>
   <li> <hr class="separador"> </li>
-  <li onclick="mover(41)"><img class="menu-icono" src="../images/iconos/mover.gif"> Mover Repositorio </li>
+  <li id="move-65"><img class="menu-icono" src="../images/iconos/mover.gif"> Mover Repositorio </li>
   <li> <hr class="separador"> </li>
   <li id="rmImage"><img class="menu-icono" src="../images/iconos/comandos.gif"> Eliminar Imagen Repositorio </li>
   <li> <hr class="separador"> </li>

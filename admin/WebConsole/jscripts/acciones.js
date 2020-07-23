@@ -110,3 +110,64 @@ function inclusion_acciones(tipo)
 	whref+="?idtipoaccion="+identificador+"&descripcionaccion="+descripcionaccion+"&tipoaccion="+tipo+"&ambito="+ambito;
 	window.open(whref,"frame_contenidos")
 }
+
+$(function() {
+    // Ejecutar tarea
+    $("[id^='execute']").on ('click', function() {
+        var resul=window.confirm(TbMsg[0]);
+        if (!resul) return;
+
+        var id=$(this).parent().attr('id').split("_");
+        var description=$('#nodo-'+id[1]+'_'+id[2]).find('a').text().trim();
+        var url="../gestores/gestor_ejecutaracciones.php";
+        var param="opcion="+actionType(id[1])+"&idtarea="+id[2]+"&descritarea="+description;
+
+        /* LLamada a la gestión */
+        CallPage(url,param,"retornoGestion","POST");
+    });
+
+    $("[id^='manageMenu']").on ('click', function() {
+        var id=$(this).parent().attr('id').split("_");
+        var description=$('#nodo-'+id[1]+'_'+id[2]).find('a').text().trim();
+        var url="../varios/accionmenu.php?idtipoaccion="+id[2]+"&descripcionaccion="+description+"&tipoaccion="+actionType(id[1]);
+
+        console.log("id:" +url);
+        window.open(url,"frame_contenidos")
+    });
+
+    $("[id^='program']").on ('click', function() {
+        var id=$(this).parent().attr('id').split("_");
+        var description=$('#nodo-'+id[1]+'_'+id[2]).find('a').text().trim();
+        var url="../varios/programaciones.php";
+        switch(id[1]){
+            case '50':
+                // comando
+                url+="?idcomando="+id[2]+"&descripcioncomando="+description+"&tipoaccion="+actionType(id[1]);
+                break;
+            case '52':
+                // tarea
+                url+="?idtarea="+id[2]+"&descripciontarea="+description+"&tipoaccion="+actionType(id[1]);
+                break;
+        }
+        console.log("id:" +url);
+        window.open(url,"frame_contenidos")
+    });
+
+    // Devuelve el tipo de acción según el identificador del grupo
+    // procedimiento 51, tarea 52.  AMBITO_GRUPOS en constantes.php
+    function actionType(id){
+        switch(id){
+            case '50':
+                // id comando provisional
+                return EJECUCION_COMANDO;
+                break;
+            case '51':
+                return EJECUCION_PROCEDIMIENTO;
+                break;
+            case '52':
+                return EJECUCION_TAREA;
+                break;
+        }
+
+    }
+});

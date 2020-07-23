@@ -442,6 +442,10 @@ function IsNumeric(sText)
 
 
 $(function() {
+    // Variable para mover nodo
+    var idMove='';
+    var typeMove='';
+
     // Inserta grupo
     // Hay que distingir en grupos de aulas y ordenadores
     $("[id^='insertGroup']").on ('click', function() {
@@ -496,6 +500,33 @@ $(function() {
         url+="?opcion="+op_modificacion+"&identificador="+id[2];
         console.log("id:" +url);
         window.open(url,"frame_contenidos")
+    });
+
+    // Mueve nodo
+    $("[id^='move']").on ('click', function() {
+        // Id menu-node-tipoNodo_tipoNodo_idNodo
+        var id=$(this).parent().attr('id').split("_");
+        idMove=id[2];
+        typeMove=id[1];
+
+            console.log("tipo: "+id[1]+" nodo; "+id[2]);
+    });
+
+    // Pone nodo en grupo
+    $("[id^='put']").on ('click', function() {
+        // Id menu-node-tipoNodo_tipoNodo_idNodo
+        var id=$(this).parent().attr('id').split("_");
+            console.log("tipo: "+id[1]+" nodo; "+id[2]);
+            console.log("idMove: "+idMove+" typeMove"+typeMove);
+        if (!idMove || id[1]!=typeMove) {
+             alert(CTbMsg[7]);
+             return
+        }
+
+        var url=urlPut(id[1]);
+        var param="opcion="+op_movida+"&grupoid="+id[2]+"&identificador="+idMove;
+        console.log("url: " +url+"param: "+param);
+        CallPage(url,param,"retornoColocar","POST");
     });
 
     // Elimina grupo
@@ -578,3 +609,46 @@ function urlProperty(nodeType) {
     return url;
 }
 
+// Devuelve la url para poner un nodo en un grupo según su tipo.
+function urlPut(nodeType) {
+    // url según tipo de nodo
+    switch(nodeType) {
+        case '54':
+            // componente de hardware
+            var url="../gestores/gestor_componentehardwares.php";
+            break;
+        case '55':
+            // componente de software
+            var url="../gestores/gestor_componentesoftwares.php";
+            break;
+        case '64':
+            // menus
+            var url="../gestores/gestor_menus.php";
+            break;
+        case '56':
+            // perfil de hardware
+            var url="../gestores/gestor_perfilhardwares.php";
+            break;
+        case '57':
+            // perfil de software
+            var url="../gestores/gestor_perfilsoftwares.php";
+            break;
+        case '51':
+            // procedimiento
+            var url="../gestores/gestor_procedimientos.php";
+            break;
+        case '65':
+            // repositorio
+            var url="../gestores/gestor_repositorios.php";
+            break;
+        case '52':
+            // tarea
+            var url="../gestores/gestor_tareas.php";
+            break;
+        default:
+            console.log("case default");
+            break;
+    }
+
+    return url;
+}
