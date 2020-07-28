@@ -108,6 +108,12 @@ $(function() {
                 var tipoaccion=34; // constantes.php AMBITO_GRUPOSTAREAS
                 var url="../varios/informacion_acciones.php?idtipoaccion="+id[2]+"&descripcionaccion="+description+"&tipoaccion="+tipoaccion;
                 break;
+            case '70':
+            case '71':
+            case '72':
+                // imagen
+                var url="../varios/informacion_imagenes.php?idimagen="+id[2]+"&descripcionimagen="+description;
+                break;
 	    default:
 		console.log("case default");
                 break;

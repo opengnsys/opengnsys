@@ -464,7 +464,7 @@ $(function() {
         var url=urlProperty(id[1]);
 
             console.log("tipo: "+id[1]+" nodo; "+id[2]);
-        url+="?opcion="+op_alta+"&grupoid="+id[2];
+        url+="opcion="+op_alta+"&grupoid="+id[2];
         console.log("id:" +url);
         window.open(url,"frame_contenidos")
             // Usamos la uel del caso por defecto
@@ -497,7 +497,7 @@ $(function() {
         var url=urlProperty(id[1]);
 
             console.log("tipo: "+id[1]+" nodo; "+id[2]);
-        url+="?opcion="+op_modificacion+"&identificador="+id[2];
+        url+="opcion="+op_modificacion+"&identificador="+id[2];
         console.log("id:" +url);
         window.open(url,"frame_contenidos")
     });
@@ -547,7 +547,7 @@ $(function() {
         var url=urlProperty(id[1]);
 
             console.log("tipo: "+id[1]+" nodo; "+id[2]);
-        url+="?opcion="+op_eliminacion+"&identificador="+id[2];
+        url+="opcion="+op_eliminacion+"&identificador="+id[2];
         console.log("id:" +url);
         window.open(url,"frame_contenidos")
     });
@@ -572,35 +572,44 @@ function urlProperty(nodeType) {
     switch(nodeType) {
         case '54':
             // componente de hardware
-            var url="../propiedades/propiedades_componentehardwares.php";
+            var url="../propiedades/propiedades_componentehardwares.php?";
             break;
         case '55':
             // componente de software
-            var url="../propiedades/propiedades_componentesoftwares.php";
+            var url="../propiedades/propiedades_componentesoftwares.php?";
+            break;
+        case '70':
+        case '71':
+        case '72':
+            // imagen
+            var url="../propiedades/propiedades_imagenes.php";
+            // Para las imágenes hay que añadir el tipo.
+            // El tipo de grupo de imagenes son 70, 71 y 72 correspondiendo al tipo de imagen 1, 2 y 3
+            if (nodeType == 70 ||  nodeType == 71 || nodeType == 72) url+="?tipoimg="+(nodeType-69+"&");
             break;
         case '64':
             // menus
-            var url="../propiedades/propiedades_menus.php";
+            var url="../propiedades/propiedades_menus.php?";
             break;
         case '56':
             // perfil de hardware
-            var url="../propiedades/propiedades_perfilhardwares.php";
+            var url="../propiedades/propiedades_perfilhardwares.php?";
             break;
         case '57':
             // perfil de software
-            var url="../propiedades/propiedades_perfilsoftwares.php";
+            var url="../propiedades/propiedades_perfilsoftwares.php?";
             break;
         case '51':
             // procedimiento
-            var url="../propiedades/propiedades_procedimientos.php";
+            var url="../propiedades/propiedades_procedimientos.php?";
             break;
         case '65':
             // repositorio
-            var url="../propiedades/propiedades_repositorios.php";
+            var url="../propiedades/propiedades_repositorios.php?";
             break;
         case '52':
             // tarea
-            var url="../propiedades/propiedades_tareas.php";
+            var url="../propiedades/propiedades_tareas.php?";
             break;
         default:
             console.log("case default");
@@ -620,6 +629,12 @@ function urlPut(nodeType) {
         case '55':
             // componente de software
             var url="../gestores/gestor_componentesoftwares.php";
+            break;
+        case '70':
+        case '71':
+        case '72':
+            // imagen
+            var url="../gestores/gestor_imagenes.php";
             break;
         case '64':
             // menus

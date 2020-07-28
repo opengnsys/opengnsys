@@ -119,36 +119,93 @@ echo $flotante->CreaMenuContextual($XMLcontextual);
 
 echo "<br><br><br>";
 echo "<br><br><br>\n";
-$nodos=nodos_arbol("imagenes");
+$monoliticas=nodos_arbol("imagenesmonoliticas");
+$basicas=nodos_arbol("imagenesbasicas");
+$incrementales=nodos_arbol("imagenesincrementales");
+
+$nodos=$monoliticas + $basicas + $incrementales;
 $grupos= grupos_arbol("imagenes");
-listaImg($nodos,$grupos);
+
+lista_raiz_arbol("imagenes", $nodos, $grupos);
 ?>
 
-
- <ul id="menu-tipes" name="menu-tipes" oncontextmenu="return false;">
-  <li onclick="insertar_grupos(0,'<?php echo $LITAMBITO_GRUPOSIMAGENES ?>');"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de imágenes</li>
-  <li onclick="insertar_imagen('<?php echo $LITAMBITO_IMAGENES ?>',0);"><img class="menu-icono" src="../images/iconos/imagen.gif"> Definir nueva imagen</li>
+<!-- Los menús son iguales para todas los tipos de imágenes pero hay que separarlos -->
+ <ul id="menu-type-70" name="menu-type-70" oncontextmenu="return false;">
+  <li id="insertGroup-type-70"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de imágenes</li>
+  <li id="insertNode-type-70"><img class="menu-icono" src="../images/iconos/imagen.gif"> Definir nueva imagen</li>
   <li> <hr class="separador"> </li>
-  <li onclick="mover()"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar imagen</li>
+  <li id="put-type-70"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar imagen</li>
  </ul>
 
- <ul id="menu-group" name="menu-group" oncontextmenu="return false;">
- <li onclick="insertar_grupos(0,'<?php echo $LITAMBITO_GRUPOSIMAGENES ?>');"><img class="menu-icono" src="../images/iconos/carpeta.gif"><span class="menu-texto"> Nuevo grupo de imágenes</span></li>
-  <li onclick="insertar_imagen('<?php echo $LITAMBITO_IMAGENES ?>',0);"><img class="menu-icono" src="../images/iconos/imagen.gif">Definir nueva imagen</li>
+ <ul id="menu-group-70" name="menu-group-70" oncontextmenu="return false;">
+ <li id="insertGroup-70"><img class="menu-icono" src="../images/iconos/carpeta.gif"><span class="menu-texto"> Nuevo grupo de imágenes</span></li>
+  <li id="insertNode-group-70"><img class="menu-icono" src="../images/iconos/imagen.gif">Definir nueva imagen</li>
   <li> <hr class="separador"> </li>
-  <li onclick="colocar('../gestores/gestor_imagenes.php',0)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar imagen</li>
+  <li id="put-group-70"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar imagen</li>
   <li> <hr class="separador"> </li>
-  <li onclick="modificar_grupos('<?php echo $LITAMBITO_GRUPOSIMAGENES ?>');"><img class="menu-icono" src="../images/iconos/modificar.gif"> Propiedades</li>
-  <li onclick="eliminar_grupos('<?php echo $LITAMBITO_GRUPOSIMAGENES ?>');"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar grupo de imágenes</li>
+  <li id="modifyGroup-70"><img class="menu-icono" src="../images/iconos/modificar.gif"> Propiedades</li>
+  <li id="removeGroup-70"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar grupo de imágenes</li>
  </ul>
 
-<ul id="menu-images" name="menu-images" oncontextmenu="return false;">
-  <li onclick="muestra_informacion();"><img class="menu-icono" src="../images/iconos/informacion.gif"> Imagen información</li>
+<ul id="menu-node-70" name="menu-node-70" oncontextmenu="return false;">
+  <li id="showInfoNode-70"><img class="menu-icono" src="../images/iconos/informacion.gif"> Imagen información</li>
   <li> <hr class="separador"> </li>
-  <li onclick="mover()"><img class="menu-icono" src="../images/iconos/mover.gif"> Mover Imagen</li>
+  <li id="move-70"><img class="menu-icono" src="../images/iconos/mover.gif"> Mover Imagen</li>
   <li> <hr class="separador"> </li>
-  <li onclick="modificar_imagen();"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades</li>
-  <li onclick="eliminar_imagen();"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar imagen</li>
+  <li id="modifyNode-70"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades</li>
+  <li id="removeNode-70"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar imagen</li>
+</ul>
+
+ <ul id="menu-type-71" name="menu-type-71" oncontextmenu="return false;">
+  <li id="insertGroup-type-71"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de imágenes</li>
+  <li id="insertNode-type-71"><img class="menu-icono" src="../images/iconos/imagen.gif"> Definir nueva imagen</li>
+  <li> <hr class="separador"> </li>
+  <li id="put-type-71"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar imagen</li>
+ </ul>
+
+ <ul id="menu-group-71" name="menu-group-71" oncontextmenu="return false;">
+ <li id="insertGroup-71"><img class="menu-icono" src="../images/iconos/carpeta.gif"><span class="menu-texto"> Nuevo grupo de imágenes</span></li>
+  <li id="insertNode-group-71"><img class="menu-icono" src="../images/iconos/imagen.gif">Definir nueva imagen</li>
+  <li> <hr class="separador"> </li>
+  <li id="put-group-71"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar imagen</li>
+  <li> <hr class="separador"> </li>
+  <li id="modifyGroup-71"><img class="menu-icono" src="../images/iconos/modificar.gif"> Propiedades</li>
+  <li id="removeGroup-71"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar grupo de imágenes</li>
+ </ul>
+
+<ul id="menu-node-71" name="menu-node-71" oncontextmenu="return false;">
+  <li id="showInfoNode-71"><img class="menu-icono" src="../images/iconos/informacion.gif"> Imagen información</li>
+  <li> <hr class="separador"> </li>
+  <li id="move-71"><img class="menu-icono" src="../images/iconos/mover.gif"> Mover Imagen</li>
+  <li> <hr class="separador"> </li>
+  <li id="modifyNode-71"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades</li>
+  <li id="removeNode-71"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar imagen</li>
+</ul>
+
+ <ul id="menu-type-72" name="menu-type-72" oncontextmenu="return false;">
+  <li id="insertGroup-type-72"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de imágenes</li>
+  <li id="insertNode-type-72"><img class="menu-icono" src="../images/iconos/imagen.gif"> Definir nueva imagen</li>
+  <li> <hr class="separador"> </li>
+  <li id="put-type-72"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar imagen</li>
+ </ul>
+
+ <ul id="menu-group-72" name="menu-group-72" oncontextmenu="return false;">
+ <li id="insertGroup-72"><img class="menu-icono" src="../images/iconos/carpeta.gif"><span class="menu-texto"> Nuevo grupo de imágenes</span></li>
+  <li id="insertNode-group-72"><img class="menu-icono" src="../images/iconos/imagen.gif">Definir nueva imagen</li>
+  <li> <hr class="separador"> </li>
+  <li id="put-group-72"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar imagen</li>
+  <li> <hr class="separador"> </li>
+  <li id="modifyGroup-72"><img class="menu-icono" src="../images/iconos/modificar.gif"> Propiedades</li>
+  <li id="removeGroup-72"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar grupo de imágenes</li>
+ </ul>
+
+<ul id="menu-node-72" name="menu-node" oncontextmenu="return false;">
+  <li id="showInfoNode-72"><img class="menu-icono" src="../images/iconos/informacion.gif"> Imagen información</li>
+  <li> <hr class="separador"> </li>
+  <li id="move-72"><img class="menu-icono" src="../images/iconos/mover.gif"> Mover Imagen</li>
+  <li> <hr class="separador"> </li>
+  <li id="modifyNode-72"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades</li>
+  <li id="removeNode-72"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar imagen</li>
 </ul>
 
  <!-- div id="outer-wrapper" onclick="ocultar_menu();" oncontextmenu="mostrarMenu(event, this.id, 'menu-contextual');return false;"> </div -->
@@ -450,86 +507,6 @@ function CreacontextualXMLImagen($amb,$litamb,$tipo)
 
 	$layerXML.='</MENUCONTEXTUAL>';
 	return($layerXML);
-}
-
-// Descripción. Devuelve un array con los nombres de los repositorios
-// Parámetros: ninguno
-// Devuelve un array con los nombres de los repositorios
-function repos(){
-        global $TbMsg;
-        global $cmd;
-        global $idcentro;
-
-        $repositorios=Array();
-        $rs=new Recordset;
-        $cmd->texto="SELECT idrepositorio, nombrerepositorio FROM repositorios;";
-        $rs->Comando=&$cmd;
-        if (!$rs->Abrir()) return($repositorios);
-
-        $rs->Primero();
-        while (!$rs->EOF){
-                $repositorios[$rs->campos["idrepositorio"]] = $rs->campos["nombrerepositorio"];
-                $rs->Siguiente();
-        }
-        $rs->Cerrar();
-        return($repositorios);
-}
-
-// Descripción: Comienza el árbol de imágenes en froma de lista.
-// Parámetros: imágenes grupos_hijos
-// array imágenes: Array con las imágenes según tipo y grupo al que pertenecen.
-// array grupos_hijos: array de los grupos hijos de cada grupo.
-// Devuelve: nada
-function listaImg ($imagenes, $grupos_hijos){
-        global $TbMsg;
-        global $NUM_TIPOS_IMAGENES;
-        $orden=0;
-        echo '<ul id="menu_arbol">'."\n";
-        echo '  <li><input type="checkbox" name="list" id="nivel1-1"><label for="nivel1-1"><img class="menu-icono" src="../images/iconos/imagenes.gif">'.str_replace ('"','',$TbMsg[9]).'</label>'."\n";
-        for ($tipo = 1; $tipo <= $NUM_TIPOS_IMAGENES; $tipo++) {
-                // Recorremos los grupos hijos desde el cero
-		echo '    <ul>'."\n";
-		echo '       <li id="grupo_'.$tipo.'_0" oncontextmenu="mostrar_menu(event, '. $tipo.', 0, \'menu-tipes\');return false;">'."\n";
-		echo '          <input type="checkbox" name="list" id="nivel2-'.$tipo.'"><label for="nivel2-'.$tipo.'"><img class="menu-icono" src="../images/iconos/carpeta.gif"> '.str_replace ('"','',$TbMsg[10+$tipo]).'</label>'."\n";
-		$orden=listaGrupo($tipo,0,2,$orden,$imagenes,$grupos_hijos);
-		$orden=$orden+1;
-		echo '       </li>'."\n";
-		echo '    </ul>'."\n";
-        }
-        echo "  </li>"."\n";
-        echo "</ul>"."\n";
-}
-
-// Descripción: Construye la parte del árbol correspondiente a un grupo de imágenes: lista sus imágenes y sus grupos hijos.
-// Parametros: tipo idgrupo nivel orden imagenes grupos_hijos
-// int tipo: tipo de imágenes (moniliticas, básicas, )
-// int idgrupo: identificador del grupo
-// int nivel: nivel de la lista
-// int orden: orden de la lista
-// array imagenes: array con info de la imagen
-// array grupos_hijos: array de grupos hijos
-// Devuelve: el orden de la lista del último elemento.
-function listaGrupo($tipo,$idgrupo,$nivel,$orden,$imagenes,$grupos_hijos){
-        $nivel=$nivel+1;
-        echo '    <ul class="interior">'."\n";
-        // si existen grupos hijos del actual creo la lista con la función listaGrupo.
-        if (isset ($grupos_hijos[$tipo][$idgrupo])){
-            foreach ($grupos_hijos[$tipo][$idgrupo] as $hijo) {
-                $orden=$orden+1;
-                echo '      <li id="grupo_'.$hijo["id"].'" oncontextmenu="mostrar_menu(event,'. $tipo.', '.$hijo["id"].', \'menu-group\');return false;"><input type="checkbox" name="list" id="nivel'.$nivel.'-'.$orden.'"><label for="nivel'.$nivel.'-'.$orden.'"><img class="menu_icono" src="../images/iconos/carpeta.gif">'.$hijo["nombre"].'</label>'."\n";
-
-                $orden=listaGrupo($tipo,$hijo["id"],$nivel,$orden,$imagenes,$grupos_hijos);
-            }
-            echo "      </li>"."\n";
-	}
-	// creo la lista de las imágenes dentro del grupo (si existen).
-	if (isset ($imagenes[$tipo][$idgrupo])){
-	    foreach ($imagenes[$tipo][$idgrupo] as $img){
-		echo '      <li id="img_'.$img["id"].'" oncontextmenu="ocultar_menu(); mostrar_menu(event,'. $tipo.', '.$img["id"].', \'menu-images\');return false;"><a href="#r"><img class="menu_icono" src="../images/iconos/imagen.gif"> '.$img["descripcion"].'</a></li>'."\n";
-	    }
-	}
-        echo "    </ul>"."\n";
-	return($orden);
 }
 ?>
 

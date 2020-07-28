@@ -6,7 +6,7 @@
 //________________________________________________________________________________________________________
 $TbMsg=array(); 
 $TbMsg[0]='Imágenes'; 
-$TbMsg[1]='Information sobre imagenes'; 
+$TbMsg[1]='Información sobre imágenes';
 $TbMsg[2]='Imagen'; 
 $TbMsg[3]='Información de la Imagen'; 
 $TbMsg[4]='Componentes software'; 

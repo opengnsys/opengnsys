@@ -87,35 +87,3 @@ function eliminar_imagen()
 	ocultar_menu();
 }
 
-// provisional menú contextual //
-function mostrar_menu(event, tipo, id, menu_id) {
-   var posX, posY, span; // Declaracion de variables
-
-   posX = event.pageX; // Obtenemos pocision X del cursor
-   posY = event.pageY; // Obtenemos pocision Y del cursor
-
-   // Flecha que indica submenues
-   //span = $('#' + menu_id + " span");
-   //span.html("»");
-
-   // Editando el codigo CSS para ciertos elementos
-
-   $('#' + menu_id).css({position: 'absolute',display: 'block',top: posY,left: posX,cursor: 'default',width: '200px',height: 'auto',padding: '2px 9px 2px 2px',listStyle: 'none',listStyleType: 'none'});
-$('#' + menu_id + " li ul").css({listStyle:'none',listStyleType:'none',cursor:'default',position:'absolute',left:'212px',marginTop:'-20px',width:'200px',height:'auto',padding:'2px 9px 2px 2px'});
-
-	 console.log($('#' + menu_id));
-  // Incluyo el tipo de imagen y el id en el ientificador
-  $('#' + menu_id ).attr("id", menu_id + "_" + tipo + "_" + id);
-
-	 console.log($('#' + menu_id+ "_" + tipo + "_" + id));
-  }
-
-function ocultar_menu() {
-	console.log("ocultar menu");
-   $("[id^='menu-images']").attr("id",'menu-images');
-   $("[id^='menu-groups']").attr("id",'menu-groups');
-   $("[id^='menu-tipes']").attr("id",'menu-tipes');
-   $("#menu-images").css({display: 'none'});
-   $("#menu-groups").css({display: 'none'});
-   $("#menu-tipes").css({display: 'none'});
-}

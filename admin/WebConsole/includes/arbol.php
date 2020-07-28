@@ -92,8 +92,6 @@ function grupos_arbol($tipo_nodo) {
 
                 $id=$rs->campos["id"];
                 $conjuntoid=$rs->campos["conjuntoid"];
-		// El tipo de grupo de imagenes son 70, 71 y 72 correspondiendo al tipo de imagen 1, 2 y 3
-		if ($tipo_nodo == "imagenes") $conjuntoid-=69;
 
                 if ($oldgrupopadre != $grupopadre) {
                         $oldgrupopadre=$grupopadre;
@@ -138,7 +136,7 @@ function lista_grupo_arbol($tipo_nodo, $tipo, $idgrupo, $nivel, $orden, $nodos, 
             foreach ($grupos[$tipo][$idgrupo] as $hijo) {
                 $orden=$orden+1;
 		echo '      <li id="grupo_'.$hijo["id"].'"><input type="checkbox" name="list" id="nivel'.$nivel.'-'.$orden.'">
-			      <label oncontextmenu="ocultar_menu(); mostrar_menu(event,'. $tipo.', '.$hijo["id"].', \'menu-grupo-'.$tipo.'\');return false;" for="nivel'.$nivel.'-'.$orden.'">
+			      <label oncontextmenu="ocultar_menu(); mostrar_menu(event,'. $tipo.', '.$hijo["id"].', \'menu-group-'.$tipo.'\');return false;" for="nivel'.$nivel.'-'.$orden.'">
                                  <img class="menu_icono" src="../images/iconos/carpeta.gif">'.$hijo["nombre"].'
                               </label>'."\n";
 
@@ -152,16 +150,16 @@ function lista_grupo_arbol($tipo_nodo, $tipo, $idgrupo, $nivel, $orden, $nodos, 
             foreach ($nodos[$tipo][$idgrupo] as $nodo){
 		if ($tipo_nodo == "aulas"){
 		    // Incluyo input para que se pueda abrir el nodo
-		    echo '      <li id="'.$tipo_nodo.'_'.$nodo["id"].'">
+		    echo '      <li id="nodo-'.$tipo.'_'.$nodo["id"].'">
 				    <input type="checkbox" name="list" id="nivel'.$nivel.'-'.$orden.'">
-				    <label oncontextmenu="ocultar_menu(); mostrar_menu(event,'. $tipo.', '.$nodo["id"].', \'menu-'.$tipo.'\');return false;" for="nivel'.$nivel.'-'.$orden.'">
+				    <label oncontextmenu="ocultar_menu(); mostrar_menu(event,'. $tipo.', '.$nodo["id"].', \'menu-node-'.$tipo.'\');return false;" for="nivel'.$nivel.'-'.$orden.'">
 					<img class="menu_icono" src="../images/iconos/imagen.gif"> '.$nodo["descripcion"].'
 				    </label>'."\n" ;
 
 		    // Listo grupo de ordenadores
 		    lista_grupo_arbol("ordenadores",$nodo["id"],0, $nivel, $orden,$ordenadores,$grp_ordenadores);
 		} else {
-		    echo '      <li id="'.$tipo_nodo.'_'.$nodo["id"].'" oncontextmenu="ocultar_menu(); mostrar_menu(event,'. $tipo.', '.$nodo["id"].', \'menu-'.$tipo.'\');return false;">
+		    echo '      <li id="nodo-'.$tipo.'_'.$nodo["id"].'" oncontextmenu="ocultar_menu(); mostrar_menu(event,'. $tipo.', '.$nodo["id"].', \'menu-node-'.$tipo.'\');return false;">
 				    <a href="#r"> <img class="menu_icono" src="../images/iconos/imagen.gif"> '.$nodo["descripcion"].'</a>';
 		}
                 echo "      </li>"."\n";
@@ -196,7 +194,7 @@ function lista_raiz_arbol ($tipo_nodo, $nodos, $grupos){
 	if (count($keys) == 1) {
 	    $tipo= array_keys($nodos)[0];
 	    echo '  <li><input type="checkbox" name="list" id="nivel1-1">
-			<label for="nivel1-1" oncontextmenu="ocultar_menu(); mostrar_menu(event, '. $tipo.', 0, \'menu-tipo-'.$tipo.'\');return false;">
+			<label for="nivel1-1" oncontextmenu="ocultar_menu(); mostrar_menu(event, '. $tipo.', 0, \'menu-type-'.$tipo.'\');return false;">
 			    <img class="menu-icono" src="../images/iconos/imagenes.gif"> Inicio árbol
 			</label>'."\n";
 	    lista_grupo_arbol($tipo_nodo, $keys[0], 0, 1, $orden, $nodos, $grupos);
@@ -207,7 +205,7 @@ function lista_raiz_arbol ($tipo_nodo, $nodos, $grupos){
                 echo '    <ul>'."\n";
                 echo '       <li id="grupo_'.$tipo.'_0" >
 				  <input type="checkbox" name="list" id="nivel2-'.$tipo.'">
-				  <label oncontextmenu="ocultar_menu(); mostrar_menu(event, '. $tipo.', 0, \'menu-tipo-'.$tipo.'\');return false;" for="nivel2-'.$tipo.'">
+				  <label oncontextmenu="ocultar_menu(); mostrar_menu(event, '. $tipo.', 0, \'menu-type-'.$tipo.'\');return false;" for="nivel2-'.$tipo.'">
 					<img class="menu-icono" src="../images/iconos/carpeta.gif"> Falta nombre del tipo: '.$tipo.'
 				  </label>'."\n";
                 $orden=lista_grupo_arbol($tipo_nodo, $tipo, 0, 2, $orden, $nodos, $grupos);
@@ -269,14 +267,38 @@ function nodos_arbol($tipo_nodo){
 		       WHERE softwares.idtiposoftware=tiposoftwares.idtiposoftware AND idcentro=$idcentro
 		     ORDER BY conjuntoid, grupoid;";
                 break; 
+	    case 'imagenesmonoliticas':
+		global $AMBITO_GRUPOSIMAGENESMONOLITICAS;
+		global $IMAGENES_MONOLITICAS;
+		$num_tipo=$AMBITO_GRUPOSIMAGENESMONOLITICAS;
+		$img_tipo=$IMAGENES_MONOLITICAS;
+	    case 'imagenesbasicas':
+		if (!isset($num_tipo)){
+		    global $AMBITO_GRUPOSIMAGENESBASICAS;
+		    global $IMAGENES_BASICAS;
+		    $num_tipo=$AMBITO_GRUPOSIMAGENESBASICAS;
+		    $img_tipo=$IMAGENES_BASICAS;
+		}
 	    case 'imagenes':
-		$num_tipo=1;
-		$sql="SELECT DISTINCT imagenes.idimagen AS id ,imagenes.descripcion AS nombre,
-			              imagenes.tipo AS conjuntoid, imagenes.grupoid,
-                             IF(imagenes.idrepositorio=0,basica.idrepositorio,imagenes.idrepositorio)  AS repo
-                        FROM imagenes
-                   LEFT JOIN imagenes AS basica  ON imagenes.imagenid=basica.idimagen
-                       WHERE imagenes.idcentro=$idcentro ORDER BY conjuntoid, grupoid;";
+		$sql="SELECT imagenes.idimagen AS id , '$num_tipo' AS conjuntoid, imagenes.grupoid,
+		      CONCAT (imagenes.descripcion,' (', IFNULL(repositorios.nombrerepositorio,'".$TbMsg['DELETEDREPO']."'),')') AS nombre
+			FROM imagenes
+		   LEFT JOIN repositorios ON imagenes.idrepositorio=repositorios.idrepositorio
+		       WHERE imagenes.idcentro=$idcentro AND imagenes.tipo=$img_tipo
+		       ORDER BY conjuntoid, grupoid;";
+                break;
+	    case 'imagenesincrementales':
+		global $AMBITO_GRUPOSIMAGENESINCREMENTALES;
+		global $IMAGENES_INCREMENTALES;
+		$num_tipo=$AMBITO_GRUPOSIMAGENESINCREMENTALES;
+		$img_tipo=$IMAGENES_INCREMENTALES;
+		$sql="SELECT imagenes.idimagen AS id , '$num_tipo' AS conjuntoid, imagenes.grupoid,
+		      CONCAT (imagenes.descripcion,' (', IFNULL(repositorios.nombrerepositorio,'".$TbMsg['DELETEDREPO']."'),')') AS nombre
+			FROM imagenes
+		  INNER JOIN imagenes AS basica  ON imagenes.imagenid=basica.idimagen
+		   LEFT JOIN repositorios ON basica.idrepositorio=repositorios.idrepositorio
+		       WHERE imagenes.idcentro=$idcentro AND imagenes.tipo=$img_tipo
+		       ORDER BY conjuntoid, grupoid;";
                 break; 
 	    case 'menus':
 		global $AMBITO_GRUPOSMENUS;
