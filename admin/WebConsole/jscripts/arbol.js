@@ -3,9 +3,9 @@
  * Funciones para mostrar y ocultar el menú contextual del frame izquierdo.
  *
  * @note Nomenclatura menú:
- *         Inicial menu-tipo-N , menu-grupo-N, menu-N.
+ *         Inicial menu-type-N , menu-group-N, menu-node-N.
  *         mostrar_menu le incluye el identificador del elemento después de un subrayado:
- *             menu-tipo-N_M , menu-grupo-N_M, menu-N_M
+ *             menu-type-N_N_M , menu-group-N_N_M, menu-node-N_N_M
  *         ocultar_menu vuelve a su nombre original.
  */
 
@@ -35,6 +35,9 @@ function mostrar_menu(event, tipo, id, menu_id) {
    // Flecha que indica submenues
    //span = $('#' + menu_id + " span");
    //span.html("»");
+
+   // Para los ordenadores quitamos segundo identificador (idaula)
+   if (menu_id.indexOf("_") != -1) menu_id=menu_id.substring(0,menu_id.indexOf("_"));
 
    // Editando el codigo CSS para ciertos elementos
 
@@ -86,6 +89,12 @@ $(function() {
                 // hardware
 		var url="../varios/informacion_perfileshardware.php?idperfil="+id[2]+"&descripcionperfil="+description;
                 break;
+            case '70':
+            case '71':
+            case '72':
+                // imagen
+                var url="../varios/informacion_imagenes.php?idimagen="+id[2]+"&descripcionimagen="+description;
+                break;
             case '64':
                 // menus
                 var url="../varios/informacion_menus.php?idmenu="+id[2]+"&descripcionmenu="+description;
@@ -107,12 +116,6 @@ $(function() {
                 // tareas
                 var tipoaccion=34; // constantes.php AMBITO_GRUPOSTAREAS
                 var url="../varios/informacion_acciones.php?idtipoaccion="+id[2]+"&descripcionaccion="+description+"&tipoaccion="+tipoaccion;
-                break;
-            case '70':
-            case '71':
-            case '72':
-                // imagen
-                var url="../varios/informacion_imagenes.php?idimagen="+id[2]+"&descripcionimagen="+description;
                 break;
 	    default:
 		console.log("case default");

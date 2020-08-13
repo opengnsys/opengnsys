@@ -447,10 +447,20 @@ $(function() {
     var typeMove='';
 
     // Inserta grupo
-    // Hay que distingir en grupos de aulas y ordenadores
     $("[id^='insertGroup']").on ('click', function() {
         var id=$(this).parent().attr('id').split("_");
-        var url="../propiedades/propiedades_grupos.php?opcion="+op_alta+"&grupoid="+id[2]+"&tipo="+id[1];
+        var url="../propiedades/propiedades_grupos.php?opcion="+op_alta+"&tipo="+id[1];
+
+        // Para aulas.
+        if (id[1] == 2) {
+            // Hay que añadir literaltipo
+            url+="&literaltipo="+LITAMBITO_GRUPOSAULAS;
+
+            // Al inertarla en la raíz del árbol hay que cambiar el grupo
+            var prefix=id[0].split("-");
+            if (prefix[1] == 'type') id[2]=0;
+        }
+        url+="&grupoid="+id[2];
 
         //    console.log("tipo: "+id[1]+" grupoPadre; "+id[2]);
         console.log("id:" +url);
@@ -463,20 +473,15 @@ $(function() {
         var id=$(this).parent().attr('id').split("_");
         var url=urlProperty(id[1]);
 
+        // Para aulas: al insertarla en la raíz del árbol hay que cambiar el grupo
+        if (id[1] == 2) {
+            var prefix=id[0].split("-");
+            if (prefix[1] == 'type') id[2]=0;
+        }
             console.log("tipo: "+id[1]+" nodo; "+id[2]);
         url+="opcion="+op_alta+"&grupoid="+id[2];
         console.log("id:" +url);
         window.open(url,"frame_contenidos")
-            // Usamos la uel del caso por defecto
-            /*
-                        var auxsplit= pages.split('?'); // La variable pages lleva parametros
-                        if(auxsplit[1]!=null)
-                                var whref=pages+"&";
-                        else
-                                var whref=pages+"?";
-                        whref+="opcion="+op_alta+"&grupoid="+identificador;
-                */
-
     });
 
     // Modifica grupo
@@ -534,6 +539,9 @@ $(function() {
         // Id menu-node-tipoNodo_tipoNodo_idNodo
         var id=$(this).parent().attr('id').split("_");
         var url="../propiedades/propiedades_grupos.php?opcion="+op_eliminacion+"&idgrupo="+id[2]+"&tipo="+id[1];
+
+        // Para aulas hay que añadir literaltipo
+        if (id[1] == 2) url+="&literaltipo="+LITAMBITO_GRUPOSAULAS;
 
             console.log("tipo: "+id[1]+" nodo; "+id[2]);
         console.log("id:" +url);
@@ -622,6 +630,10 @@ function urlProperty(nodeType) {
 function urlPut(nodeType) {
     // url según tipo de nodo
     switch(nodeType) {
+        case '2':
+            // aula
+            var url="../propiedades/propiedades_aulas.php?";
+            break;
         case '54':
             // componente de hardware
             var url="../gestores/gestor_componentehardwares.php";

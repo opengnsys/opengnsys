@@ -382,3 +382,297 @@ function ver_ubicarordenadores(){
 	 window.open(whref,"frame_contenidos")
 }
 	
+$(function() {
+    /// @function actionsQueue
+    /// @brief Carga la página de la cola de acciones para el ámbito seleccionado.
+    $("[id^='actionsQueue']").on ('click', function() {
+        var data=scope($(this));
+        var url="../principal/colasacciones.php?ambito="+data[2]+"&idambito="+data[0]+"&nombreambito="+data[1];
+
+        console.log("id:" +url);
+        window.open(url,"frame_contenidos")
+    });
+
+    /// @function config
+    /// @brief Muestra formulario para incorporar un sólo ordenador.
+    $("[id^='config']").on ('click', function() {
+        var data=scope($(this));
+        var url="configuraciones.php?idambito="+data[0]+"&ambito="+data[2];
+	    console.log("url: "+url);
+        window.open(url,"frame_contenidos");
+    });
+
+    /// @function console
+    /// @brief Muestra el eco de una consola en una ventana.
+    /// FALTA algo seguro
+    $("[id^='console']").on ('click', function() {
+        var data=scope($(this));
+	//var sw=( data[2] == AMBITO_ORDENADORES ) ? 1 : 2 ;
+	var sw=1;
+	    console.log("tipo amb: "+data[2]+ "AMBITO_ORDENADORES: "+AMBITO_ORDENADORES);
+        var url="../principal/consolaremota.php?litambito="+data[3]+"&idambito="+data[0]+"&nomambito="+data[1]+"&sw="+sw;
+	    console.log("url: "+url);
+        window.open(url,"frame_contenidos")
+	    /*
+
+        if (data[2] == AMBITO_ORDENADORES) {
+                window.open(url,"frame_contenidos")
+        }
+        else{
+                var nomw="w_"+data[3]+"_"+data[0];
+                window.open(url,nomw,"width=720,height=640");
+	}
+	*/
+    });
+
+    /// @function echo
+    /// @brief Muestra formulario para configurar arranque PXE
+    $("[id^='echo']").on ('click', function() {
+        var data=scope($(this));
+	//if (data[0] == null) alert(TbMsg[6]);
+	var sw=2;
+        var url="../principal/consolaremota.php?litambito="+data[3]+"&idambito="+data[0]+"&nomambito="+data[1]+"&sw="+sw;
+	    console.log("url: "+url);
+        window.open(url,"frame_contenidos");
+    });
+
+    /// @function includePC
+    /// @brief Muestra formulario para incorporar ordenadores partiendo de la configuración del dhcp
+    $("[id^='includePC']").on ('click', function() {
+        var data=scope($(this));
+	var url="../varios/incorporaordenadores.php?idaula="+data[0]+"&nombreaula="+data[1];
+	    console.log("url: "+url);
+        window.open(url,"frame_contenidos");
+    });
+
+    /// @function insertGrpPC
+    /// @brief Muestra formulario para insertar un grupo de ordenadores
+    $("[id^='insertGrpPC']").on ('click', function() {
+        var data=scope($(this));
+	// Para grupo de ordenadores necesitamos el idaula
+	if (data[2] == AMBITO_GRUPOSORDENADORES) {
+            var id=$(this).parent().attr('id').split("_");
+            var labId=id[1];
+            var groupID=data[0];
+        } else {
+            var labId=data[0];
+            var groupID=0;
+        }
+	var url="../propiedades/propiedades_grupos.php?opcion="+op_alta+"&grupoid="+groupID+"&idaula="+labId+"&tipo="+AMBITO_GRUPOSORDENADORES+"&literaltipo="+LITAMBITO_GRUPOSORDENADORES;
+	    console.log("url: "+url);
+        window.open(url,"frame_contenidos");
+    });
+
+    /// @function insertPC
+    /// @brief Muestra formulario para insertar un ordenador
+    $("[id^='insertPC']").on ('click', function() {
+        var data=scope($(this));
+	// Para grupo de ordenadores necesitamos el idaula
+	if (data[2] == AMBITO_GRUPOSORDENADORES) {
+            var id=$(this).parent().attr('id').split("_");
+            var labId=id[1];
+            var groupID=data[0];
+        } else {
+            var labId=data[0];
+            var groupID=0;
+        }
+        var url="../propiedades/propiedades_ordenadores.php?opcion="+op_alta+"&grupoid="+groupID+"&idaula="+labId;
+	    console.log("url: "+url);
+        window.open(url,"frame_contenidos");
+    });
+
+    /// @function liveLogPC
+    /// @brief Muestra log en tiempo real del equipo
+    $("[id^='liveLogPC']").on ('click', function() {
+        var data=scope($(this));
+        var url="../principal/verlogseguimiento.php?nombreordenador="+data[1];
+	    console.log("url: "+url);
+        window.open(url,"","width=1024,height=870,scrollbars=YES,resizable=YES")
+    });
+
+    /// @function logPC
+    /// @brief Muestra log del equipo
+    $("[id^='logPC']").on ('click', function() {
+        var data=scope($(this));
+	    console.log(data);
+        var url="../principal/verlog.php?nombreordenador="+data[1];
+	    console.log("url: "+url);
+        window.open(url,"","width=1024,height=870,scrollbars=YES,resizable=YES")
+    });
+
+    /// @function modifyGrpPC
+    /// @brief Muestra propiedades del grupo
+    $("[id^='modifyGrpPC']").on ('click', function() {
+        var data=scope($(this));
+	    console.log(data);
+        var url="../propiedades/propiedades_grupos.php?opcion="+op_modificacion+"&idgrupo="+data[0]+"&literaltipo="+data[3];
+	    console.log("url: "+url);
+        window.open(url,"frame_contenidos")
+    });
+
+    /// @function modifyPC
+    /// @brief Muestra propiedades del equipo
+    $("[id^='modifyPC']").on ('click', function() {
+        var data=scope($(this));
+	    console.log(data);
+        var url="../propiedades/propiedades_ordenadores.php?opcion="+op_modificacion+"&identificador="+data[0];
+	    console.log("url: "+url);
+        window.open(url,"frame_contenidos")
+    });
+
+    /// @function movePC
+    /// @brief Guarda datos del equipo para moverlo.
+    /// FALTA
+    $("[id^='movePC']").on ('click', function() {
+        // No hay url
+        //var url="aula.php?litambito="+field[1]+"&idambito="+id[2]+"&nombreambito="+description;
+            console.log("antes: "+prefix[1]+" tipo: "+id[1]+" nodo; "+id[2]);
+	    console.log("url: "+url);
+        window.open(url,"frame_contenidos")
+    });
+
+    /// @function netBoot
+    /// @brief Muestra formulario para configurar arranque PXE
+    $("[id^='netBoot']").on ('click', function() {
+        var data=scope($(this));
+        var url="boot.php?litambito="+data[3]+"&idambito="+data[0]+"&nombreambito="+data[1];;
+	    console.log("url: "+url);
+        window.open(url,"frame_contenidos");
+    });
+
+    /// @function procedure
+    /// @brief Muestra pagina procedimientos
+    $("[id^='procedure']").on ('click', function() {
+        var data=scope($(this));
+        var url="../varios/ejecutaracciones.php?ambito="+data[2]+"&idambito="+data[0]+"&nombreambito="+data[1];
+	    console.log("url: "+url);
+        window.open(url,"frame_contenidos");
+    });
+
+    /// @function purgePC
+    /// @brief reinicia ogAdmclient del equipo
+    $("[id^='purgePC']").on ('click', function() {
+        var resul=window.confirm(TbMsg[4]);
+	if (!resul)return;
+        var data=scope($(this));
+        var url="purgar.php";
+        var param="idambito="+data[0]+"&ambito="+data[2];
+	    console.log("url: "+url + " param: "+param);
+        CallPage(url,param,"retornoActualizar","POST");
+    });
+
+    /// @function putPC
+    /// @brief Situa el equipo movido en el grupo de destino.
+    /// FALTA
+    $("[id^='putPC']").on ('click', function() {
+
+        var url="../gestores/gestor_ordenadores.php";
+                if (swsf==0) // El ordenador se mueve a un grupo de ordenadores
+                var prm="opcion="+op_movida+"&grupoid="+identificador+"&idordenador="+identificador_ordenador+"&coloc="+colo;
+        else // El ordenador se mueve a un aula
+                var prm="opcion="+op_movida+"&idaula="+identificador+"&idordenador="+identificador_ordenador+"&coloc="+colo;
+
+            console.log("antes: "+prefix[1]+" tipo: "+id[1]+" nodo; "+id[2]);
+	    console.log("url: "+url);
+        CallPage(wurl,prm,"retornoColocar","POST");
+    });
+
+    /// @function relocationPC
+    /// @brief Muestra formulario para reubicar ordenadores.
+    $("[id^='relocationPC']").on ('click', function() {
+        var data=scope($(this));
+        var url="ubicarordenadores.php?litambito="+data[3]+"&idambito="+data[0]+"&nombreambito="+data[1];
+	    console.log("url: "+url);
+        window.open(url,"frame_contenidos");
+    });
+
+    /// @function removeGrpPC
+    /// @brief Elimina grupo de ordenadores
+    $("[id^='removeGrpPC']").on ('click', function() {
+        var data=scope($(this));
+        var url="../propiedades/propiedades_grupos.php?opcion="+op_eliminacion+"&idgrupo="+data[0]+"&literaltipo="+data[3];
+	    console.log("url: "+url);
+        window.open(url,"frame_contenidos");
+    });
+
+    /// @function removePC
+    /// @brief Elimina ordenador
+    $("[id^='removePC']").on ('click', function() {
+        var data=scope($(this));
+        var url="../propiedades/propiedades_ordenadores.php?opcion="+op_eliminacion+"&identificador="+data[0];
+	    console.log("url: "+url);
+        window.open(url,"frame_contenidos");
+    });
+
+    /// @function status
+    /// @brief Carga la página de estado de los ordenadores para el ámbito seleccionado.
+    $("[id^='status']").on ('click', function() {
+        var data=scope($(this));
+        var url="aula.php?litambito="+data[3]+"&idambito="+data[0]+"&nombreambito="+data[1];
+	    console.log("url: "+url);
+        window.open(url,"frame_contenidos")
+    });
+
+    /// @function updatePC
+    /// @brief Actualiza estado del equipo
+    $("[id^='updatePC']").on ('click', function() {
+        var data=scope($(this));
+        var url="actualizar.php";
+        var param="idambito="+data[0]+"&ambito="+data[2];
+	    console.log("url: "+url + " param: "+param);
+        CallPage(url, param, "retornoActualizar", "POST");
+    });
+
+});
+
+/// @function scope
+/// @brief Devuelve array con valores del ámbito (ámbito, literalAmbito)
+/// @param 1 {Str} prefijo del id del elemento de la lista.
+/// @param 2 {Int} tipo de nodo.
+/// @param 3 {Int} identificador del nodo.
+/// @return  {Array} array (idNodo, nombreNodo, idÁmbito, nombreÁmbito)
+/// @date:   2020-07-29
+function scope(node) {
+    // Id menu-node-tipoNodo_tipoNodo_idNodo
+    var id=node.parent().attr('id').split("_");
+        console.log("id: "+id[0]);
+    var prefixAux=id[0].split("-");
+    var nodeType=id[1];
+    var nodeId=id[2]
+    var prefix=prefixAux[1];
+
+            console.log("antes: "+prefixAux[1]+" tipo: "+id[1]+" nodo; "+id[2]);
+    var id = 0;
+    var name = '';
+    var tag="label:first"
+    switch (prefix) {
+        case 'type':
+            id = AMBITO_CENTROS;
+            name = LITAMBITO_CENTROS;
+            break;
+        case 'group':
+            if (nodeType == 2) {
+                id = AMBITO_GRUPOSAULAS;
+                name = LITAMBITO_GRUPOSAULAS;
+            } else {
+                id = AMBITO_GRUPOSORDENADORES;
+                name = LITAMBITO_GRUPOSORDENADORES;
+            }
+            break;
+        case 'node':
+            if (nodeType == 2) {
+                id = AMBITO_AULAS;
+                name = LITAMBITO_AULAS;
+            } else {
+                id = AMBITO_ORDENADORES;
+                name = LITAMBITO_ORDENADORES;
+                tag="a";
+            }
+            break;
+     }
+     // El id del nodo raíz no cumple el formato.
+     var idLi = (id == AMBITO_CENTROS) ? "#root" : "#"+prefix+"-"+nodeType+"_"+nodeId;
+	console.log("idLi: "+idLi);
+     var description=$(idLi).find(tag).text().trim();
+     return [ nodeId, description, id, name ];
+}

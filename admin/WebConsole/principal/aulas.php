@@ -114,132 +114,138 @@ $XMLcontextual=ContextualXMLAsistentes($LITAMBITO_ORDENADORES,$AMBITO_ORDENADORE
 echo $flotante->CreaMenuContextual($XMLcontextual);
 //___________________________________________________________________________________________________
 
-// Árbol de aulas
+// Mostramos árbol de aulas
 echo "<br><br>\n";
 $nodos=nodos_arbol("aulas");
 $grupos=grupos_arbol("aulas");
 
 lista_raiz_arbol ("aulas",$nodos,$grupos);
 
-// Menús contextuales
-echo "<!-- comandos -->\n";
-echo menu_comandos("ordenadores",16);
-echo "<!-- sincronizacion -->\n";
-echo menu_sincronizacion("ordenadores",16);
-echo "<!-- asistentes. -->\n";
-echo menu_asistentes("ordenadores",16);
+//___________________________________________________________________________________________________
 ?>
-<!-- aulas -->
-
+<!-- Menú unidad organizativa -->
 <ul id="menu-type-2" name="menu-type-2" oncontextmenu="return false;">
-  <li onclick="ver_aulas()"><img class="menu-icono" src="../images/iconos/ordenadores.gif"> Estatus ordenadores </li>
-  <li onclick="cola_acciones()"><img class="menu-icono" src="../images/iconos/acciones.gif"> Cola de acciones </li>
+  <li id="status-type-2"><img class="menu-icono" src="../images/iconos/ordenadores.gif"> Estatus ordenadores </li>
+  <li id="actionsQueue-type-2"><img class="menu-icono" src="../images/iconos/acciones.gif"> Cola de acciones </li>
   <li> <hr class="separador"> </li>
-  <li onclick="insertar_grupos(2,'gruposaulas',1)"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de aulas </li>
-  <li onclick="insertar(170,80,480,480,'../propiedades/propiedades_aulas.php',1)"><img class="menu-icono" src="../images/iconos/aula.gif"> Añadir nueva aula </li>
+  <li id="insertGroup-type-2"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de aulas </li>
+  <li id="insertNode-type-2"><img class="menu-icono" src="../images/iconos/aula.gif"> Añadir nueva aula </li>
   <li> <hr class="separador"> </li>
-  <li onclick="actualizar_ordenadores()"><img class="menu-icono" src="../images/iconos/actualizar.gif"> Actualizar </li>
-  <li onclick="purgar_ordenadores()"><img class="menu-icono" src="../images/iconos/purgar.gif"> Conmutar </li>
+  <li id="updatePC-type-2"><img class="menu-icono" src="../images/iconos/actualizar.gif"> Actualizar </li>
+  <li id="purgePC-type-2"><img class="menu-icono" src="../images/iconos/purgar.gif"> Conmutar </li>
   <li> <hr class="separador"> </li>
-  <li onclick="consola_remota(id)"><img class="menu-icono" src="../images/iconos/shell.gif"> Consola remota </li>
+  <li id="console-type-2"><img class="menu-icono" src="../images/iconos/shell.gif"> Consola remota </li>
   <li> <hr class="separador"> </li>
   <li onmouseover="ocultar_menu('comandos'); mostrar_menu(event,1,1,'menu-comandos-ordenadores')"><img class="menu-icono" src="../images/iconos/comandos.gif"> Comandos <img name="swsbfn" src="../images/flotantes/swsbfn.gif"></li>
-  <li onclick="confirmarprocedimiento(id)"><img class="menu-icono" src="../images/iconos/procedimiento.gif"> Procedimientos </li>
+  <li id="procedure-type-2"><img class="menu-icono" src="../images/iconos/procedimiento.gif"> Procedimientos </li>
 </ul>
 
+<!-- Menú grupo de aulas -->
 <ul id="menu-group-2" name="menu-group-2" oncontextmenu="return false;">
-  <li onclick="ver_aulas()"><img class="menu-icono" src="../images/iconos/ordenadores.gif"> Estatus ordenadores </li>
-  <li onclick="cola_acciones()"><img class="menu-icono" src="../images/iconos/acciones.gif"> Cola de acciones </li>
+  <li id="status-group-2"><img class="menu-icono" src="../images/iconos/ordenadores.gif"> Estatus ordenadores </li>
+  <li id="actionsQueue-group-2"><img class="menu-icono" src="../images/iconos/acciones.gif"> Cola de acciones </li>
   <li> <hr class="separador"> </li>
-  <li onclick="insertar_grupos(2,'gruposaulas',1)"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de aulas </li>
-  <li onclick="insertar(170,80,480,480,'../propiedades/propiedades_aulas.php',1)"><img class="menu-icono" src="../images/iconos/aula.gif"> Añadir nueva aula </li>
+  <li id="insertGroup-group-2"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de aulas </li>
+  <li id="insertNode-group-2"><img class="menu-icono" src="../images/iconos/aula.gif"> Añadir nueva aula </li>
   <li> <hr class="separador"> </li>
-  <li onclick="actualizar_ordenadores()"><img class="menu-icono" src="../images/iconos/actualizar.gif"> Actualizar </li>
-  <li onclick="purgar_ordenadores()"><img class="menu-icono" src="../images/iconos/purgar.gif"> Conmutar </li>
+  <li id="updatePC-group-2"><img class="menu-icono" src="../images/iconos/actualizar.gif"> Actualizar </li>
+  <li id="purgePC-group-2"><img class="menu-icono" src="../images/iconos/purgar.gif"> Conmutar </li>
   <li> <hr class="separador"> </li>
-  <li onclick="consola_remota(id)"><img class="menu-icono" src="../images/iconos/shell.gif"> Consola remota </li>
+  <li id="console-group-2"><img class="menu-icono" src="../images/iconos/shell.gif"> Consola remota </li>
   <li> <hr class="separador"> </li>
   <li onmouseover="ocultar_menu('comandos'); mostrar_menu(event,1,1,'menu-comandos-ordenadores')"><img class="menu-icono" src="../images/iconos/comandos.gif"> Comandos <img name="swsbfn" src="../images/flotantes/swsbfn.gif"> </li>
-  <li onclick="confirmarprocedimiento(id)"><img class="menu-icono" src="../images/iconos/procedimiento.gif"> Procedimientos </li>
+  <li id="procedure-group-2"><img class="menu-icono" src="../images/iconos/procedimiento.gif"> Procedimientos </li>
   <li> <hr class="separador"> </li>
-  <li onclick="modificar_grupos()"><img class="menu-icono" src="../images/iconos/modificar.gif"> Propiedades </li>
-  <li onclick="eliminar_grupos()"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar grupo de aulas </li>
+  <li id="modifyGroup-2"><img class="menu-icono" src="../images/iconos/modificar.gif"> Propiedades </li>
+  <li id="removeGroup-2"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar grupo de aulas </li>
 </ul>
 
+<!-- Menú aulas -->
 <ul id="menu-node-2" name="menu-node-2" oncontextmenu="return false;">
-  <li onclick="ver_boot()"><img class="menu-icono" src="../images/iconos/ordenadores.gif"> NetBoot AVANZADO </li>
-  <li onclick="ver_ubicarordenadores()"><img class="menu-icono" src="../images/iconos/ordenadores.gif"> Reubicar ordenadores </li>
-  <li onclick="ver_aulas()"><img class="menu-icono" src="../images/iconos/ordenadores.gif"> Estatus ordenadores </li>
-  <li onclick="cola_acciones()"><img class="menu-icono" src="../images/iconos/acciones.gif"> Cola de acciones </li>
+  <li id="netBoot-node-2"><img class="menu-icono" src="../images/iconos/ordenadores.gif"> NetBoot AVANZADO </li>
+  <li id="relocationPC-node-2"><img class="menu-icono" src="../images/iconos/ordenadores.gif"> Reubicar ordenadores </li>
+  <li id="status-node-2"><img class="menu-icono" src="../images/iconos/ordenadores.gif"> Estatus ordenadores </li>
+  <li id="actionsQueue-node-2"><img class="menu-icono" src="../images/iconos/acciones.gif"> Cola de acciones </li>
   <li> <hr class="separador"> </li>
-  <li onclick="insertar_grupos(4,'aulas')"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de ordenadores </li>
-  <li onclick="colocar_ordenador(1)"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar ordenador </li>
+  <li id="insertGrpPC-node-2"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de ordenadores </li>
+  <li id="putPC-node-2"><img class="menu-icono" src="../images/iconos/colocar.gif"> Colocar ordenador </li>
   <li> <hr class="separador"> </li>
-  <li onclick="insertar(170,80,480,480,'../propiedades/propiedades_ordenadores.php')"><img class="menu-icono" src="../images/iconos/ordenador.gif"> Añadir nuevo ordenador </li>
-  <li onclick="incorporarordenador()"><img class="menu-icono" src="../images/iconos/aula.gif"> Incorporar ordenadores </li>
+  <li id="insertPC-node-2"><img class="menu-icono" src="../images/iconos/ordenador.gif"> Añadir nuevo ordenador </li>
+  <li id="includePC-node-2"><img class="menu-icono" src="../images/iconos/aula.gif"> Incorporar ordenadores </li>
   <li> <hr class="separador"> </li>
-  <li onclick="actualizar_ordenadores()"><img class="menu-icono" src="../images/iconos/actualizar.gif"> Actualizar </li>
-  <li onclick="purgar_ordenadores()"><img class="menu-icono" src="../images/iconos/purgar.gif"> Conmutar </li>
+  <li id="updatePC-node-2"><img class="menu-icono" src="../images/iconos/actualizar.gif"> Actualizar </li>
+  <li id="purgePC-node-2"><img class="menu-icono" src="../images/iconos/purgar.gif"> Conmutar </li>
   <li> <hr class="separador"> </li>
-  <li onclick="consola_remota(id)"><img class="menu-icono" src="../images/iconos/shell.gif"> Consola remota </li>
+  <li id="console-node-2"><img class="menu-icono" src="../images/iconos/shell.gif"> Consola remota </li>
   <li> <hr class="separador"> </li>
   <li onmouseover="ocultar_menu('comandos'); mostrar_menu(event,1,1,'menu-comandos-ordenadores')"><img class="menu-icono" src="../images/iconos/comandos.gif"> Comandos <img name="swsbfn" src="../images/flotantes/swsbfn.gif"></li>
   <li onmouseover="ocultar_menu('comandos'); mostrar_menu(event,1,1,'menu-sincronizadas-ordenadores')"><img class="menu-icono" src="../images/iconos/comandos.gif"> Sincronizadas <img name="swsbfn" src="../images/flotantes/swsbfn.gif"></li>
   <li onmouseover="ocultar_menu('comandos'); mostrar_menu(event,1,1,'menu-asistentes-ordenadores')"><img class="menu-icono" src="../images/iconos/comandos.gif"> Asistentes <img name="swsbfn" src="../images/flotantes/swsbfn.gif"></li>
   <li> <hr class="separador"> </li>
-  <li onclick="confirmarprocedimiento(id)"><img class="menu-icono" src="../images/iconos/procedimiento.gif"> Procedimientos </li>
+  <li id="procedure-node-2"><img class="menu-icono" src="../images/iconos/procedimiento.gif"> Procedimientos </li>
   <li> <hr class="separador"> </li>
-  <li onclick="configuraciones(4)"><img class="menu-icono" src="../images/iconos/configuraciones.gif"> Configuración </li>
-  <li onclick="modificar(170,80,480,480,'../propiedades/propiedades_aulas.php')"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades </li>
-  <li onclick="eliminar(170,80,480,480,'../propiedades/propiedades_aulas.php')"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar aula </li>
+  <li id="configure-node-2"><img class="menu-icono" src="../images/iconos/configuraciones.gif"> Configuración </li>
+  <li id="modifyNode-node-2"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades </li>
+  <li id="removeNode-node-2"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar aula </li>
 </ul>
 
-<!-- ordenadores -->
-<ul id="menu-group-1" name="menu-group-1" oncontextmenu="return false;">
-  <li onclick="ver_boot()"><img class="menu-icono" src="../images/iconos/ordenadores.gif"> NetBoot AVANZADO </li>
-  <li onclick="ver_aulas()"><img class="menu-icono" src="../images/iconos/ordenadores.gif"> Estatus ordenadores </li>
-  <li onclick="cola_acciones()"><img class="menu-icono" src="../images/iconos/acciones.gif"> Cola de acciones </li>
+<!-- Menú grupo de ordenadores -->
+<ul id="menu-group-8" name="menu-group-8" oncontextmenu="return false;">
+  <li id="netBoot-group-8"><img class="menu-icono" src="../images/iconos/ordenadores.gif"> NetBoot AVANZADO </li>
+  <li id="status-group-8"><img class="menu-icono" src="../images/iconos/ordenadores.gif"> Estatus ordenadores </li>
+  <li id="actionsQueue-group-8"><img class="menu-icono" src="../images/iconos/acciones.gif"> Cola de acciones </li>
   <li> <hr class="separador"> </li>
-  <li onclick="insertar_grupos(2,'gruposaulas',1)"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de aulas </li>
-  <li onclick="insertar(170,80,480,480,'../propiedades/propiedades_aulas.php',1)"><img class="menu-icono" src="../images/iconos/aula.gif"> Añadir nueva aula </li>
-  <li onclick="actualizar_ordenadores()"><img class="menu-icono" src="../images/iconos/actualizar.gif"> Actualizar </li>
-  <li onclick="purgar_ordenadores()"><img class="menu-icono" src="../images/iconos/purgar.gif"> Conmutar </li>
+  <li id="insertGrpPC-group-8"><img class="menu-icono" src="../images/iconos/carpeta.gif"> Nuevo grupo de ordenadores </li>
+  <li id="insertPC-group-8"><img class="menu-icono" src="../images/iconos/aula.gif"> Añadir nuevo ordenador </li>
   <li> <hr class="separador"> </li>
-  <li onclick="consola_remota(id)"><img class="menu-icono" src="../images/iconos/shell.gif"> Consola remota </li>
+  <li id="updatePC-group-8"><img class="menu-icono" src="../images/iconos/actualizar.gif"> Actualizar </li>
+  <li id="purgePC-group-8"><img class="menu-icono" src="../images/iconos/purgar.gif"> Conmutar </li>
+  <li> <hr class="separador"> </li>
+  <li id="console-group-8"><img class="menu-icono" src="../images/iconos/shell.gif"> Consola remota </li>
   <li> <hr class="separador"> </li>
   <li onmouseover="ocultar_menu('comandos'); mostrar_menu(event,1,1,'menu-comandos-ordenadores')"><img class="menu-icono" src="../images/iconos/comandos.gif"> Comandos <img name="swsbfn" src="../images/flotantes/swsbfn.gif"></li>
   <li onmouseover="ocultar_menu('comandos'); mostrar_menu(event,1,1,'menu-sincronizadas-ordenadores')"><img class="menu-icono" src="../images/iconos/comandos.gif"> Sincronizadas <img name="swsbfn" src="../images/flotantes/swsbfn.gif"></li>
   <li onmouseover="ocultar_menu('comandos'); mostrar_menu(event,1,1,'menu-asistentes-ordenadores')"><img class="menu-icono" src="../images/iconos/comandos.gif"> Asistentes <img name="swsbfn" src="../images/flotantes/swsbfn.gif"></li>
   <li> <hr class="separador"> </li>
-  <li onclick="confirmarprocedimiento(id)"><img class="menu-icono" src="../images/iconos/procedimiento.gif"> Procedimientos </li>
-  <li onclick="configuraciones()"><img class="menu-icono" src="../images/iconos/configuraciones.gif"> Configuración </li>
-  <li onclick="modificar_grupos()"><img class="menu-icono" src="../images/iconos/modificar.gif"> Propiedades </li>
-  <li onclick="eliminar_grupos"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar grupo de ordenadores </li>
+  <li id="procedure-group-8"><img class="menu-icono" src="../images/iconos/procedimiento.gif"> Procedimientos </li>
+  <li> <hr class="separador"> </li>
+  <li id="config-group-8"><img class="menu-icono" src="../images/iconos/configuraciones.gif"> Configuración </li>
+  <li id="modifyGrpPC-group-8"><img class="menu-icono" src="../images/iconos/modificar.gif"> Propiedades </li>
+  <li id="removeGrpPC-group-8"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar grupo de ordenadores </li>
 </ul>
 
-<ul id="menu-node-1" name="menu-node-1" oncontextmenu="return false;">
-  <li onclick="cola_acciones()"><img class="menu-icono" src="../images/iconos/acciones.gif"> Cola de acciones </li>
+<!-- Menú ordenadores -->
+<ul id="menu-node-8" name="menu-node-8" oncontextmenu="return false;">
+  <li id="actionsQueue-node-8"><img class="menu-icono" src="../images/iconos/acciones.gif"> Cola de acciones </li>
   <li> <hr class="separador"> </li>
-  <li onclick="ver_log(16)"><img class="menu-icono" src="../images/iconos/acciones.gif"> Log historico </li>
-  <li onclick="ver_log_seguimiento(16)"><img class="menu-icono" src="../images/iconos/acciones.gif"> Log en tiempo real </li>
-  <li onclick="mover_ordenador()"><img class="menu-icono" src="../images/iconos/mover.gif"> Mover ordenador </li>
+  <li id="logPC-node-8"><img class="menu-icono" src="../images/iconos/acciones.gif"> Log historico </li>
+  <li id="liveLogPC-node-8"><img class="menu-icono" src="../images/iconos/acciones.gif"> Log en tiempo real </li>
   <li> <hr class="separador"> </li>
-  <li onclick="actualizar_ordenadores()"><img class="menu-icono" src="../images/iconos/actualizar.gif"> Actualizar </li>
-  <li onclick="purgar_ordenadores()"><img class="menu-icono" src="../images/iconos/purgar.gif"> Conmutar </li>
+  <li id="updatePC-node-8"><img class="menu-icono" src="../images/iconos/actualizar.gif"> Actualizar </li>
+  <li id="purgePC-node-8"><img class="menu-icono" src="../images/iconos/purgar.gif"> Conmutar </li>
   <li> <hr class="separador"> </li>
-  <li onclick="consola_remota(id)"><img class="menu-icono" src="../images/iconos/shell.gif"> Consola remota </li>
-  <li onclick="eco_remoto()"><img class="menu-icono" src="../images/iconos/ecocon.gif"> Eco de Consola </li>
+  <li id="console-node-8"><img class="menu-icono" src="../images/iconos/shell.gif"> Consola remota </li>
+  <li id="echo-node-8"><img class="menu-icono" src="../images/iconos/ecocon.gif"> Eco de Consola </li>
   <li> <hr class="separador"> </li>
-  <li onclick="confirmarprocedimiento(id)"><img class="menu-icono" src="../images/iconos/procedimiento.gif"> Procedimientos </li>
+  <li id="procedure-node-8"><img class="menu-icono" src="../images/iconos/procedimiento.gif"> Procedimientos </li>
   <li> <hr class="separador"> </li>
   <li onmouseover="ocultar_menu('comandos'); mostrar_menu(event,1,1,'menu-comandos-ordenadores')"><img class="menu-icono" src="../images/iconos/comandos.gif"> Comandos <img name="swsbfn" src="../images/flotantes/swsbfn.gif"></li>
   <li onmouseover="ocultar_menu('comandos'); mostrar_menu(event,1,1,'menu-sincronizadas-ordenadores')"><img class="menu-icono" src="../images/iconos/comandos.gif"> Sincronizadas <img name="swsbfn" src="../images/flotantes/swsbfn.gif"></li>
   <li onmouseover="ocultar_menu('comandos'); mostrar_menu(event,1,1,'menu-asistentes-ordenadores')"><img class="menu-icono" src="../images/iconos/comandos.gif"> Asistentes <img name="swsbfn" src="../images/flotantes/swsbfn.gif"></li>
   <li> <hr class="separador"> </li>
-  <li onclick="configuraciones(16)"><img class="menu-icono" src="../images/iconos/configuraciones.gif"> Configuración </li>
-  <li onclick="modificar(170,80,480,400,'../propiedades/propiedades_ordenadores.php')"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades </li>
-  <li onclick="eliminar(170,80,480,400,'../propiedades/propiedades_ordenadores.php')"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar ordenador </li>
+  <li id="config-node-8"><img class="menu-icono" src="../images/iconos/configuraciones.gif"> Configuración </li>
+  <li id="modifyPC-node-8"><img class="menu-icono" src="../images/iconos/propiedades.gif"> Propiedades </li>
+  <li id="removePC-node-8"><img class="menu-icono" src="../images/iconos/eliminar.gif"> Eliminar ordenador </li>
 </ul>
+
+<?php
+// Menús contextuales comandos, sincronizadas y asistentes.
+echo menu_comandos("ordenadores",16);
+echo menu_sincronizacion("ordenadores",16);
+echo menu_asistentes("ordenadores",16);
+?>
+
+
 
 </BODY>
 </HTML>

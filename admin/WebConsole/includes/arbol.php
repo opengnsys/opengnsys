@@ -130,13 +130,19 @@ function lista_grupo_arbol($tipo_nodo, $tipo, $idgrupo, $nivel, $orden, $nodos, 
 	    global $grp_ordenadores;
 	    global $idaulas;
 	}
+	// Los ordenadores tiene como tipo de nodo el idaula. El menú debe tener un sufijo fijo:
+	$sufijo_menu=$tipo;
+        if ($tipo_nodo == "ordenadores") {
+            global $AMBITO_GRUPOSORDENADORES;
+            $sufijo_menu=$AMBITO_GRUPOSORDENADORES;
+	}
         echo "\n".'    <ul '.$class." >\n";
         // si existen grupos hijos del actual creo la lista con la función listaGrupo.
         if (isset ($grupos[$tipo][$idgrupo])){
             foreach ($grupos[$tipo][$idgrupo] as $hijo) {
                 $orden=$orden+1;
-		echo '      <li id="grupo_'.$hijo["id"].'"><input type="checkbox" name="list" id="nivel'.$nivel.'-'.$orden.'">
-			      <label oncontextmenu="ocultar_menu(); mostrar_menu(event,'. $tipo.', '.$hijo["id"].', \'menu-group-'.$tipo.'\');return false;" for="nivel'.$nivel.'-'.$orden.'">
+		echo '      <li id="group-'. $tipo.'_'.$hijo["id"].'"><input type="checkbox" name="list" id="nivel'.$nivel.'-'.$orden.'">
+			      <label oncontextmenu="ocultar_menu(); mostrar_menu(event,'. $tipo.', '.$hijo["id"].', \'menu-group-'.$sufijo_menu.'\');return false;" for="nivel'.$nivel.'-'.$orden.'">
                                  <img class="menu_icono" src="../images/iconos/carpeta.gif">'.$hijo["nombre"].'
                               </label>'."\n";
 
@@ -150,16 +156,16 @@ function lista_grupo_arbol($tipo_nodo, $tipo, $idgrupo, $nivel, $orden, $nodos, 
             foreach ($nodos[$tipo][$idgrupo] as $nodo){
 		if ($tipo_nodo == "aulas"){
 		    // Incluyo input para que se pueda abrir el nodo
-		    echo '      <li id="nodo-'.$tipo.'_'.$nodo["id"].'">
+		    echo '      <li id="node-'.$tipo.'_'.$nodo["id"].'">
 				    <input type="checkbox" name="list" id="nivel'.$nivel.'-'.$orden.'">
-				    <label oncontextmenu="ocultar_menu(); mostrar_menu(event,'. $tipo.', '.$nodo["id"].', \'menu-node-'.$tipo.'\');return false;" for="nivel'.$nivel.'-'.$orden.'">
+				    <label oncontextmenu="ocultar_menu(); mostrar_menu(event,'. $tipo.', '.$nodo["id"].', \'menu-node-'.$sufijo_menu.'\');return false;" for="nivel'.$nivel.'-'.$orden.'">
 					<img class="menu_icono" src="../images/iconos/imagen.gif"> '.$nodo["descripcion"].'
 				    </label>'."\n" ;
 
 		    // Listo grupo de ordenadores
 		    lista_grupo_arbol("ordenadores",$nodo["id"],0, $nivel, $orden,$ordenadores,$grp_ordenadores);
 		} else {
-		    echo '      <li id="nodo-'.$tipo.'_'.$nodo["id"].'" oncontextmenu="ocultar_menu(); mostrar_menu(event,'. $tipo.', '.$nodo["id"].', \'menu-node-'.$tipo.'\');return false;">
+		    echo '      <li id="node-'.$tipo.'_'.$nodo["id"].'" oncontextmenu="ocultar_menu(); mostrar_menu(event,'. $tipo.', '.$nodo["id"].', \'menu-node-'.$sufijo_menu.'\');return false;">
 				    <a href="#r"> <img class="menu_icono" src="../images/iconos/imagen.gif"> '.$nodo["descripcion"].'</a>';
 		}
                 echo "      </li>"."\n";
@@ -177,24 +183,28 @@ function lista_grupo_arbol($tipo_nodo, $tipo, $idgrupo, $nivel, $orden, $nodos, 
  * @param[nodos] array nodos a mostrar
  * @param[grupos] array grupos de nodos a mostrar
  * @return Escribe la raíz del árbol de nodos y el primer nivel.
+ * @note elementos li: id raiz #root. id tipo #group-$tipoNodo_0. id grupo #group-$tipoNodo_$idgrupo. id nodo #node-$tipoNodo_$idnodo
  */
 function lista_raiz_arbol ($tipo_nodo, $nodos, $grupos){
         global $TbMsg;
         global $NUM_TIPOS_IMAGENES;
         $orden=0;
+        $raiz=0;
 	if ($tipo_nodo == "aulas") {
 	    // Definimos variables para mostrar ordenadores
 	    global $ordenadores;
 	    global $grp_ordenadores;
 	    $ordenadores=nodos_arbol("ordenadores");
 	    $grp_ordenadores=grupos_arbol("ordenadores");
+            // id ou. Necesario para comandos de menú.
+            $raiz=$_SESSION["widcentro"];
 	}
         echo '<ul id="menu_arbol">'."\n";
 	$keys=array_keys($nodos);
 	if (count($keys) == 1) {
 	    $tipo= array_keys($nodos)[0];
-	    echo '  <li><input type="checkbox" name="list" id="nivel1-1">
-			<label for="nivel1-1" oncontextmenu="ocultar_menu(); mostrar_menu(event, '. $tipo.', 0, \'menu-type-'.$tipo.'\');return false;">
+	    echo '  <li id="root"><input type="checkbox" name="list" id="nivel1-1">
+			<label for="nivel1-1" oncontextmenu="ocultar_menu(); mostrar_menu(event, '. $tipo.', '.$raiz.', \'menu-type-'.$tipo.'\');return false;">
 			    <img class="menu-icono" src="../images/iconos/imagenes.gif"> Inicio árbol
 			</label>'."\n";
 	    lista_grupo_arbol($tipo_nodo, $keys[0], 0, 1, $orden, $nodos, $grupos);
@@ -203,7 +213,7 @@ function lista_raiz_arbol ($tipo_nodo, $nodos, $grupos){
 	    foreach ($keys as $tipo) {
                 // Recorremos los grupos hijos desde el cero
                 echo '    <ul>'."\n";
-                echo '       <li id="grupo_'.$tipo.'_0" >
+                echo '       <li id="group_'.$tipo.'_0" >
 				  <input type="checkbox" name="list" id="nivel2-'.$tipo.'">
 				  <label oncontextmenu="ocultar_menu(); mostrar_menu(event, '. $tipo.', 0, \'menu-type-'.$tipo.'\');return false;" for="nivel2-'.$tipo.'">
 					<img class="menu-icono" src="../images/iconos/carpeta.gif"> Falta nombre del tipo: '.$tipo.'
